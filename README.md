@@ -61,7 +61,6 @@ AI는 한 번에 답을 낼 때보다, **자신이 낸 답을 다시 한번 검�
 ### 🖋️ 콘텐츠 전환 및 고급화
 - `sermon-to-column.md`: 설교문을 유진 피터슨/팀 켈러 풍의 고급 칼럼으로 리폼
 - `sermon-cardnews-maker.md`: 설교 핵심 내용을 4-5컷의 카드뉴스로 기획
-- `sermon-shorts-strategy.md`: 설교 영상 중 숏츠/릴스용 임팩트 구간 및 자막 추출
 - `sermon-to-tts.md`: 설교문을 3분 분량의 오디오 TTS 대본으로 변환
 - `sermon-to-blog.md`: 설교를 블로그 포스팅용 텍스트로 전환
 
@@ -74,6 +73,8 @@ AI는 한 번에 답을 낼 때보다, **자신이 낸 답을 다시 한번 검�
 - `meeting-agenda.md`: 당회 및 제직회 회의 안건 구조화
 
 ### 🤝 목양 및 소그룹
+- `bible-study-generator.md`: 주해(Core)-교안(Lesson)-워크북(Workbook) 통합 성경공부 설계
+- `devotional-generator.md`: 개인의 영적 형성을 돕는 고정밀 QT/묵상 가이드 생성
 - `small-group-guide.md`: 설교 메시지를 성도들의 삶으로 연결하는 나눔지(관찰/적용) 생성
 - `visitation-guide.md`: 상황별 심방 성구 및 목회적 권면 가이드
 - `mid-week-meditation.md`: 주중 성도들에게 공유할 짧은 묵상 콘텐츠 제작
