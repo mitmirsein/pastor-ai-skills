@@ -78,7 +78,7 @@ AI는 한 번에 답을 낼 때보다, **자신이 낸 답을 다시 한번 검�
 
 본 프로젝트는 아래의 선행 연구와 오픈 소스 프로젝트에 영감을 받아 제작되었습니다.
 
-- **Original Creator:** 이 툴킷의 기반이 된 `pastor-ai-skills` 리포지토리 제작자분께 깊은 감사를 표합니다. 
+- **Original Creator:** 본 툴킷의 모태가 된 [pastor-ai-skills](https://github.com/tkcostello/pastor-ai-skills)의 제작자 **Thomas Costello (@tkcostello)** 님께 깊은 감사를 표합니다. 
 - **Theological Framework:** 고정밀 성경 주해의 뼈대가 된 **'6 Gems'** 방법론 연구자분들께 감사드립니다.
 - **Support:** 본 툴킷이 한국 교회 목회자분들의 사역에 작은 보탬이 되기를 소망합니다.
 
