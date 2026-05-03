@@ -47,7 +47,7 @@ AI는 한 번에 답을 낼 때보다, **자신이 낸 답을 다시 한번 검�
 
 ### 🔍 주해 및 사역 연구
 - `sermon-research.md`: 6 Gems 엔진 기반의 고정밀 주해 리포트 생성
-- `sermon-illustration-finder.md`: 설교의 생동감을 더하는 인문학/역사/고전 예화 큐레이션
+- `bible-study-generator.md`: 주해(Core)-교안(Lesson)-워크북(Workbook) 통합 성경공부 설계
 - `sermon-brainstorming.md`: 소크라테스식 문답을 통한 설교 인사이트 발굴
 - `sermon-series-planner.md`: 4-6주 단위의 강해 설교 시리즈 기획
 - `biblical-dilemma-solver.md`: 성경 난제에 대한 입체적 변증 가이드
