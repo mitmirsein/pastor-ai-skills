@@ -1,6 +1,6 @@
 # 🕊️ Pastor-KR 사용 가이드
 
-`Pastor-KR` 프로젝트를 사역에 활용하는 방법을 안내합니다. 본 스킬셋은 **Claude Code, Gemini, ChatGPT** 등 인터넷 접속과 파일 읽기가 가능한 모든 최신 AI 에이전트에서 완벽하게 동작합니다.
+`Pastor-KR` 프로젝트를 사역에 활용하는 방법을 안내합니다. 본 스킬셋은 **Claude Code, Gemini, Cursor(커서), Codex** 등 인터넷 접속과 파일 읽기가 가능한 모든 최신 AI 에이전트에서 완벽하게 동작합니다.
 
 ---
 

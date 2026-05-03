@@ -13,7 +13,7 @@ This project is a localized fork of the excellent work by **Thomas Costello** (F
 ---
 
 ## 🚀 프로젝트 소개
-`Pastor-KR`은 목회자분들이 **Claude, Gemini, ChatGPT** 등 다양한 AI 에이전트에서 바로 사용할 수 있는 15가지 목회 지원 스킬을 담고 있습니다. 미국식 실용주의 워크플로우를 한국 교회의 정서와 신학적 맥락에 맞게 재구축하였습니다.
+`Pastor-KR`은 목회자분들이 **Claude, Gemini, Cursor(커서)** 등 다양한 AI 에이전트에서 바로 사용할 수 있는 15가지 목회 지원 스킬을 담고 있습니다. 미국식 실용주의 워크플로우를 한국 교회의 정서와 신학적 맥락에 맞게 재구축하였습니다.
 
 ## 📥 가장 쉬운 설치 방법 (초심자용)
 AI와 대화 중일 때, 아래 문장을 그대로 복사해서 붙여넣으세요:
