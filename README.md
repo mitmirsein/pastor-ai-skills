@@ -62,7 +62,7 @@ This project is a localized fork of the excellent work by **Thomas Costello** (F
 
 ## 4. 📖 주요 스킬 리스트 및 활용 사례
 
-총 17가지의 사역 스킬이 포함되어 있습니다. 아래처럼 AI에게 명령해 보세요.
+총 19가지의 사역 스킬이 포함되어 있습니다. 아래처럼 AI에게 명령해 보세요.
 
 ### 🔍 설교 연구 (`sermon-research`)
 - **명령:** "이번 주일 본문인 로마서 8:1-11로 설교 연구 리포트를 작성해줘."
@@ -79,6 +79,10 @@ This project is a localized fork of the excellent work by **Thomas Costello** (F
 ### 🖋️ 설교 고급화 및 디자인 (`sermon-to-column`, `sermon-cardnews-maker`)
 - **명령:** "주일 설교를 유진 피터슨 스타일의 칼럼으로 바꿔줘. 그리고 킨포크 무드의 4컷 카드뉴스로 기획해 줘."
 - **결과:** 거장의 문체로 리폼된 고품격 칼럼, 그리고 Hook-Hurdle-Solution 구조의 카드뉴스 텍스트+이미지 기획안 생성.
+
+### 🛡️ 설교 비평 및 신학 변증 (`sermon-red-team`, `biblical-dilemma-solver`)
+- **명령:** "가나안 진멸 전쟁에 대한 청년의 질문에 답할 수 있도록 성경 난제 가이드를 줘."
+- **결과:** 역사적/문법적 배경, 주요 신학적 관점, 그리고 대상별(초신자/리더) 맞춤형 목회적 답변 스크립트 제공.
 
 *기타 스킬: sermon-series-planner, small-group-discussion, admin-email, pastoral-letter, visitation-guide, mid-week-meditation, meeting-agenda, sermon-to-blog, sermon-to-youtube, social-media-post 등*
 
