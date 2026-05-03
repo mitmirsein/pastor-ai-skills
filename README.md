@@ -64,23 +64,23 @@ This project is a localized fork of the excellent work by **Thomas Costello** (F
 
 총 17가지의 사역 스킬이 포함되어 있습니다. 아래처럼 AI에게 명령해 보세요.
 
-### 🔍 설교 연구 (`설교-연구`)
+### 🔍 설교 연구 (`sermon-research`)
 - **명령:** "이번 주일 본문인 로마서 8:1-11로 설교 연구 리포트를 작성해줘."
 - **결과:** 원어 분석, 개역개정 대조, 주석 통찰, 한국적 적용점이 담긴 전문 리포트 생성.
 
-### 💡 설교 브레인스토밍 (`설교-브레인스토밍`)
+### 💡 설교 브레인스토밍 (`sermon-brainstorming`)
 - **명령:** "이번 설교 주제인 '고난 속의 소망'에 대해 나와 대화하며 아이디어를 짜보자."
 - **결과:** 뻔한 정답을 주지 않고, 목사님의 사유를 이끌어내는 소크라테스식 파트너 역할 수행.
 
-### 📋 주보 및 광고 도우미 (`주보-도우미`, `광고-스크립트`)
+### 📋 주보 및 광고 도우미 (`bulletin-helper`, `announcement-script`)
 - **명령:** "이번 주 교회 소식을 바탕으로 광고 스크립트와 주보 원고를 정리해줘."
 - **결과:** 남선교회, 권사회 등 한국 교회 특유의 직분과 정서를 반영한 깔끔한 공식 문체 자동 정리.
 
-### 🖋️ 설교 고급화 및 디자인 (`설교-고급-칼럼-전환`, `설교-카드뉴스-제작`)
+### 🖋️ 설교 고급화 및 디자인 (`sermon-to-column`, `sermon-cardnews-maker`)
 - **명령:** "주일 설교를 유진 피터슨 스타일의 칼럼으로 바꿔줘. 그리고 킨포크 무드의 4컷 카드뉴스로 기획해 줘."
 - **결과:** 거장의 문체로 리폼된 고품격 칼럼, 그리고 Hook-Hurdle-Solution 구조의 카드뉴스 텍스트+이미지 기획안 생성.
 
-*기타 스킬: 시리즈-기획, 소그룹-나눔, 교회-이메일, 교회-서신, 심방-가이드, 주중-묵상 등*
+*기타 스킬: sermon-series-planner, small-group-discussion, admin-email, pastoral-letter, visitation-guide, mid-week-meditation, meeting-agenda, sermon-to-blog, sermon-to-youtube, social-media-post 등*
 
 ---
 
