@@ -13,7 +13,7 @@ This project is a localized fork of the excellent work by **Thomas Costello** (F
 ---
 
 ## 🚀 프로젝트 소개
-`Pastor-KR`은 목회자분들이 **Claude Code, Cursor, Windsurf, Aider** 등 2026년 최신 AI 에이전트에서 바로 사용할 수 있는 15가지 목회 지원 스킬을 담고 있습니다. 미국식 실용주의 워크플로우를 한국 교회의 정서와 신학적 맥락에 맞게 재구축하였습니다.
+`Pastor-KR`은 목회자분들이 **Claude Code, Codex, Antigravity, Cursor** 등 최신 AI 에이전트 환경에서 바로 사용할 수 있는 15가지 목회 지원 스킬을 담고 있습니다. 미국식 실용주의 워크플로우를 한국 교회의 정서와 신학적 맥락에 맞게 재구축하였습니다.
 
 > [!TIP]
 > **요즘 유행하는 AI 에이전트란?**
