@@ -41,12 +41,13 @@ AI는 한 번에 답을 낼 때보다, **자신이 낸 답을 다시 한번 검�
 
 ---
 
-## 📖 주요 스킬 리스트 (총 20종)
+### 📖 주요 스킬 리스트 (총 20종)
 
 현재 **총 20개**의 고정밀 사역 스킬이 탑재되어 있습니다.
 
 ### 🔍 주해 및 사역 연구
 - `sermon-research.md`: 6 Gems 엔진 기반의 고정밀 주해 리포트 생성
+- `sermon-illustration-finder.md`: 설교의 생동감을 더하는 인문학/역사/고전 예화 큐레이션
 - `sermon-brainstorming.md`: 소크라테스식 문답을 통한 설교 인사이트 발굴
 - `sermon-series-planner.md`: 4-6주 단위의 강해 설교 시리즈 기획
 - `biblical-dilemma-solver.md`: 성경 난제에 대한 입체적 변증 가이드
@@ -54,9 +55,9 @@ AI는 한 번에 답을 낼 때보다, **자신이 낸 답을 다시 한번 검�
 ### 🖋️ 콘텐츠 전환 및 고급화
 - `sermon-to-column.md`: 설교문을 유진 피터슨/팀 켈러 풍의 고급 칼럼으로 리폼
 - `sermon-cardnews-maker.md`: 설교 핵심 내용을 4-5컷의 카드뉴스로 기획
+- `sermon-shorts-strategy.md`: 설교 영상 중 숏츠/릴스용 임팩트 구간 및 자막 추출
 - `sermon-to-tts.md`: 설교문을 3분 분량의 오디오 TTS 대본으로 변환
 - `sermon-to-blog.md`: 설교를 블로그 포스팅용 텍스트로 전환
-- `sermon-to-youtube.md`: 유튜브 영상 설명 및 챕터 구분 생성
 
 ### 🛡️ 비평 및 행정 지원
 - `sermon-red-team.md`: 설교 원고의 신학적 맹점 및 회중 시선 분석
@@ -67,7 +68,7 @@ AI는 한 번에 답을 낼 때보다, **자신이 낸 답을 다시 한번 검�
 - `meeting-agenda.md`: 당회 및 제직회 회의 안건 구조화
 
 ### 🤝 목양 및 소그룹
-- `small-group-discussion.md`: 본문 기반의 깊이 있는 소그룹 나눔 질문 생성
+- `small-group-guide.md`: 설교 메시지를 성도들의 삶으로 연결하는 나눔지(관찰/적용) 생성
 - `visitation-guide.md`: 상황별 심방 성구 및 목회적 권면 가이드
 - `mid-week-meditation.md`: 주중 성도들에게 공유할 짧은 묵상 콘텐츠 제작
 - `social-media-post.md`: 인스타그램/페이스북용 짧은 영감 문구 추출
