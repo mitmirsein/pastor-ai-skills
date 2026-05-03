@@ -1,112 +1,65 @@
-# 🕊️ Pastor-KR (목회자 AI 스킬셋 한국어판)
+# 🕊️ Pastor-KR (High-Precision Pastoral AI Toolkit)
 
-본 레포지토리는 Thomas Costello의 [pastor-ai-skills](https://github.com/tkcostello/pastor-ai-skills)를 기반으로 하여, 한국 목회 상황에 맞게 리폼(Reform)하고 현지화한 버전입니다. 목회자분들이 코딩 지식 없이도 AI 비서를 쉽게 고용하고 활용할 수 있도록 돕습니다.
+**Pastor-KR**은 목회 현장의 고유한 맥락을 깊이 이해하고, 실제적인 사역 결과물을 만들어내는 **고성능 한국어 목회 지원 AI 스킬셋**입니다. 
 
----
-
-### 🙏 Acknowledgments & Credits
-This project is a localized fork of the excellent work by **Thomas Costello** (Founder of [REACHRIGHT](https://reachrightstudios.com/)). We express our deep gratitude for his vision and contribution to pastoral ministry through AI workflow tools. 
-
-- **Original Repository:** [tkcostello/pastor-ai-skills](https://github.com/tkcostello/pastor-ai-skills)
-- **Original Author:** Thomas Costello
+이 툴킷은 단순히 일반적인 프롬프트를 모아놓은 것이 아니라, 최고 수준의 성서학적 주해 엔진(6 Gems)과 현대 한국 교회의 사역 문화를 결합한 **'지능형 워크플로우 라이브러리'**로 작동합니다.
 
 ---
 
-## 🚀 지원하는 AI 에이전트
-본 스킬셋은 인터넷 접속과 파일 읽기가 가능한 모든 최신 AI 에이전트에서 완벽하게 동작합니다.
+## 🌟 프로젝트의 핵심 가치
 
-> **💡 추천 AI 에이전트 리스트**
-> - **Claude Code:** 터미널 기반의 가장 강력하고 똑똑한 사역 파트너.
-> - **Codex:** 고도의 논리적 추론과 사역 행정 자동화에 최적화된 엔진.
-> - **Antigravity:** 복잡한 신학적 맥락을 이해하고 정교하게 보조하는 사역 가이드.
-> - **Cursor:** 사역 자료 전체를 지능적으로 색인하고 관리하는 최고의 AI 편집기.
+1.  **목회적 감수성:** 번역투의 딱딱한 말투를 지양하고, 성도들의 마음을 만지는 따뜻하고 권위 있는 한국어 목회 언어를 사용합니다.
+2.  **6 Gems 엔진 탑재:** 성경 본문 분석 시 구조(Chiasm), 문헌(Philology), 정경(Canon), 상황(Context) 등 6가지 핵심 렌즈를 통해 깊이 있는 통찰을 제공합니다.
+3.  **즉시 실행 가능성 (Portable):** 별도의 복잡한 설치 없이, AI(Gemini, Claude, GPT-4o 등)에게 이 폴더의 지침을 읽게 하는 것만으로 바로 사역 파트너로 활용할 수 있습니다.
+4.  **개인화된 SSOT:** `core/foundation.md` 설정을 통해 우리 교회, 우리 교단에 딱 맞는 맞춤형 응답을 생성합니다.
 
 ---
 
-## 1. ⚡ 가장 빠른 시작 (30초 설치)
+## 🛠️ 시작하기 (Quick Start)
 
-어떤 AI 에이전트를 쓰시든, 대화창에 아래 내용을 그대로 복사해서 붙여넣으세요:
+### 1. 설정 (Foundation Setup)
+`core/foundation.md` 파일을 열어 교회 이름, 목회자 성함, 교단 배경 등을 수정하세요.
 
-```text
-아래 GitHub 주소에 접속해서 'core/skills' 폴더에 있는 모든 한국형 목회 스킬들을 내 시스템에 설치해줘. 
-설치 후에는 내가 어떤 스킬들을 사용할 수 있는지 목록을 요약해서 알려줘.
-주소: https://github.com/mitmirsein/pastor-ai-skills
-```
-이 한 마디면 AI가 스스로 스킬을 학습하고 사역을 도울 준비를 마칩니다.
+### 2. 실행 (Execution)
+AI 에이전트(예: Cursor, Claude, ChatGPT 등)에게 다음과 같이 요청하세요.
+> "이 폴더 안에 있는 `core/skills` 폴더의 지침들을 네 지식으로 로드해 줘. 그리고 앞으로 내가 명령하는 스킬들을 그 지침에 맞춰 실행해줘."
 
 ---
 
-## 2. ⚙️ 필수 초기 설정 (나만의 맞춤 비서 만들기)
+## 📖 주요 스킬 리스트 (총 20종)
 
-스킬이 설치되었다면, AI가 목사님의 교회 환경에 딱 맞는 답변을 하도록 기본 정보를 알려주어야 합니다. 
-프로젝트 내의 `core/foundation.md` 파일을 열고, 아래의 정보들을 목사님의 상황에 맞게 수정해 주세요.
+현재 **총 20개**의 사역 스킬이 탑재되어 있습니다.
 
-- `church_name`: "OOO 교회"
-- `pastor_name`: "OOO 목사"
-- `denomination`: "대한예수교장로회(합동)"
-- `preferred_bible`: "개역개정" 등
+### 🔍 주해 및 사역 연구
+- `sermon-research.md`: 6 Gems 엔진 기반의 고정밀 주해 리포트 생성
+- `sermon-brainstorming.md`: 소크라테스식 문답을 통한 설교 인사이트 발굴
+- `sermon-series-planner.md`: 4-6주 단위의 강해 설교 시리즈 기획
+- `biblical-dilemma-solver.md`: 성경 난제에 대한 입체적 변증 가이드
 
-> [!TIP]
-> **왜 설정해야 하나요?**
-> 이 파일 하나만 수정해 두면, 앞으로 AI가 설교를 돕거나 주보를 만들 때 '우리 교회'의 이름과 교단 신학에 맞는 톤앤매너를 자동으로 적용합니다.
+### 🖋️ 콘텐츠 전환 및 고급화
+- `sermon-to-column.md`: 설교문을 유진 피터슨/팀 켈러 풍의 고급 칼럼으로 리폼
+- `sermon-cardnews-maker.md`: 설교 핵심 내용을 4-5컷의 카드뉴스로 기획
+- `sermon-to-tts.md`: 설교문을 3분 분량의 오디오 TTS 대본으로 변환
+- `sermon-to-blog.md`: 설교를 블로그 포스팅용 텍스트로 전환
+- `sermon-to-youtube.md`: 유튜브 영상 설명 및 챕터 구분 생성
 
----
+### 🛡️ 비평 및 행정 지원
+- `sermon-red-team.md`: 설교 원고의 신학적 맹점 및 회중 시선 분석
+- `pastoral-letter.md`: 절기 및 상황별 고품격 목양 편지 작성
+- `admin-email.md`: 정중하고 명확한 교회 행정 이메일 작성
+- `bulletin-helper.md`: 주보 광고 및 교회 소식 가독성 있게 정리
+- `announcement-script.md`: 자연스럽고 따뜻한 광고 스크립트 작성
+- `meeting-agenda.md`: 당회 및 제직회 회의 안건 구조화
 
-## 3. 🛠️ 수동 설치 방법 (직접 관리하고 싶은 경우)
-
-1. **파일 다운로드:** 본 레포지토리를 ZIP으로 다운로드하거나 `git clone` 합니다.
-2. **폴더 위치:** `core/` 폴더를 목사님의 사역용 AI 프로젝트 폴더(또는 Obsidian 볼트 등)로 복사합니다.
-3. **에이전트 인식:** AI에게 "내 프로젝트 폴더에 있는 `core/skills` 폴더의 지침을 읽고 실행해줘"라고 명령합니다.
-
----
-
-## 4. 📖 주요 스킬 리스트 및 활용 사례
-
-총 19가지의 사역 스킬이 포함되어 있습니다. 아래처럼 AI에게 명령해 보세요.
-
-### 🔍 설교 연구 (`sermon-research`)
-- **명령:** "이번 주일 본문인 로마서 8:1-11로 설교 연구 리포트를 작성해줘."
-- **결과:** 원어 분석, 개역개정 대조, 주석 통찰, 한국적 적용점이 담긴 전문 리포트 생성.
-
-### 💡 설교 브레인스토밍 (`sermon-brainstorming`)
-- **명령:** "이번 설교 주제인 '고난 속의 소망'에 대해 나와 대화하며 아이디어를 짜보자."
-- **결과:** 뻔한 정답을 주지 않고, 목사님의 사유를 이끌어내는 소크라테스식 파트너 역할 수행.
-
-### 📋 주보 및 광고 도우미 (`bulletin-helper`, `announcement-script`)
-- **명령:** "이번 주 교회 소식을 바탕으로 광고 스크립트와 주보 원고를 정리해줘."
-- **결과:** 남선교회, 권사회 등 한국 교회 특유의 직분과 정서를 반영한 깔끔한 공식 문체 자동 정리.
-
-### 🖋️ 설교 고급화 및 디자인 (`sermon-to-column`, `sermon-cardnews-maker`)
-- **명령:** "주일 설교를 유진 피터슨 스타일의 칼럼으로 바꿔줘. 그리고 킨포크 무드의 4컷 카드뉴스로 기획해 줘."
-- **결과:** 거장의 문체로 리폼된 고품격 칼럼, 그리고 Hook-Hurdle-Solution 구조의 카드뉴스 텍스트+이미지 기획안 생성.
-
-### 🛡️ 설교 비평 및 신학 변증 (`sermon-red-team`, `biblical-dilemma-solver`)
-- **명령:** "가나안 진멸 전쟁에 대한 청년의 질문에 답할 수 있도록 성경 난제 가이드를 줘."
-- **결과:** 역사적/문법적 배경, 주요 신학적 관점, 그리고 대상별(초신자/리더) 맞춤형 목회적 답변 스크립트 제공.
-
-*기타 스킬: sermon-series-planner, small-group-discussion, admin-email, pastoral-letter, visitation-guide, mid-week-meditation, meeting-agenda, sermon-to-blog, sermon-to-youtube, social-media-post 등*
+### 🤝 목양 및 소그룹
+- `small-group-discussion.md`: 본문 기반의 깊이 있는 소그룹 나눔 질문 생성
+- `visitation-guide.md`: 상황별 심방 성구 및 목회적 권면 가이드
+- `mid-week-meditation.md`: 주중 성도들에게 공유할 짧은 묵상 콘텐츠 제작
+- `social-media-post.md`: 인스타그램/페이스북용 짧은 영감 문구 추출
 
 ---
 
-## 5. 🪡 심화 팁: 나만의 맞춤 스킬 만들기
+## ⚖️ 저작권 및 배포
+본 프로젝트는 **MIT License**를 따릅니다. 동료 목회자들과 자유롭게 공유하고 수정하여 사용하실 수 있습니다.
 
-이 프로젝트에 포함된 스킬들은 복잡한 코드가 아니라, AI에게 업무를 지시하는 **자연어(글) 매뉴얼**입니다. 
-`core/skills/` 폴더 안의 파일들을 열어보시고, 목사님의 사역 스타일이나 철학에 맞게 내용을 마음껏 추가하고 수정해 보세요.
-
-> [!TIP]
-> **수정 예시**
-> *"우리 교회는 '셀'이라는 명칭을 쓰니까 모든 결과물에 '셀'이라고 표기해 줘"*
-> *"나는 존 파이퍼 목사님의 신학을 좋아하니, 주석을 찾을 때 그분의 관점을 꼭 포함해 줘"*
-
-목사님께서 스킬 문서를 조금씩 다듬어 가실수록, AI는 세상에 단 하나뿐인 **목사님만의 완벽한 맞춤형 비서**로 진화합니다.
-
----
-
-## 6. ⚠️ 사역자를 위한 주의사항
-- **보조 도구:** AI는 목사님의 사역을 돕는 유능한 '비서'입니다. 설교의 핵심 영감과 영적 권위는 목사님의 고유한 영역임을 기억해 주세요.
-- **성경 역본:** 기본적으로 **개역개정**을 사용하도록 설정되어 있습니다. 다른 역본이 필요하시면 명령 시 명시해 주세요.
-
----
-
-## ⚖️ License
-Original code is licensed under the MIT License. This localized version also follows the MIT License.
+> **Note:** 본 툴킷은 목회자의 사역을 보조하는 도구입니다. 최종적인 설교의 메시지와 영적 판단은 기도 가운데 목회자 본인이 직접 결정하시기를 권장합니다.
