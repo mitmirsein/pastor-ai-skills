@@ -1,5 +1,7 @@
 # 🕊️ Pastor-KR (High-Precision Pastoral AI Toolkit)
 
+**20 AI-powered pastoral workflow skills based on '6 Gems' & 'Inferential Ontology'. High-precision Korean toolkit mimicking ontology-building for modern ministry.**
+
 ![Pastor-KR Hero Image](assets/hero-image.jpg)
 
 **Pastor-KR**은 목회 현장의 고유한 맥락을 깊이 이해하고, 실제적인 사역 결과물을 만들어내는 **고성능 한국어 목회 지원 AI 스킬셋**입니다. 
