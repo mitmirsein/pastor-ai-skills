@@ -55,7 +55,7 @@ This project is a localized fork of the excellent work by **Thomas Costello** (F
 ## 3. 🛠️ 수동 설치 방법 (직접 관리하고 싶은 경우)
 
 1. **파일 다운로드:** 본 레포지토리를 ZIP으로 다운로드하거나 `git clone` 합니다.
-2. **폴더 위치:** `core/` 폴더와 `templates/` 폴더를 목사님의 사역용 AI 프로젝트 폴더(또는 Obsidian 볼트 등)로 복사합니다.
+2. **폴더 위치:** `core/` 폴더를 목사님의 사역용 AI 프로젝트 폴더(또는 Obsidian 볼트 등)로 복사합니다.
 3. **에이전트 인식:** AI에게 "내 프로젝트 폴더에 있는 `core/skills` 폴더의 지침을 읽고 실행해줘"라고 명령합니다.
 
 ---
