@@ -1,5 +1,7 @@
 # 🕊️ Pastor-KR (High-Precision Pastoral AI Toolkit)
 
+![Pastor-KR Hero Image](assets/hero-image.jpg)
+
 **Pastor-KR**은 목회 현장의 고유한 맥락을 깊이 이해하고, 실제적인 사역 결과물을 만들어내는 **고성능 한국어 목회 지원 AI 스킬셋**입니다. 
 
 이 툴킷은 단순히 일반적인 프롬프트를 모아놓은 것이 아니라, 최고 수준의 성서학적 주해 엔진(6 Gems)과 현대 한국 교회의 사역 문화를 결합한 **'지능형 워크플로우 라이브러리'**로 작동합니다.
