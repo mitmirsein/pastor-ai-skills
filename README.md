@@ -1,6 +1,6 @@
 # 🕊️ Pastor-KR (High-Precision Pastoral AI Toolkit)
 
-> **버전 (Version): v2.0 (Layered Orchestrator Structure)**
+> **버전 (Version): v2.1 (Persistence & Layered Orchestrator)**
 
 **Agentic pastoral workflow framework with 'Concierge & Guild' architecture. High-precision Korean toolkit featuring 19 specialized skills based on '6 Gems' & 'Inferential Ontology'.**
 
@@ -28,7 +28,7 @@
 
 ---
 
-## 🌟 프로젝트의 핵심 가치 (v2.0 업데이트)
+## 🌟 프로젝트의 핵심 가치 (v2.1 업데이트)
 
 1. **인지 부하 최소화 (오케스트레이터):** 19개의 스킬 목록을 외울 필요가 없습니다. `00_pastor_concierge`에게 자연어로 말하면 최적의 스킬을 매칭해 줍니다.
 2. **단절 없는 워크플로우 (파이프라인):** 하나의 작업이 끝나면 `Call to Action`을 통해 다음 단계(예: 브레인스토밍 ➔ 주해 ➔ 검증 ➔ 블로그 발행)를 자연스럽게 제안합니다.
@@ -39,7 +39,7 @@
 
 ## 📖 스킬 디렉토리 구조 (전문가 길드)
 
-v2.0부터 모든 스킬은 목회자의 실제 워크플로우에 따라 5개의 직관적인 그룹으로 재편되었습니다.
+v2.1부터 모든 스킬은 목회자의 실제 워크플로우에 따라 5개의 직관적인 그룹으로 재편되었으며, 작업 결과가 `outputs/` 폴더에 자동으로 저장됩니다.
 
 ### 🛎️ `00_pastor_concierge` (단일 진입점)
 - `SKILL.md`: 사용자의 자연어 의도를 분석하여 아래의 4대 코어 스킬로 라우팅해주는 최상위 수석 비서
