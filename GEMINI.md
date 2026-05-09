@@ -1,7 +1,7 @@
 # 🕊️ Pastor-KR (Project Entrypoint)
 
-> **버전 (Version): v2.5 (Memory · Liturgy · Lineage)**
-> *이전 버전: v2.1 (Persistence & Layered Orchestrator)*
+> **버전 (Version): v2.7 (Audit Gate & Journal Lint)**
+> *이전 버전: v2.5 (Memory · Liturgy · Lineage)*
 
 ## 1. 프로젝트 목표
 본 프로젝트는 `pastor-ai-skills`를 한국 목회 상황에 맞게 리폼(Reform)하여, 목회자들에게 최적화된 **'오케스트레이터(Concierge) + 전문가 길드(Guild) + 목회 메모리(Memory)'** 기반의 하이엔드 AI 비서 워크플로우를 제공하는 것을 목표로 합니다.
@@ -40,6 +40,11 @@
     - `02_pastoral_care/`: 성경공부 교안, 구역 나눔, 주중 묵상, 심방
     - `03_omni_publisher/`: 재생산 얇은 라우터 및 다매체 변환 (블로그, 칼럼, TTS, 카드뉴스)
     - `04_church_admin/`: 교회 행정, 주보, 목회서신, 이메일, 회의록
+    - `05_meta_tools/` *(Tier 1·2)*: 시스템 자기 점검·조회 도구 (foundation-setup, journal-show, recall, weekly-briefing)
+- `harness/` *(Tier 3 신규)*: **품질 보증 도구** — skills/와 분리된 감사 전용 위계. 발행 차단 권한을 갖는 유일한 디렉토리.
+    - `sermon_audit.md`: 발행 전 사역물 5렌즈 포렌식 검수 (80점 fail-fast)
+    - `journal_lint.md`: `pastor_journal.md` 스키마·PII·표류 점검
+    - `_README.md`: harness/ 운용 정책 및 skills/와의 책임 경계
 - `docs/`: 아키텍처 설계, 기획, 리뷰 문서 보관소
 - `outputs/`:
     - `sermons/{passage_id}/`: 본문 중심 lineage (`_manifest.md` + `v01..vNN`)

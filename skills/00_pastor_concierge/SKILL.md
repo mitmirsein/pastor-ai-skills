@@ -65,6 +65,16 @@ description: 목회자의 일상 언어를 분석하여 의도를 파악하고, 
 - `meeting-agenda`: 당회, 제직회, 교역자 회의 등의 아젠다와 회의록 초안을 잡을 때
 - `announcement-script`: 강단/주보 광고 멘트를 자연스러운 입말로 다듬을 때
 
+**🛠️ [05. 메타 도구 (Meta Tools)]**
+- `foundation-setup`: 첫 설치 시 교회·목회자 메타데이터를 인터뷰하여 `core/foundation.md`를 초기화할 때
+- `journal-show`: 현재 `pastor_journal.md` 상태를 시각화된 대시보드로 한눈에 확인하고 싶을 때
+- `recall`: 과거 사역 자산을 자연어로 검색하고 싶을 때 ("지난번 마태 5장 어떻게 했지?", "은혜 다룬 거 모아서")
+- `weekly-briefing`: 한 주 사역을 한 장으로 정리하고 다음 주 우선순위를 파악하고 싶을 때 (월요일 브리핑)
+
+**🛑 [Q. 품질 게이트 (Quality Gate / harness)]**
+- `sermon_audit`: 발행 직전 사역물을 5대 렌즈로 포렌식 검수. 80점 fail-fast로 발행 품질을 보증할 때. → `harness/sermon_audit.md`
+- `journal_lint`: `pastor_journal.md`의 스키마·PII 위반·표류·만료를 점검하고 위생 상태를 확인할 때. → `harness/journal_lint.md`
+
 ---
 
 ## 4. 작동 프로세스 (Workflow v2.5)
@@ -85,6 +95,18 @@ description: 목회자의 일상 언어를 분석하여 의도를 파악하고, 
 ### Step 3: 최적 스킬 라우팅
 - §3 인벤토리에서 단 1개의 가장 적합한 스킬을 선택합니다.
 - 절기 컨텍스트가 본문/주제 추천에 반영되어야 하지만, **시리즈 진행 중이면 시리즈가 절기보다 우선**합니다 (`liturgical_calendar.md` 원칙 1.2).
+
+**[05. 메타 도구 라우팅 패턴]**
+- "지난번", "예전에", "이전에" 같은 시간 후행 키워드 + 본문·주제·사람 → `recall`
+- "찾아줘", "모아줘", "어디 있어" 등 검색 의도 + 과거 맥락 → `recall`
+- "이번 주", "지난주", "한 주 정리", "월요일 브리핑", "주간 다이제스트" → `weekly-briefing`
+- 처음 설정 또는 `foundation.md` 초기화 필요 → `foundation-setup`
+- "메모리 보여줘", "journal 현황", "지금 뭐 진행 중이야" → `journal-show`
+
+**[Q. 품질 게이트 라우팅 패턴]**
+- "발행 전 검수", "감사 게이트", "최종 점검", "이 원고 검수해" → `sermon_audit`
+- "메모리 점검", "journal lint", "위생 검사", "메모리 정리" → `journal_lint`
+- ⚡ **자동 권장:** 본문 lineage `stage`가 `redteam` → `drafted/preached/published`로 전이하는 시점을 감지하면, Concierge는 `sermon_audit` 실행을 먼저 권장합니다. (강제 아님 — 사용자 선택)
 
 ### Step 4: '복사/붙여넣기'용 실행 프롬프트 제공
 - 사용자가 해당 스킬을 호출할 때 사용할 **완성형 프롬프트**를 코드 블록에 담아 제공합니다.
