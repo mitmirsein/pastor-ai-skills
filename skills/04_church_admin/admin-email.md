@@ -36,11 +36,17 @@ description: 노회, 외부 강사 초청, 지역 관공서 등 대외/행정 �
 
 [시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
 
-### 💾 결과 저장 및 영속화 (Persistence)
-- **저장 실행:** 생성된 모든 결과물 내용을 마크다운 파일로 저장하십시오.
-- **저장 경로:** `outputs/{date}/04_church_admin/admin-email_{topic}.md`
-- **YAML 메타데이터:** 파일 상단에 `date`, `skill`, `category`, `topic` 정보를 포함하십시오.
-- **안내:** 저장 완료 후 사용자에게 저장된 절대 경로를 브리핑하십시오.
+### 💾 결과 저장 및 영속화 (Persistence v2.5)
+- **저장 경로:** `outputs/{date}/04_church_admin/admin-email_{topic}.md` (날짜 기반)
+- **YAML 메타데이터:** `date`, `skill: admin-email`, `category: 04_church_admin`, `topic`, `recipient_role`(직책만, 예: "노회 서기"), `purpose`(섭외/요청/감사/회신) 포함. **수신자 실명/주소/이메일은 본문에는 둘 수 있으나 메타데이터·journal에는 기록 금지.**
+
+### 🪔 메모리 갱신 (Journal Update v2.5)
+일반적으로 `pastor_journal` 갱신은 생략. 행정 이메일은 단발성 작업이므로 메모리에 누적시키지 않습니다. 단:
+- 외부 강사 섭외처럼 후속 일정이 발생하는 경우 사용자가 명시적으로 요청하면 `notes`에 행사 일자와 행사명만 한 줄 추가 가능.
+- PII 정책 엄격 준수.
+
+### 📣 안내
+저장 완료 후 사용자에게 저장된 절대 경로를 브리핑하고, 발송 전 첨부 서류 점검을 권합니다.
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

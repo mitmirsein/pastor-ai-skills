@@ -33,11 +33,20 @@ description: 전체 성도를 대상으로 하는 목회 서신(연말연시, �
 
 [시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
 
-### 💾 결과 저장 및 영속화 (Persistence)
-- **저장 실행:** 생성된 모든 결과물 내용을 마크다운 파일로 저장하십시오.
-- **저장 경로:** `outputs/{date}/04_church_admin/pastoral-letter_{topic}.md`
-- **YAML 메타데이터:** 파일 상단에 `date`, `skill`, `category`, `topic` 정보를 포함하십시오.
-- **안내:** 저장 완료 후 사용자에게 저장된 절대 경로를 브리핑하십시오.
+### 💾 결과 저장 및 영속화 (Persistence v2.5)
+- **저장 경로:** `outputs/{date}/04_church_admin/pastoral-letter_{topic}.md` (날짜 기반)
+- **YAML 메타데이터:** `date`, `skill: pastoral-letter`, `category: 04_church_admin`, `topic`, `letter_type`(절기/위로/축하/공동체 권면/감사), `audience_scope`(전 성도/특정 그룹/특정 직분군) 포함. **개별 수신자 명단은 기록 금지.**
+
+### 🪔 메모리 갱신 (Journal Update v2.5)
+`core/pastor_journal.md`를 다음 기준으로 갱신합니다.
+- 절기 서신(`letter_type: 절기`)인 경우 `recent_topics`에 절기명 추가.
+- 위로 서신이 특정 심방 케이스의 후속이면 `active_visitations` 해당 항목의 `notes`에 "[목회 서신 발송 {date}]" 한 줄 추가 (대상자 식별은 기존 직분+이니셜 유지).
+- 공동체 권면 서신은 `recent_topics`에 핵심 권면 키워드 1개 추가.
+- 절기 서신 외 일반적인 단발성 서신은 갱신 생략.
+- PII 정책 준수.
+
+### 📣 안내
+저장 완료 후 사용자에게 ①저장된 절대 경로, ②(해당 시) journal 갱신 항목을 브리핑합니다.
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

@@ -40,11 +40,24 @@ description: 본문의 신학적 긴장과 성도의 삶을 연결하여, 정직
 
 [시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
 
-### 💾 결과 저장 및 영속화 (Persistence)
-- **저장 실행:** 생성된 모든 결과물 내용을 마크다운 파일로 저장하십시오.
-- **저장 경로:** `outputs/{date}/02_pastoral_care/devotional-generator_{topic}.md`
-- **YAML 메타데이터:** 파일 상단에 `date`, `skill`, `category`, `topic` 정보를 포함하십시오.
-- **안내:** 저장 완료 후 사용자에게 저장된 절대 경로를 브리핑하십시오.
+### 💾 결과 저장 및 영속화 (Persistence v2.5)
+- **본문 식별:** 묵상 본문이 명확하면 `passage_id`로 분류 (`{book-slug}-{ch}-{vstart}-{vend}`). 본문 없는 일반 묵상은 `topic-{slug}`로 폴백.
+- **버전 번호:** 본문 기반인 경우 `outputs/sermons/{passage_id}/`, 폴백인 경우 `outputs/devotionals/{topic-slug}/` 폴더 스캔하여 다음 `v{NN}` 결정.
+- **저장 경로:**
+  - 본문 기반: `outputs/sermons/{passage_id}/v{NN}_devotional-generator_{date}.md`
+  - 폴백: `outputs/devotionals/{topic-slug}/v{NN}_devotional-generator_{date}.md`
+- **YAML 메타데이터:** `date`, `skill: devotional-generator`, `category: 02_pastoral_care`, `passage_id`(없으면 null), `topic`, `version`, `stage: devotional` 포함.
+- **Manifest 갱신:** 본문 기반인 경우 `outputs/sermons/{passage_id}/_manifest.md` 갱신. 폴백인 경우 갱신 생략.
+
+### 🪔 메모리 갱신 (Journal Update v2.5)
+`core/pastor_journal.md`를 갱신합니다.
+- 본문 기반 + 해당 `passage_id` 항목 존재 시: `notes`에 "[묵상 카드 작성]" 태그 추가.
+- 신규 본문 묵상이면 `active_sermons`에 `stage: devotional`로 추가.
+- `recent_topics`에 묵상 키워드 1개 FIFO 추가.
+- PII 정책 준수, 읽고-병합-쓰기.
+
+### 📣 안내
+저장 완료 후 사용자에게 ①저장된 절대 경로, ②(본문 기반인 경우) manifest 갱신 결과, ③journal 갱신 항목을 한 번에 브리핑합니다.
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

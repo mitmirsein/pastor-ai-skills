@@ -39,11 +39,21 @@ description: 설교 원고를 유진 피터슨(Eugene Peterson)의 시적 영성
 
 [시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
 
-### 💾 결과 저장 및 영속화 (Persistence)
-- **저장 실행:** 생성된 모든 결과물 내용을 마크다운 파일로 저장하십시오.
-- **저장 경로:** `outputs/{date}/03_omni_publisher/sermon-to-column_{topic}.md`
-- **YAML 메타데이터:** 파일 상단에 `date`, `skill`, `category`, `topic` 정보를 포함하십시오.
-- **안내:** 저장 완료 후 사용자에게 저장된 절대 경로를 브리핑하십시오.
+### 💾 결과 저장 및 영속화 (Persistence v2.5)
+- **본문 식별:** 원본 설교의 `passage_id`를 결정합니다.
+- **버전 번호:** `outputs/sermons/{passage_id}/` 폴더를 스캔하여 다음 `v{NN}` 번호 결정.
+- **저장 경로:** `outputs/sermons/{passage_id}/v{NN}_sermon-to-column_{date}.md`
+- **YAML 메타데이터:** `date`, `skill: sermon-to-column`, `category: 03_omni_publisher`, `passage_id`, `version`, `topic`, `style`(피터슨/켈러/일반), `stage: published_column` 포함.
+- **Manifest 갱신:** `outputs/sermons/{passage_id}/_manifest.md`을 읽고-병합-쓰기로 갱신. 라인 추가 예: `- v{NN} sermon-to-column ({date}) — {style} 스타일 칼럼 ({글자수})`.
+
+### 🪔 메모리 갱신 (Journal Update v2.5)
+`core/pastor_journal.md`의 `active_sermons`를 갱신합니다.
+- 해당 `passage_id` 항목 존재 시: `notes`에 "[칼럼 발행: {style}]" 태그 추가. `stage`가 `preached`였다면 `published`로 승격.
+- 미존재 시: 신규 항목 추가 (`stage: published`).
+- PII 정책 준수, 읽고-병합-쓰기.
+
+### 📣 안내
+저장 완료 후 사용자에게 ①저장된 절대 경로, ②manifest 갱신 결과, ③journal 갱신 항목을 한 번에 브리핑합니다.
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

@@ -30,11 +30,22 @@ description: 설교 원고나 요약본을 네이버 블로그 등 웹 환경에
 
 [시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
 
-### 💾 결과 저장 및 영속화 (Persistence)
-- **저장 실행:** 생성된 모든 결과물 내용을 마크다운 파일로 저장하십시오.
-- **저장 경로:** `outputs/{date}/03_omni_publisher/sermon-to-blog_{topic}.md`
-- **YAML 메타데이터:** 파일 상단에 `date`, `skill`, `category`, `topic` 정보를 포함하십시오.
-- **안내:** 저장 완료 후 사용자에게 저장된 절대 경로를 브리핑하십시오.
+### 💾 결과 저장 및 영속화 (Persistence v2.5)
+- **본문 식별:** 원본 설교의 `passage_id`를 결정합니다. 사용자가 원고에 본문을 명시했다면 그것을 사용, 아니면 사용자에게 한 번 확인.
+- **버전 번호:** `outputs/sermons/{passage_id}/` 폴더를 스캔하여 다음 `v{NN}` 번호 결정.
+- **저장 경로:** `outputs/sermons/{passage_id}/v{NN}_sermon-to-blog_{date}.md`
+- **YAML 메타데이터:** `date`, `skill: sermon-to-blog`, `category: 03_omni_publisher`, `passage_id`, `version`, `topic`, `stage: published_blog` 포함.
+- **Manifest 갱신:** `outputs/sermons/{passage_id}/_manifest.md`을 읽고-병합-쓰기로 갱신. 라인 추가 예: `- v{NN} sermon-to-blog ({date}) — 블로그 변환본`.
+
+### 🪔 메모리 갱신 (Journal Update v2.5)
+`core/pastor_journal.md`의 `active_sermons`를 갱신합니다.
+- 해당 `passage_id` 항목 존재 시: `notes`에 "[블로그 발행]" 태그 추가. `stage`가 `preached`였다면 `published`로 승격.
+- 미존재 시 (외부 원고를 변환한 경우): 신규 항목 추가 (`stage: published`, `preached_on`은 사용자 확인 후 채움).
+- 4주 경과 시 archive 처리 대상.
+- PII 정책 준수, 읽고-병합-쓰기.
+
+### 📣 안내
+저장 완료 후 사용자에게 ①저장된 절대 경로, ②manifest 갱신 결과, ③journal 갱신 항목을 한 번에 브리핑합니다.
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

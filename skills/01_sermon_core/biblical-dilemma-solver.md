@@ -63,11 +63,22 @@ description: 6 Gems 엔진(정경적 궤적, 사회-수사학적 코드)을 활�
 
 [시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
 
-### 💾 결과 저장 및 영속화 (Persistence)
-- **저장 실행:** 생성된 모든 결과물 내용을 마크다운 파일로 저장하십시오.
-- **저장 경로:** `outputs/{date}/01_sermon_core/biblical-dilemma-solver_{topic}.md`
-- **YAML 메타데이터:** 파일 상단에 `date`, `skill`, `category`, `topic` 정보를 포함하십시오.
-- **안내:** 저장 완료 후 사용자에게 저장된 절대 경로를 브리핑하십시오.
+### 💾 결과 저장 및 영속화 (Persistence v2.5)
+- **본문 식별:** 난제 본문의 `passage_id`를 결정합니다 (`{book-slug}-{ch}-{vstart}-{vend}`).
+- **버전 번호:** `outputs/sermons/{passage_id}/` 폴더를 스캔하여 다음 `v{NN}` 번호 결정.
+- **저장 경로:** `outputs/sermons/{passage_id}/v{NN}_biblical-dilemma-solver_{date}.md`
+- **YAML 메타데이터:** `date`, `skill: biblical-dilemma-solver`, `category: 01_sermon_core`, `passage_id`, `version`, `topic`, `stage: dilemma` 포함.
+- **Manifest 갱신:** `outputs/sermons/{passage_id}/_manifest.md`을 읽고-병합-쓰기로 갱신. 라인 추가 예: `- v{NN} biblical-dilemma-solver ({date}) — 난제 해결: {핵심 변증 한 줄}`.
+
+### 🪔 메모리 갱신 (Journal Update v2.5)
+`core/pastor_journal.md`의 `active_sermons`를 갱신합니다.
+- 해당 `passage_id` 항목 존재 시: `stage` → `dilemma`, `next_step` → `sermon-red-team` 또는 `sermon-brainstorming`(설교 골격 진입 시).
+- 미존재 시: 신규 항목 추가 (`stage: dilemma`, `notes`에 해결된 난제 요약 한 줄).
+- `recent_topics`에 변증 주제 1~2개 추가.
+- PII 정책 준수, 읽고-병합-쓰기.
+
+### 📣 안내
+저장 완료 후 사용자에게 ①저장된 절대 경로, ②manifest 갱신 결과, ③journal 갱신 항목을 한 번에 브리핑합니다.
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

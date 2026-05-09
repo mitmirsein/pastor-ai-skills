@@ -1,11 +1,12 @@
 # 🕊️ Pastor-KR (High-Precision Pastoral AI Toolkit)
 
-> **버전 (Version): v2.1 (Persistence & Layered Orchestrator)**
+> **버전 (Version): v2.5 (Memory · Liturgy · Lineage)**
+> *이전: v2.1 (Persistence & Layered Orchestrator)*
 
-**Agentic pastoral workflow framework with 'Concierge & Guild' architecture. High-precision Korean toolkit featuring 19 specialized skills based on '6 Gems' & 'Inferential Ontology'.**
+**Agentic pastoral workflow framework with 'Concierge & Guild + Memory' architecture. High-precision Korean toolkit featuring 19 specialized skills based on '6 Gems' & 'Inferential Ontology', now with persistent pastoral memory, liturgical-calendar awareness, and passage-centric lineage.**
 
-**"오케스트레이터 + 전문가 길드" 아키텍처 기반의 고성능 한국어 목회 지원 AI 스킬셋.**
-단 하나의 진입점(`Pastor-Concierge`)을 통해 복잡한 스킬 선택의 고민 없이 목회 워크플로우를 자동화합니다.
+**"오케스트레이터 + 전문가 길드 + 목회 메모리" 아키텍처 기반의 고성능 한국어 목회 지원 AI 스킬셋.**
+단 하나의 진입점(`Pastor-Concierge`)을 통해 복잡한 스킬 선택의 고민 없이 목회 워크플로우를 자동화하며, **매 세션 진입 시 진행 중인 사역(설교/시리즈/심방)과 절기 컨텍스트를 자동 복원**합니다.
 
 ![Pastor-KR Hero Image](assets/hero-image.jpg)
 
@@ -28,18 +29,21 @@
 
 ---
 
-## 🌟 프로젝트의 핵심 가치 (v2.1 업데이트)
+## 🌟 프로젝트의 핵심 가치 (v2.5 업데이트)
 
 1. **인지 부하 최소화 (오케스트레이터):** 19개의 스킬 목록을 외울 필요가 없습니다. `00_pastor_concierge`에게 자연어로 말하면 최적의 스킬을 매칭해 줍니다.
 2. **단절 없는 워크플로우 (파이프라인):** 하나의 작업이 끝나면 `Call to Action`을 통해 다음 단계(예: 브레인스토밍 ➔ 주해 ➔ 검증 ➔ 블로그 발행)를 자연스럽게 제안합니다.
 3. **정밀도 최극대화 (전문가 길드):** 범용 프롬프트 대통합의 함정을 피하고, 각 목적에 특화된 개별 에이전트들의 페르소나를 완벽히 보존합니다.
 4. **추론적 온톨로지(Inferential Ontology):** 별도의 데이터베이스 없이도 AI가 본문의 핵심 개념을 엔티티(Entity)와 관계로 해체하여 분석하는 논리가 탑재되어 있습니다. (적용: `sermon-research`, `biblical-dilemma-solver`, `sermon-brainstorming`, `sermon-red-team`, `devotional-generator`, `small-group-guide`, `sermon-cardnews-maker`)
+5. **🪔 목회 메모리 (v2.5 신규):** `core/pastor_journal.md`에 진행 중인 설교/시리즈/심방/기도제목이 자동 누적·갱신됩니다. Concierge는 매 세션 진입 시 이를 의무 로드하여, 콜드 스타트 없이 사역의 흐름을 이어갑니다. (PII 보호: 직분+이니셜만 기록)
+6. **🗓️ 절기 자각 (v2.5 신규):** `core/liturgical_calendar.md`가 교회력(대림~일반)과 한국 교회 고유 절기(맥추/추수/송구영신/종교개혁/어린이/어버이)를 매핑합니다. "이번 주일 뭐 할까?"라는 모호한 질문에도 절기 흐름을 결합한 본문 후보가 제시됩니다.
+7. **📜 본문 중심 lineage (v2.5 신규):** 동일 본문에 대한 모든 작업물이 `outputs/sermons/{passage_id}/`라는 하나의 폴더에 누적되며, `_manifest.md`가 작업 이력을 한눈에 보여줍니다. "이 본문 어디까지 했지?"가 즉시 보입니다.
 
 ---
 
 ## 📖 스킬 디렉토리 구조 (전문가 길드)
 
-v2.1부터 모든 스킬은 목회자의 실제 워크플로우에 따라 5개의 직관적인 그룹으로 재편되었으며, 작업 결과가 `outputs/` 폴더에 자동으로 저장됩니다.
+v2.5부터 모든 스킬은 목회자의 실제 워크플로우에 따라 5개의 직관적인 그룹으로 운영되며, 작업 결과가 `outputs/` 폴더에 **본문 중심 lineage** 방식으로 자동 저장됩니다.
 
 ### 🛎️ `00_pastor_concierge` (단일 진입점)
 - `SKILL.md`: 사용자의 자연어 의도를 분석하여 아래의 4대 코어 스킬로 라우팅해주는 최상위 수석 비서
@@ -70,6 +74,40 @@ v2.1부터 모든 스킬은 목회자의 실제 워크플로우에 따라 5개�
 - `pastoral-letter.md`: 절기 및 상황별 고품격 공식 목회 서신 작성
 - `admin-email.md`: 정중하고 명확한 교회 행정 및 대외 비즈니스 이메일 작성
 - `meeting-agenda.md`: 당회 및 제직회 등 각종 회의 안건 구조화
+
+---
+
+## 🪔 v2.5 컨텍스트 트리오 (SSOT Trio)
+Concierge가 매 세션 진입 시 의무 로드하는 3개 파일이 사역의 단일 진실 공급원(Single Source of Truth)을 구성합니다.
+
+| 파일 | 역할 |
+|---|---|
+| `core/foundation.md` | 교회·목회자 메타데이터 (교단, 신학적 지향, 톤) |
+| `core/pastor_journal.md` *(신규)* | 진행 중인 설교/시리즈/심방, 최근 주제, 기도제목 |
+| `core/liturgical_calendar.md` *(신규)* | 교회력 + 한국 교회 고유 절기 매핑 규칙 |
+
+> 사역의 흐름을 잃지 않으려면 `core/pastor_journal.md`만 정기적으로 살펴보세요. 자동 갱신되지만, 종결된 시리즈를 archive로 옮기거나 만료된 기도제목을 정리하는 것은 사용자의 몫입니다.
+
+---
+
+## 📂 outputs/ 구조 (v2.5)
+
+```
+outputs/
+├── sermons/{passage_id}/         # 본문 중심 lineage (설교 코어 / 옴니 퍼블리셔 / 일부 목양)
+│   ├── _manifest.md
+│   ├── v01_sermon-brainstorming_2026-05-06.md
+│   ├── v02_sermon-research_2026-05-10.md
+│   └── ...
+├── series/{series_id}/           # 시리즈 기획·진행
+│   ├── _manifest.md
+│   └── plan_2026-04-05.md
+├── {date}/{category}/            # 비-본문 작업물 (심방 / 행정 / 공지)
+│   └── ...
+└── devotionals/{topic-slug}/     # 본문 미식별 묵상 폴백
+```
+
+`passage_id` 명명 규칙과 manifest 구조는 `outputs/sermons/_README.md`를 참고하세요.
 
 ---
 

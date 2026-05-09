@@ -38,11 +38,18 @@ description: 주보 내용이나 주요 공지사항을 바탕으로, 예배 시
 
 [시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
 
-### 💾 결과 저장 및 영속화 (Persistence)
-- **저장 실행:** 생성된 모든 결과물 내용을 마크다운 파일로 저장하십시오.
-- **저장 경로:** `outputs/{date}/04_church_admin/announcement-script_{topic}.md`
-- **YAML 메타데이터:** 파일 상단에 `date`, `skill`, `category`, `topic` 정보를 포함하십시오.
-- **안내:** 저장 완료 후 사용자에게 저장된 절대 경로를 브리핑하십시오.
+### 💾 결과 저장 및 영속화 (Persistence v2.5)
+- **저장 경로:** `outputs/{date}/04_church_admin/announcement-script_{topic}.md` (날짜 기반)
+- **YAML 메타데이터:** `date`, `skill: announcement-script`, `category: 04_church_admin`, `topic`, `target_service`(주일/수요/금요/특별집회) 포함.
+
+### 🪔 메모리 갱신 (Journal Update v2.5)
+일반적으로 `pastor_journal` 갱신은 생략. 단, 광고 내용이 진행 중인 시리즈/심방/기도제목과 직접 연관된 경우에 한해 다음을 수행:
+- `active_series.notes` 또는 `active_visitations.notes`에 광고 발송 사실 한 줄 추가.
+- 신규 기도제목 광고 시 `open_prayer_requests`에 항목 등록 가능.
+- PII 정책 준수.
+
+### 📣 안내
+저장 완료 후 사용자에게 저장된 절대 경로를 브리핑합니다.
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

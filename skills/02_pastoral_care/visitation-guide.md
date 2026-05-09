@@ -38,11 +38,18 @@ description: 한국 교회 상황(장례, 개업, 병환, 이사 등)에 맞춘 
 
 [시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
 
-### 💾 결과 저장 및 영속화 (Persistence)
-- **저장 실행:** 생성된 모든 결과물 내용을 마크다운 파일로 저장하십시오.
-- **저장 경로:** `outputs/{date}/02_pastoral_care/visitation-guide_{topic}.md`
-- **YAML 메타데이터:** 파일 상단에 `date`, `skill`, `category`, `topic` 정보를 포함하십시오.
-- **안내:** 저장 완료 후 사용자에게 저장된 절대 경로를 브리핑하십시오.
+### 💾 결과 저장 및 영속화 (Persistence v2.5)
+- **저장 경로:** `outputs/{date}/02_pastoral_care/visitation-guide_{topic}.md` (날짜 기반 — 본문 lineage에 합류하지 않음)
+- **YAML 메타데이터:** `date`, `skill: visitation-guide`, `category: 02_pastoral_care`, `topic`(상황 카테고리: 장례/병환/개업 등), `target_role`(직분만), `target_id`(이니셜 한 글자) 포함. 실명/연락처/병명 상세는 절대 기록 금지.
+
+### 🪔 메모리 갱신 (Journal Update v2.5)
+`core/pastor_journal.md`의 `active_visitations`를 갱신합니다.
+- 항목 구성: `target`(직분+이니셜, 예: "K집사"), `context`(일반화된 한 줄. 예: "암 투병 중"), `last_visit: {date}`, `followup_due: {date + 권장 후속 간격}`, `prayer_focus`(2-3개 키워드).
+- 동일 `target`이 이미 존재하면 갱신: `last_visit` 갱신, `context`에 변동사항 한 줄 append.
+- 🚨 **PII 가드:** 사용자가 실명을 입력해도 자동으로 직분+이니셜로 변환하여 저장. 가족 구성원 실명은 "가족"으로 일반화.
+
+### 📣 안내
+저장 완료 후 사용자에게 ①저장된 절대 경로, ②journal에 등록된 후속 심방 일정을 한 번에 브리핑합니다.
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

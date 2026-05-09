@@ -34,11 +34,22 @@ description: 설교 메시지를 성도들의 삶으로 연결하는 아이스�
 
 [시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
 
-### 💾 결과 저장 및 영속화 (Persistence)
-- **저장 실행:** 생성된 모든 결과물 내용을 마크다운 파일로 저장하십시오.
-- **저장 경로:** `outputs/{date}/02_pastoral_care/small-group-guide_{topic}.md`
-- **YAML 메타데이터:** 파일 상단에 `date`, `skill`, `category`, `topic` 정보를 포함하십시오.
-- **안내:** 저장 완료 후 사용자에게 저장된 절대 경로를 브리핑하십시오.
+### 💾 결과 저장 및 영속화 (Persistence v2.5)
+- **본문 식별:** 나눔 본문의 `passage_id`를 결정합니다 (설교와 연동되는 경우 동일 `passage_id` 사용 권장).
+- **버전 번호:** `outputs/sermons/{passage_id}/` 폴더를 스캔하여 다음 `v{NN}` 번호 결정.
+- **저장 경로:** `outputs/sermons/{passage_id}/v{NN}_small-group-guide_{date}.md`
+- **YAML 메타데이터:** `date`, `skill: small-group-guide`, `category: 02_pastoral_care`, `passage_id`, `version`, `topic`, `stage: smallgroup` 포함.
+- **Manifest 갱신:** `outputs/sermons/{passage_id}/_manifest.md`을 읽고-병합-쓰기로 갱신. 라인 추가 예: `- v{NN} small-group-guide ({date}) — 핵심 적용질문: {대표 질문 한 줄}`.
+
+### 🪔 메모리 갱신 (Journal Update v2.5)
+`core/pastor_journal.md`의 `active_sermons`를 갱신합니다.
+- 해당 `passage_id` 항목 존재 시: `notes`에 "[구역 나눔지 작성 완료]" 태그 추가.
+- 미존재 시: 신규 항목 추가 (`stage: smallgroup`, `next_step: devotional-generator`).
+- 발행이 가까운 본문은 `stage`를 후퇴시키지 말 것 (설교 lineage 우선).
+- PII 정책 준수, 읽고-병합-쓰기.
+
+### 📣 안내
+저장 완료 후 사용자에게 ①저장된 절대 경로, ②manifest 갱신 결과, ③journal 갱신 항목을 한 번에 브리핑합니다.
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

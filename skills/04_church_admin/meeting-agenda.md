@@ -35,11 +35,18 @@ description: 교역자 회의, 당회, 제직회, 부서 회의 등 교회의 �
 
 [시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
 
-### 💾 결과 저장 및 영속화 (Persistence)
-- **저장 실행:** 생성된 모든 결과물 내용을 마크다운 파일로 저장하십시오.
-- **저장 경로:** `outputs/{date}/04_church_admin/meeting-agenda_{topic}.md`
-- **YAML 메타데이터:** 파일 상단에 `date`, `skill`, `category`, `topic` 정보를 포함하십시오.
-- **안내:** 저장 완료 후 사용자에게 저장된 절대 경로를 브리핑하십시오.
+### 💾 결과 저장 및 영속화 (Persistence v2.5)
+- **저장 경로:** `outputs/{date}/04_church_admin/meeting-agenda_{topic}.md` (날짜 기반)
+- **YAML 메타데이터:** `date`, `skill: meeting-agenda`, `category: 04_church_admin`, `topic`, `meeting_type`(당회/제직회/교역자회의/위원회), `meeting_date` 포함.
+
+### 🪔 메모리 갱신 (Journal Update v2.5)
+일반적으로 `pastor_journal` 갱신은 생략. 단:
+- 회의에서 결정될 사안이 시리즈/사역과 직접 연관된 경우 `active_series.notes`에 한 줄 추가 가능.
+- 회의록 후속 작업(공문 발송, 이메일 등) 트리거가 발생하면 사용자에게 안내만 제공.
+- 회의 참석자 명단/발언 내용은 메모리 기록 금지.
+
+### 📣 안내
+저장 완료 후 사용자에게 저장된 절대 경로를 브리핑합니다.
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**
