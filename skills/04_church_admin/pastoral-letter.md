@@ -1,9 +1,15 @@
 ---
 name: 교회-서신 (church-pastoral-letter)
 description: 전체 성도를 대상으로 하는 목회 서신(연말연시, 절기, 특별 건축, 임직 등)을 '목자의 심정'을 담아 따뜻하고 권위 있는 문체로 작성합니다.
+requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core/_hooks.md §5 CHAT 폴백"
 ---
 
 # ✉️ 교회-서신 (Pastoral Letter to Congregation)
+
+> 🧯 **목양 안전 게이트 (v2.10 P2-8)**: 콘텐츠 생성 전에 `core/care_safety.md`를 로드하여 ①위기 신호 스크리닝(자해·학대·급성 위기 → 전문 연계 안내 우선) ②상황별 금기 언어 준수 ③출력 전 '욥의 친구 경보' 자가 차단을 적용한다.
+
+> 🎙️ **보이스 우선 (v2.9 P1-4)**: `core/pastor_voice.md`가 `status: confirmed`면 **목회자 자신의 문체가 기본값**이다 — 카드의 호흡·어휘 지문·금기 표현을 준수한다. 외부 문체 모사는 사용자가 명시 요청할 때만. 미설정 시 `foundation.md`의 `tone_preference` 폴백.
+
 
 이 스킬은 담임목회자가 성도 전체(또는 특정 그룹)에게 보내는 **영적이고 목양적인 편지(목회 서신)** 초안을 작성하는 데 특화되어 있습니다.
 
@@ -31,22 +37,13 @@ description: 전체 성도를 대상으로 하는 목회 서신(연말연시, �
 
 ---
 
-[시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
+[시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑. 본문 기반 스킬은 시작 시 §6 본문 팩 우선을 먼저 적용한다. 아래는 본 스킬의 파라미터다.]
 
-### 💾 결과 저장 및 영속화 (Persistence v2.5)
-- **저장 경로:** `outputs/{date}/04_church_admin/pastoral-letter_{topic}.md` (날짜 기반)
-- **YAML 메타데이터:** `date`, `skill: pastoral-letter`, `category: 04_church_admin`, `topic`, `letter_type`(절기/위로/축하/공동체 권면/감사), `audience_scope`(전 성도/특정 그룹/특정 직분군) 포함. **개별 수신자 명단은 기록 금지.**
+### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-### 🪔 메모리 갱신 (Journal Update v2.5)
-`core/pastor_journal.md`를 다음 기준으로 갱신합니다.
-- 절기 서신(`letter_type: 절기`)인 경우 `recent_topics`에 절기명 추가.
-- 위로 서신이 특정 심방 케이스의 후속이면 `active_visitations` 해당 항목의 `notes`에 "[목회 서신 발송 {date}]" 한 줄 추가 (대상자 식별은 기존 직분+이니셜 유지).
-- 공동체 권면 서신은 `recent_topics`에 핵심 권면 키워드 1개 추가.
-- 절기 서신 외 일반적인 단발성 서신은 갱신 생략.
-- PII 정책 준수.
-
-### 📣 안내
-저장 완료 후 사용자에게 ①저장된 절대 경로, ②(해당 시) journal 갱신 항목을 브리핑합니다.
+- **save**: `dated` — `outputs/{date}/04_church_admin/pastoral-letter_{topic}.md`
+- **extra 메타**: `letter_type`(절기/위로/축하/공동체 권면/감사), `audience_scope`(전 성도/특정 그룹/특정 직분군) — **개별 수신자 명단 기록 금지**
+- **journal**: 절기 서신 → `recent_topics`에 절기명; 심방 후속 위로 서신 → 해당 `active_visitations.notes`에 "[목회 서신 발송 {date}]" (직분+이니셜 유지); 권면 서신 → `recent_topics`에 핵심 키워드 1개; 그 외 단발성 서신은 생략
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

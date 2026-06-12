@@ -1,6 +1,7 @@
 ---
 name: 교회-주보-도우미 (church-bulletin-helper)
 description: 거친 메모나 파편화된 소식들을 입력받아, 한국 교회의 전형적인 주보 양식(환영, 예배안내, 교우소식, 봉사자 등)에 맞춘 격식 있고 은혜로운 공식 문안으로 자동 정리합니다.
+requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core/_hooks.md §5 CHAT 폴백"
 ---
 
 # 📜 교회-주보-도우미 (Bulletin Organizer)
@@ -36,20 +37,13 @@ description: 거친 메모나 파편화된 소식들을 입력받아, 한국 교
 
 ---
 
-[시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
+[시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑. 본문 기반 스킬은 시작 시 §6 본문 팩 우선을 먼저 적용한다. 아래는 본 스킬의 파라미터다.]
 
-### 💾 결과 저장 및 영속화 (Persistence v2.5)
-- **저장 경로:** `outputs/{date}/04_church_admin/bulletin-helper_{topic}.md` (날짜 기반)
-- **YAML 메타데이터:** `date`, `skill: bulletin-helper`, `category: 04_church_admin`, `topic`, `bulletin_section`(광고/칼럼/공지/기도제목) 포함.
+### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-### 🪔 메모리 갱신 (Journal Update v2.5)
-일반적으로 `pastor_journal` 갱신은 생략. 단:
-- 칼럼이 현재 진행 중인 시리즈/설교 주제와 연동된 경우 `active_series.notes`에 한 줄 추가.
-- 새 기도제목이 등장하면 `open_prayer_requests`에 항목 등록.
-- PII 정책 준수 (성도 명단 인쇄용 정보는 메모리에 기록 금지).
-
-### 📣 안내
-저장 완료 후 사용자에게 저장된 절대 경로를 브리핑합니다.
+- **save**: `dated` — `outputs/{date}/04_church_admin/bulletin-helper_{topic}.md`
+- **extra 메타**: `bulletin_section` (광고/칼럼/공지/기도제목)
+- **journal**: 원칙적으로 생략(단발성). 단, 칼럼이 진행 중 시리즈/설교 주제와 연동되면 `active_series.notes`에 한 줄; 새 기도제목 등장 시 `open_prayer_requests` 등록. 성도 명단 인쇄용 정보는 메모리 기록 금지
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

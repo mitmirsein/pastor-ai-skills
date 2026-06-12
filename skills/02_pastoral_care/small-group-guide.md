@@ -1,9 +1,15 @@
 ---
 name: 소그룹-나눔-가이드 (small-group-guide)
 description: 설교 메시지를 성도들의 삶으로 연결하는 아이스브레이킹, 관찰, 적용 질문과 공동체 기도 제목을 생성합니다.
+requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core/_hooks.md §5 CHAT 폴백"
 ---
 
 # 🗣️ 소그룹-나눔-가이드 (Small Group Discussion Guide)
+
+> 🧯 **목양 안전 게이트 (v2.10 P2-8)**: 콘텐츠 생성 전에 `core/care_safety.md`를 로드하여 ①위기 신호 스크리닝(자해·학대·급성 위기 → 전문 연계 안내 우선) ②상황별 금기 언어 준수 ③출력 전 '욥의 친구 경보' 자가 차단을 적용한다.
+
+> 📖 **본문 팩 우선 (v2.8 P0-1)**: 본문 기반 작업 시 `core/_hooks.md` §6 적용 — `data/scripture/` 조회 또는 본문 붙여넣기 요청. **기억으로부터의 성경 인용 금지.**
+
 
 이 스킬은 주일 설교의 핵심 메시지가 성도들의 평일 삶 속에서 구체적인 실천과 나눔으로 이어지도록 돕는 '나눔지'를 자동으로 설계합니다.
 
@@ -32,24 +38,14 @@ description: 설교 메시지를 성도들의 삶으로 연결하는 아이스�
 
 ---
 
-[시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
+[시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑. 본문 기반 스킬은 시작 시 §6 본문 팩 우선을 먼저 적용한다. 아래는 본 스킬의 파라미터다.]
 
-### 💾 결과 저장 및 영속화 (Persistence v2.5)
-- **본문 식별:** 나눔 본문의 `passage_id`를 결정합니다 (설교와 연동되는 경우 동일 `passage_id` 사용 권장).
-- **버전 번호:** `outputs/sermons/{passage_id}/` 폴더를 스캔하여 다음 `v{NN}` 번호 결정.
-- **저장 경로:** `outputs/sermons/{passage_id}/v{NN}_small-group-guide_{date}.md`
-- **YAML 메타데이터:** `date`, `skill: small-group-guide`, `category: 02_pastoral_care`, `passage_id`, `version`, `topic`, `stage: smallgroup` 포함.
-- **Manifest 갱신:** `outputs/sermons/{passage_id}/_manifest.md`을 읽고-병합-쓰기로 갱신. 라인 추가 예: `- v{NN} small-group-guide ({date}) — 핵심 적용질문: {대표 질문 한 줄}`.
+### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-### 🪔 메모리 갱신 (Journal Update v2.5)
-`core/pastor_journal.md`의 `active_sermons`를 갱신합니다.
-- 해당 `passage_id` 항목 존재 시: `notes`에 "[구역 나눔지 작성 완료]" 태그 추가.
-- 미존재 시: 신규 항목 추가 (`stage: smallgroup`, `next_step: devotional-generator`).
-- 발행이 가까운 본문은 `stage`를 후퇴시키지 말 것 (설교 lineage 우선).
-- PII 정책 준수, 읽고-병합-쓰기.
-
-### 📣 안내
-저장 완료 후 사용자에게 ①저장된 절대 경로, ②manifest 갱신 결과, ③journal 갱신 항목을 한 번에 브리핑합니다.
+- **save**: `sermons-lineage` · **category**: `02_pastoral_care`
+- **stage**: `smallgroup` → **next_step**: `devotional-generator`
+- **manifest 라인**: `핵심 적용질문: {대표 질문 한 줄}`
+- **journal**: `active_sermons` 갱신/추가
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

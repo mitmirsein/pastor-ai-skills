@@ -1,6 +1,7 @@
 ---
 name: 설교-브레인스토밍 (sermon-brainstorming)
 description: 소크라테스식 문답법을 통해 목회자 스스로 설교의 핵심 통찰을 발견하도록 돕는 페어 프로그래밍(Pair-Programming) 스타일의 묵상 파트너.
+requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core/_hooks.md §5 CHAT 폴백"
 ---
 
 # 🧠 설교-브레인스토밍 (Socratic Sermon Partner)
@@ -44,24 +45,14 @@ description: 소크라테스식 문답법을 통해 목회자 스스로 설교�
 
 ---
 
-[시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
+[시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑. 본문 기반 스킬은 시작 시 §6 본문 팩 우선을 먼저 적용한다. 아래는 본 스킬의 파라미터다.]
 
-### 💾 결과 저장 및 영속화 (Persistence v2.5)
-- **본문 식별:** 종합 리포트의 본문으로부터 `passage_id`를 결정합니다 (`{book-slug}-{ch}-{vstart}-{vend}`. 예: 마가 5:25-34 → `mark-5-25-34`). 본문이 명확하지 않으면 `topic-{slug}`로 폴백.
-- **버전 번호:** `outputs/sermons/{passage_id}/` 폴더를 스캔하여 다음 `v{NN}` 번호 결정.
-- **저장 경로:** `outputs/sermons/{passage_id}/v{NN}_sermon-brainstorming_{date}.md`
-- **YAML 메타데이터:** `date`, `skill: sermon-brainstorming`, `category: 01_sermon_core`, `passage_id`, `version`, `topic`, `stage: brainstorm` 포함.
-- **Manifest 갱신:** `outputs/sermons/{passage_id}/_manifest.md`을 읽고-병합-쓰기로 갱신 (없으면 신규 생성). 라인 추가 예: `- v{NN} sermon-brainstorming ({date}) — Big Idea: {한 줄 요약}`.
+### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-### 🪔 메모리 갱신 (Journal Update v2.5)
-`core/pastor_journal.md`의 `active_sermons`를 갱신합니다.
-- 해당 `passage_id` 항목 존재 시: `stage` → `brainstorm`, `next_step` → `sermon-research`.
-- 미존재 시: 신규 항목 추가 (`stage: brainstorm`, `next_step: sermon-research`, `notes`에 Big Idea 한 줄).
-- `recent_topics`에 도출된 핵심 키워드 1~2개 FIFO 추가 (12개 한도, 중복 제거).
-- PII 정책 준수, 읽고-병합-쓰기.
-
-### 📣 안내
-저장 완료 후 사용자에게 ①저장된 절대 경로, ②manifest 갱신 결과, ③journal 갱신 항목을 한 번에 브리핑합니다.
+- **save**: `sermons-lineage` (본문 불명 시 `topic-{slug}` 폴백) · **category**: `01_sermon_core`
+- **stage**: `brainstorm` → **next_step**: `sermon-research`
+- **manifest 라인**: `Big Idea: {한 줄 요약}`
+- **journal**: `active_sermons` 갱신/추가 — `notes`에 Big Idea 한 줄; `recent_topics`에 핵심 키워드 1~2개
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

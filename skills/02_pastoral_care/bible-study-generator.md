@@ -1,9 +1,13 @@
 ---
 name: 성경공부-통합-시스템 (bible-study-generator)
 description: 본문 주해(Core), 교사용 진행안(Lesson), 학습자 활동지(Workbook)를 아우르는 고정밀 성경공부 패키지를 생성합니다.
+requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core/_hooks.md §5 CHAT 폴백"
 ---
 
 # 📖 성경공부-통합-시스템 (Integrated Bible Study System)
+
+> 📖 **본문 팩 우선 (v2.8 P0-1)**: 본문 기반 작업 시 `core/_hooks.md` §6 적용 — `data/scripture/` 조회 또는 본문 붙여넣기 요청. **기억으로부터의 성경 인용 금지.**
+
 
 이 스킬은 텍스트 중심의 정교한 주해를 바탕으로 현장에서 즉시 사용 가능한 성경공부 교재(교사용/학습자용)를 설계합니다.
 
@@ -44,24 +48,15 @@ description: 본문 주해(Core), 교사용 진행안(Lesson), 학습자 활동�
 
 ---
 
-[시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
+[시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑. 본문 기반 스킬은 시작 시 §6 본문 팩 우선을 먼저 적용한다. 아래는 본 스킬의 파라미터다.]
 
-### 💾 결과 저장 및 영속화 (Persistence v2.5)
-- **본문 식별:** 성경공부 본문의 `passage_id`를 결정합니다 (`{book-slug}-{ch}-{vstart}-{vend}`).
-- **버전 번호:** `outputs/sermons/{passage_id}/` 폴더를 스캔하여 다음 `v{NN}` 번호 결정 (성경공부도 동일 본문 lineage에 합류).
-- **저장 경로:** `outputs/sermons/{passage_id}/v{NN}_bible-study-generator_{date}.md`
-- **YAML 메타데이터:** `date`, `skill: bible-study-generator`, `category: 02_pastoral_care`, `passage_id`, `version`, `topic`, `audience`(주일학교/청년부/장년부 등), `stage: study` 포함.
-- **Manifest 갱신:** `outputs/sermons/{passage_id}/_manifest.md`을 읽고-병합-쓰기로 갱신. 라인 추가 예: `- v{NN} bible-study-generator ({date}) — {audience} 대상 통합 교안`.
+### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-### 🪔 메모리 갱신 (Journal Update v2.5)
-`core/pastor_journal.md`의 `active_sermons`를 갱신합니다.
-- 해당 `passage_id` 항목 존재 시: `notes`에 "[성경공부 교안 작성: {audience}]" 태그 추가 (stage는 변경하지 않음 — 설교 lineage 보존).
-- 미존재 시: 신규 항목 추가 (`stage: study`, `next_step: small-group-guide`, `notes`에 audience와 핵심 학습목표).
-- `recent_topics`에 성경공부 주제 1~2개 추가.
-- PII 정책 준수, 읽고-병합-쓰기.
-
-### 📣 안내
-저장 완료 후 사용자에게 ①저장된 절대 경로, ②manifest 갱신 결과, ③journal 갱신 항목을 한 번에 브리핑합니다.
+- **save**: `sermons-lineage` (성경공부도 동일 본문 lineage 합류) · **category**: `02_pastoral_care`
+- **stage**: `study` → **next_step**: `small-group-guide`
+- **extra 메타**: `audience` (주일학교/청년부/장년부 등)
+- **manifest 라인**: `{audience} 대상 통합 교안`
+- **journal**: `active_sermons` 갱신/추가 — `notes`에 audience와 핵심 학습목표 한 줄
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

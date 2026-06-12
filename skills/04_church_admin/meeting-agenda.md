@@ -1,6 +1,7 @@
 ---
 name: 회의-아젠다 (meeting-agenda)
 description: 교역자 회의, 당회, 제직회, 부서 회의 등 교회의 다양한 공식 회의를 효율적으로 진행하기 위한 구조화된 회의 순서지와 아젠다를 작성합니다.
+requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core/_hooks.md §5 CHAT 폴백"
 ---
 
 # 📝 회의-아젠다 (Meeting Agenda Planner)
@@ -33,20 +34,13 @@ description: 교역자 회의, 당회, 제직회, 부서 회의 등 교회의 �
 
 ---
 
-[시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
+[시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑. 본문 기반 스킬은 시작 시 §6 본문 팩 우선을 먼저 적용한다. 아래는 본 스킬의 파라미터다.]
 
-### 💾 결과 저장 및 영속화 (Persistence v2.5)
-- **저장 경로:** `outputs/{date}/04_church_admin/meeting-agenda_{topic}.md` (날짜 기반)
-- **YAML 메타데이터:** `date`, `skill: meeting-agenda`, `category: 04_church_admin`, `topic`, `meeting_type`(당회/제직회/교역자회의/위원회), `meeting_date` 포함.
+### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-### 🪔 메모리 갱신 (Journal Update v2.5)
-일반적으로 `pastor_journal` 갱신은 생략. 단:
-- 회의에서 결정될 사안이 시리즈/사역과 직접 연관된 경우 `active_series.notes`에 한 줄 추가 가능.
-- 회의록 후속 작업(공문 발송, 이메일 등) 트리거가 발생하면 사용자에게 안내만 제공.
-- 회의 참석자 명단/발언 내용은 메모리 기록 금지.
-
-### 📣 안내
-저장 완료 후 사용자에게 저장된 절대 경로를 브리핑합니다.
+- **save**: `dated` — `outputs/{date}/04_church_admin/meeting-agenda_{topic}.md`
+- **extra 메타**: `meeting_type`(당회/제직회/교역자회의/위원회), `meeting_date`
+- **journal**: 원칙적으로 생략. 회의 결정 사안이 시리즈/사역과 직접 연관되면 `active_series.notes`에 한 줄; 후속 작업 트리거는 안내만. **회의 참석자 명단·발언 내용 기록 금지**
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

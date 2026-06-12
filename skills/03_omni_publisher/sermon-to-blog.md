@@ -1,9 +1,13 @@
 ---
 name: 설교-블로그-전환 (sermon-to-blog)
 description: 설교 원고나 요약본을 네이버 블로그 등 웹 환경에 최적화된 가독성 높은 글(SEO 반영, 소제목, 강조표시 등)로 변환합니다.
+requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core/_hooks.md §5 CHAT 폴백"
 ---
 
 # ✍️ 설교-블로그-전환 (Sermon to Blog Post)
+
+> 🎙️ **보이스 우선 (v2.9 P1-4)**: `core/pastor_voice.md`가 `status: confirmed`면 **목회자 자신의 문체가 기본값**이다 — 카드의 호흡·어휘 지문·금기 표현을 준수한다. 외부 문체 모사는 사용자가 명시 요청할 때만. 미설정 시 `foundation.md`의 `tone_preference` 폴백.
+
 
 이 스킬은 딱딱한 설교 원고를 온라인 환경(네이버 블로그, 교회 홈페이지 등)에서 비신자나 초신자도 편안하게 읽을 수 있는 **가독성 높은 웹 포스팅**으로 변환합니다.
 
@@ -28,24 +32,14 @@ description: 설교 원고나 요약본을 네이버 블로그 등 웹 환경에
 
 ---
 
-[시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
+[시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑. 본문 기반 스킬은 시작 시 §6 본문 팩 우선을 먼저 적용한다. 아래는 본 스킬의 파라미터다.]
 
-### 💾 결과 저장 및 영속화 (Persistence v2.5)
-- **본문 식별:** 원본 설교의 `passage_id`를 결정합니다. 사용자가 원고에 본문을 명시했다면 그것을 사용, 아니면 사용자에게 한 번 확인.
-- **버전 번호:** `outputs/sermons/{passage_id}/` 폴더를 스캔하여 다음 `v{NN}` 번호 결정.
-- **저장 경로:** `outputs/sermons/{passage_id}/v{NN}_sermon-to-blog_{date}.md`
-- **YAML 메타데이터:** `date`, `skill: sermon-to-blog`, `category: 03_omni_publisher`, `passage_id`, `version`, `topic`, `stage: published_blog` 포함.
-- **Manifest 갱신:** `outputs/sermons/{passage_id}/_manifest.md`을 읽고-병합-쓰기로 갱신. 라인 추가 예: `- v{NN} sermon-to-blog ({date}) — 블로그 변환본`.
+### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-### 🪔 메모리 갱신 (Journal Update v2.5)
-`core/pastor_journal.md`의 `active_sermons`를 갱신합니다.
-- 해당 `passage_id` 항목 존재 시: `notes`에 "[블로그 발행]" 태그 추가. `stage`가 `preached`였다면 `published`로 승격.
-- 미존재 시 (외부 원고를 변환한 경우): 신규 항목 추가 (`stage: published`, `preached_on`은 사용자 확인 후 채움).
-- 4주 경과 시 archive 처리 대상.
-- PII 정책 준수, 읽고-병합-쓰기.
-
-### 📣 안내
-저장 완료 후 사용자에게 ①저장된 절대 경로, ②manifest 갱신 결과, ③journal 갱신 항목을 한 번에 브리핑합니다.
+- **save**: `sermons-lineage` · **category**: `03_omni_publisher`
+- **stage**: `published_blog` (journal에는 `published`)
+- **manifest 라인**: `블로그 변환본`
+- **journal**: `active_sermons` `stage: published`; 외부 원고 변환이면 신규 추가하되 `preached_on`은 사용자 확인 후 기입
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

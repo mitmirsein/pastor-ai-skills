@@ -1,6 +1,7 @@
 ---
 name: 광고-스크립트 (announcement-script)
 description: 주보 내용이나 주요 공지사항을 바탕으로, 예배 시간 강단에서 자연스럽게 읽을 수 있는 구어체(대화형) 광고 대본을 작성합니다.
+requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core/_hooks.md §5 CHAT 폴백"
 ---
 
 # 🎙️ 광고-스크립트 (Announcement Script)
@@ -36,20 +37,13 @@ description: 주보 내용이나 주요 공지사항을 바탕으로, 예배 시
 
 ---
 
-[시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
+[시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑. 본문 기반 스킬은 시작 시 §6 본문 팩 우선을 먼저 적용한다. 아래는 본 스킬의 파라미터다.]
 
-### 💾 결과 저장 및 영속화 (Persistence v2.5)
-- **저장 경로:** `outputs/{date}/04_church_admin/announcement-script_{topic}.md` (날짜 기반)
-- **YAML 메타데이터:** `date`, `skill: announcement-script`, `category: 04_church_admin`, `topic`, `target_service`(주일/수요/금요/특별집회) 포함.
+### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-### 🪔 메모리 갱신 (Journal Update v2.5)
-일반적으로 `pastor_journal` 갱신은 생략. 단, 광고 내용이 진행 중인 시리즈/심방/기도제목과 직접 연관된 경우에 한해 다음을 수행:
-- `active_series.notes` 또는 `active_visitations.notes`에 광고 발송 사실 한 줄 추가.
-- 신규 기도제목 광고 시 `open_prayer_requests`에 항목 등록 가능.
-- PII 정책 준수.
-
-### 📣 안내
-저장 완료 후 사용자에게 저장된 절대 경로를 브리핑합니다.
+- **save**: `dated` — `outputs/{date}/04_church_admin/announcement-script_{topic}.md`
+- **extra 메타**: `target_service` (주일/수요/금요/특별집회)
+- **journal**: 원칙적으로 생략. 단, 광고가 진행 중 시리즈/심방/기도제목과 직접 연관되면 해당 `notes`에 발송 사실 한 줄; 신규 기도제목 광고 시 `open_prayer_requests` 등록
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

@@ -1,6 +1,7 @@
 ---
 name: 설교-시리즈-기획 (sermon-series-planner)
 description: 특정 성경 책이나 신학적 주제를 바탕으로 4~8주 분량의 체계적인 설교 시리즈(절기 포함)를 기획하고 주차별 개요를 작성합니다.
+requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core/_hooks.md §5 CHAT 폴백"
 ---
 
 # 📅 설교-시리즈-기획 (Sermon Series Planner)
@@ -32,25 +33,14 @@ description: 특정 성경 책이나 신학적 주제를 바탕으로 4~8주 분
 
 ---
 
-[시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
+[시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑. 본문 기반 스킬은 시작 시 §6 본문 팩 우선을 먼저 적용한다. 아래는 본 스킬의 파라미터다.]
 
-### 💾 결과 저장 및 영속화 (Persistence v2.5)
-- **시리즈 식별:** `series_id`를 결정합니다 (`{book-slug}-{year}-{season}` 또는 `{theme-slug}-{year}-{season}` 형식. 예: `ephesians-2026-spring`, `lords-prayer-2026-fall`).
-- **저장 경로:**
-  - 기획안 본체: `outputs/series/{series_id}/plan_{date}.md`
-  - 시리즈 manifest: `outputs/series/{series_id}/_manifest.md` (없으면 신규 생성)
-- **YAML 메타데이터:** `date`, `skill: sermon-series-planner`, `category: 01_sermon_core`, `series_id`, `total`(편수), `theme`, `start_target`(예정 시작 주일), `weekly_passages`(편당 본문 목록).
-- **Manifest 구조:** 시리즈 개요 + 주차별 본문 + 진행 상태 표. 각 주차 본문이 별도 `passage_id`로 관리되며, 해당 `outputs/sermons/{passage_id}/`와 양방향 링크.
+### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-### 🪔 메모리 갱신 (Journal Update v2.5)
-`core/pastor_journal.md`의 `active_series`에 신규 항목 등록 또는 갱신합니다.
-- 항목 구성: `id`, `title`, `total`, `progress: 0`, `next_passage`, `next_passage_id`, `started_on: {예정 시작일 또는 currentDate}`, `notes: 1-2줄 시리즈 핵심 컨셉`.
-- 동일 `id`가 이미 존재하면 갱신 거부하고 사용자에게 충돌 보고.
-- `active_sermons`에는 첫 주차 본문을 `stage: pending`, `series_id` 연결로 사전 등록.
-- PII 정책 준수, 읽고-병합-쓰기.
-
-### 📣 안내
-저장 완료 후 사용자에게 ①기획안 절대 경로, ②manifest 위치, ③journal에 등록된 시리즈 정보를 한 번에 브리핑합니다.
+- **save**: `series` — `outputs/series/{series_id}/plan_{date}.md` + `_manifest.md` (`series_id` = `{book|theme-slug}-{year}-{season}`, 예: `ephesians-2026-spring`)
+- **extra 메타**: `total`(편수), `theme`, `start_target`(예정 시작 주일), `weekly_passages`(편당 본문 목록)
+- **manifest 구조**: 시리즈 개요 + 주차별 본문 + 진행 상태 표 — 각 주차 본문은 별도 `passage_id`로 관리, `outputs/sermons/{passage_id}/`와 양방향 링크
+- **journal**: `active_series` 신규 등록 (`id`/`title`/`total`/`progress: 0`/`next_passage`/`next_passage_id`/`started_on`/`notes` 1-2줄) — **동일 id 존재 시 갱신 거부·충돌 보고**; `active_sermons`에 1주차 본문 사전 등록 (`stage: pending`, `series_id` 연결)
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

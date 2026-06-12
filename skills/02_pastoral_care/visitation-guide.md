@@ -1,9 +1,13 @@
 ---
 name: 심방-가이드 (visitation-guide)
 description: 한국 교회 상황(장례, 개업, 병환, 이사 등)에 맞춘 맞춤형 심방 준비 어시스턴트. 적절한 성경 구절, 권면, 대표기도문 초안 및 대화 가이드를 제공합니다.
+requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core/_hooks.md §5 CHAT 폴백"
 ---
 
 # 🚪 심방-가이드 (K-Visitation Guide)
+
+> 🧯 **목양 안전 게이트 (v2.10 P2-8)**: 콘텐츠 생성 전에 `core/care_safety.md`를 로드하여 ①위기 신호 스크리닝(자해·학대·급성 위기 → 전문 연계 안내 우선) ②상황별 금기 언어 준수 ③출력 전 '욥의 친구 경보' 자가 차단을 적용한다.
+
 
 이 스킬은 한국 교회의 다양한 목양적 상황(심방)을 대비하여, 목회자가 깊이 있는 영적 돌봄을 제공할 수 있도록 돕는 대화형 어시스턴트입니다.
 
@@ -36,20 +40,13 @@ description: 한국 교회 상황(장례, 개업, 병환, 이사 등)에 맞춘 
 
 ---
 
-[시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
+[시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑. 본문 기반 스킬은 시작 시 §6 본문 팩 우선을 먼저 적용한다. 아래는 본 스킬의 파라미터다.]
 
-### 💾 결과 저장 및 영속화 (Persistence v2.5)
-- **저장 경로:** `outputs/{date}/02_pastoral_care/visitation-guide_{topic}.md` (날짜 기반 — 본문 lineage에 합류하지 않음)
-- **YAML 메타데이터:** `date`, `skill: visitation-guide`, `category: 02_pastoral_care`, `topic`(상황 카테고리: 장례/병환/개업 등), `target_role`(직분만), `target_id`(이니셜 한 글자) 포함. 실명/연락처/병명 상세는 절대 기록 금지.
+### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-### 🪔 메모리 갱신 (Journal Update v2.5)
-`core/pastor_journal.md`의 `active_visitations`를 갱신합니다.
-- 항목 구성: `target`(직분+이니셜, 예: "K집사"), `context`(일반화된 한 줄. 예: "암 투병 중"), `last_visit: {date}`, `followup_due: {date + 권장 후속 간격}`, `prayer_focus`(2-3개 키워드).
-- 동일 `target`이 이미 존재하면 갱신: `last_visit` 갱신, `context`에 변동사항 한 줄 append.
-- 🚨 **PII 가드:** 사용자가 실명을 입력해도 자동으로 직분+이니셜로 변환하여 저장. 가족 구성원 실명은 "가족"으로 일반화.
-
-### 📣 안내
-저장 완료 후 사용자에게 ①저장된 절대 경로, ②journal에 등록된 후속 심방 일정을 한 번에 브리핑합니다.
+- **save**: `dated` — `outputs/{date}/02_pastoral_care/visitation-guide_{topic}.md` (본문 lineage 비합류)
+- **extra 메타**: `topic`(상황: 장례/병환/개업 등), `target_role`(직분만), `target_id`(이니셜 한 글자) — **실명·연락처·병명 상세 기록 절대 금지**
+- **journal**: `active_visitations` 갱신 — `target`(직분+이니셜)·`context`(일반화 한 줄)·`last_visit`·`followup_due`(권장 후속 간격)·`prayer_focus`(2-3 키워드). 동일 target 존재 시 `last_visit` 갱신 + `context`에 변동 한 줄 append. 🚨 실명 입력 시 자동 변환, 가족 실명은 "가족"으로 일반화
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

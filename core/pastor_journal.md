@@ -1,11 +1,12 @@
 ---
 last_updated: 2026-05-10
-schema_version: 1
+schema_version: 2
 active_sermons: []
 active_series: []
 active_visitations: []
 recent_topics: []
 open_prayer_requests: []
+lessons: []
 ---
 
 # 🪔 Pastor Journal (목회 메모리 레이어)
@@ -66,6 +67,7 @@ active_sermons:
     next_step: redteam           # 다음 권장 스킬
     started_on: 2026-05-06
     preached_on: null            # 선포일 (강단 후 채움)
+    retro_done: false            # (schema v2) 선포 후 회고(sermon-retro) 완료 여부
     series_id: null              # 시리즈에 속할 경우 series.id 참조
     notes: "사회적 수치 vs 개인적 믿음 긴장 강조"
 ```
@@ -112,6 +114,16 @@ open_prayer_requests:
   - id: 2026-05-prayer-01
     item: "5월 새가족 정착"
     raised_on: 2026-05-03
+```
+
+### 3.6 `lessons` *(schema v2 — sermon-retro가 기록)*
+설교 후 회고에서 나온 "다음에 다르게 할 것". 최근 5건 FIFO 회전. `sermon-red-team`과 `weekly-briefing`이 반복 패턴 신호로 참조한다.
+
+```yaml
+lessons:
+  - passage_id: mark-5-25-34
+    date: 2026-05-12
+    lesson: "적용이 추상적이었다 — 다음엔 구체적 한 장면으로"
 ```
 
 ---

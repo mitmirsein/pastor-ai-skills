@@ -1,9 +1,15 @@
 ---
 name: 묵상-영성-지도 (devotional-generator)
 description: 본문의 신학적 긴장과 성도의 삶을 연결하여, 정직하게 하나님 앞에 머무는 고품격 QT/묵상 콘텐츠를 생성합니다.
+requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core/_hooks.md §5 CHAT 폴백"
 ---
 
 # 🕊️ 묵상-영성-지도 (Devotional Generator)
+
+> 🧯 **목양 안전 게이트 (v2.10 P2-8)**: 콘텐츠 생성 전에 `core/care_safety.md`를 로드하여 ①위기 신호 스크리닝(자해·학대·급성 위기 → 전문 연계 안내 우선) ②상황별 금기 언어 준수 ③출력 전 '욥의 친구 경보' 자가 차단을 적용한다.
+
+> 📖 **본문 팩 우선 (v2.8 P0-1)**: 본문 기반 작업 시 `core/_hooks.md` §6 적용 — `data/scripture/` 조회 또는 본문 붙여넣기 요청. **기억으로부터의 성경 인용 금지.**
+
 
 이 스킬은 성경 본문과 신학적 온톨로지를 결합하여, 단순한 성경 지식 전달을 넘어 성도의 '영적 형성'을 돕는 묵상 가이드를 설계합니다.
 
@@ -38,26 +44,13 @@ description: 본문의 신학적 긴장과 성도의 삶을 연결하여, 정직
 
 ---
 
-[시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
+[시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑. 본문 기반 스킬은 시작 시 §6 본문 팩 우선을 먼저 적용한다. 아래는 본 스킬의 파라미터다.]
 
-### 💾 결과 저장 및 영속화 (Persistence v2.5)
-- **본문 식별:** 묵상 본문이 명확하면 `passage_id`로 분류 (`{book-slug}-{ch}-{vstart}-{vend}`). 본문 없는 일반 묵상은 `topic-{slug}`로 폴백.
-- **버전 번호:** 본문 기반인 경우 `outputs/sermons/{passage_id}/`, 폴백인 경우 `outputs/devotionals/{topic-slug}/` 폴더 스캔하여 다음 `v{NN}` 결정.
-- **저장 경로:**
-  - 본문 기반: `outputs/sermons/{passage_id}/v{NN}_devotional-generator_{date}.md`
-  - 폴백: `outputs/devotionals/{topic-slug}/v{NN}_devotional-generator_{date}.md`
-- **YAML 메타데이터:** `date`, `skill: devotional-generator`, `category: 02_pastoral_care`, `passage_id`(없으면 null), `topic`, `version`, `stage: devotional` 포함.
-- **Manifest 갱신:** 본문 기반인 경우 `outputs/sermons/{passage_id}/_manifest.md` 갱신. 폴백인 경우 갱신 생략.
+### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-### 🪔 메모리 갱신 (Journal Update v2.5)
-`core/pastor_journal.md`를 갱신합니다.
-- 본문 기반 + 해당 `passage_id` 항목 존재 시: `notes`에 "[묵상 카드 작성]" 태그 추가.
-- 신규 본문 묵상이면 `active_sermons`에 `stage: devotional`로 추가.
-- `recent_topics`에 묵상 키워드 1개 FIFO 추가.
-- PII 정책 준수, 읽고-병합-쓰기.
-
-### 📣 안내
-저장 완료 후 사용자에게 ①저장된 절대 경로, ②(본문 기반인 경우) manifest 갱신 결과, ③journal 갱신 항목을 한 번에 브리핑합니다.
+- **save**: `devotional-fallback` (본문 식별 시 lineage, 아니면 `outputs/devotionals/{topic-slug}/`) · **category**: `02_pastoral_care`
+- **stage**: `devotional`
+- **journal**: 기존 `passage_id` 항목엔 `notes`에 "[묵상 카드 작성]" 태그 추가; 신규 본문이면 `active_sermons`에 `stage: devotional`로 추가; `recent_topics`에 묵상 키워드 1개
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

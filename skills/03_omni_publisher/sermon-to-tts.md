@@ -1,9 +1,13 @@
 ---
 name: 설교-TTS-대본-생성기 (sermon-to-tts)
 description: 긴 설교 원고를 3분 내외(약 300단어/1,200자)의 '듣는 언어'로 리폼하여 오디오 대본을 생성합니다.
+requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core/_hooks.md §5 CHAT 폴백"
 ---
 
 # 🎙️ 설교 TTS 대본 생성기 (Sermon to Audio Script)
+
+> 🎙️ **보이스 우선 (v2.9 P1-4)**: `core/pastor_voice.md`가 `status: confirmed`면 **목회자 자신의 문체가 기본값**이다 — 카드의 호흡·어휘 지문·금기 표현을 준수한다. 외부 문체 모사는 사용자가 명시 요청할 때만. 미설정 시 `foundation.md`의 `tone_preference` 폴백.
+
 
 이 스킬은 텍스트 중심의 설교 원고를 전문 성우나 목회자가 낭독하기 가장 좋은 **'구어체 오디오 대본'**으로 변환합니다. 팟캐스트, 주중 오디오 묵상, 또는 SNS용 짧은 메시지 제작에 최적화되어 있습니다.
 
@@ -65,23 +69,15 @@ AI가 생성한 대본을 그대로 쓰기보다, 목사님의 평소 언어 습
 
 ---
 
-[시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
+[시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑. 본문 기반 스킬은 시작 시 §6 본문 팩 우선을 먼저 적용한다. 아래는 본 스킬의 파라미터다.]
 
-### 💾 결과 저장 및 영속화 (Persistence v2.5)
-- **본문 식별:** 원본 설교의 `passage_id`를 결정합니다.
-- **버전 번호:** `outputs/sermons/{passage_id}/` 폴더를 스캔하여 다음 `v{NN}` 번호 결정.
-- **저장 경로:** `outputs/sermons/{passage_id}/v{NN}_sermon-to-tts_{date}.md`
-- **YAML 메타데이터:** `date`, `skill: sermon-to-tts`, `category: 03_omni_publisher`, `passage_id`, `version`, `topic`, `target_duration`(분), `stage: published_tts` 포함.
-- **Manifest 갱신:** `outputs/sermons/{passage_id}/_manifest.md`을 읽고-병합-쓰기로 갱신. 라인 추가 예: `- v{NN} sermon-to-tts ({date}) — {분량}분 오디오 대본`.
+### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-### 🪔 메모리 갱신 (Journal Update v2.5)
-`core/pastor_journal.md`의 `active_sermons`를 갱신합니다.
-- 해당 `passage_id` 항목 존재 시: `notes`에 "[TTS 대본 발행]" 태그 추가. `stage`가 `preached`였다면 `published`로 승격.
-- 미존재 시: 신규 항목 추가 (`stage: published`).
-- PII 정책 준수, 읽고-병합-쓰기.
-
-### 📣 안내
-저장 완료 후 사용자에게 ①저장된 절대 경로, ②manifest 갱신 결과, ③journal 갱신 항목을 한 번에 브리핑합니다.
+- **save**: `sermons-lineage` · **category**: `03_omni_publisher`
+- **stage**: `published_tts` (journal에는 `published`)
+- **extra 메타**: `target_duration` (분)
+- **manifest 라인**: `{분량}분 오디오 대본`
+- **journal**: `active_sermons` `stage: published`
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

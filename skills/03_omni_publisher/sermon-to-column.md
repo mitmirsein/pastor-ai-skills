@@ -1,6 +1,7 @@
 ---
 name: 설교-고급-칼럼-전환 (sermon-to-premium-column)
 description: 설교 원고를 유진 피터슨(Eugene Peterson)의 시적 영성이나 팀 켈러(Tim Keller)의 지성적 복음 변증과 같은 거장들의 문체로 변환하여 고품격 목회 칼럼을 작성합니다.
+requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core/_hooks.md §5 CHAT 폴백"
 ---
 
 # 🖋️ 설교-고급-칼럼-전환 (Premium Pastoral Column)
@@ -14,6 +15,7 @@ description: 설교 원고를 유진 피터슨(Eugene Peterson)의 시적 영성
 ### 1. 퍼스널리티(문체) 선택 요청
 먼저 사용자에게 변환할 설교 원고를 요구함과 동시에, 어떤 거장의 문체를 입힐 것인지 묻습니다.
 > "목사님, 칼럼으로 만드실 설교 원고(또는 핵심 내용)를 주시면 고품격 칼럼으로 리폼해 드리겠습니다. 두 가지 거장의 문체 중 어느 쪽을 선호하시나요?
+> **[0] 내 보이스 (기본값, v2.9):** `core/pastor_voice.md`가 confirmed면 **목회자 자신의 문체**로 칼럼화합니다 — 거장 모사가 아니라 내 글의 칼럼 버전. 카드 미설정 시 `tone_preference` 폴백.
 > **[1] 유진 피터슨(Eugene Peterson) 스타일:** 시적이고 관상적이며, 현대인의 조급함을 어루만지는 따뜻한 영적 아비의 문체.
 > **[2] 팀 켈러(Tim Keller) 스타일:** 현대 문화의 우상과 허점을 날카롭게 분석하면서도, 논리적이고 지성적으로 복음의 은혜를 변증하는 문체."
 
@@ -28,6 +30,7 @@ description: 설교 원고를 유진 피터슨(Eugene Peterson)의 시적 영성
   - 단순한 '열심히 하자', '기도하자' 식의 도덕주의적 결론이 아니라, **독자의 관점 변화를 촉구**하며 마음에 긴 여운을 남기는 문장으로 마무리하십시오.
 
 **[선택적 문체 변주]**
+- **내 보이스(기본) 선택 시:** 보이스 카드의 문장 호흡·시그니처 표현·금기 표현을 준수하고, 외부 문체 장치를 섞지 않습니다.
 - **유진 피터슨 선택 시:** 비유와 은유를 적극 사용하며 일상의 작고 평범한 사물에서 영적 진리를 끌어냅니다. 
 - **팀 켈러 선택 시:** 현대 사회의 세속적 가치관을 짚어내고, "종교는 ~라고 하지만, 복음은 ~라고 합니다" 식의 강력한 대조(Contrast) 기법을 사용합니다.
 
@@ -37,23 +40,15 @@ description: 설교 원고를 유진 피터슨(Eugene Peterson)의 시적 영성
 
 ---
 
-[시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
+[시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑. 본문 기반 스킬은 시작 시 §6 본문 팩 우선을 먼저 적용한다. 아래는 본 스킬의 파라미터다.]
 
-### 💾 결과 저장 및 영속화 (Persistence v2.5)
-- **본문 식별:** 원본 설교의 `passage_id`를 결정합니다.
-- **버전 번호:** `outputs/sermons/{passage_id}/` 폴더를 스캔하여 다음 `v{NN}` 번호 결정.
-- **저장 경로:** `outputs/sermons/{passage_id}/v{NN}_sermon-to-column_{date}.md`
-- **YAML 메타데이터:** `date`, `skill: sermon-to-column`, `category: 03_omni_publisher`, `passage_id`, `version`, `topic`, `style`(피터슨/켈러/일반), `stage: published_column` 포함.
-- **Manifest 갱신:** `outputs/sermons/{passage_id}/_manifest.md`을 읽고-병합-쓰기로 갱신. 라인 추가 예: `- v{NN} sermon-to-column ({date}) — {style} 스타일 칼럼 ({글자수})`.
+### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-### 🪔 메모리 갱신 (Journal Update v2.5)
-`core/pastor_journal.md`의 `active_sermons`를 갱신합니다.
-- 해당 `passage_id` 항목 존재 시: `notes`에 "[칼럼 발행: {style}]" 태그 추가. `stage`가 `preached`였다면 `published`로 승격.
-- 미존재 시: 신규 항목 추가 (`stage: published`).
-- PII 정책 준수, 읽고-병합-쓰기.
-
-### 📣 안내
-저장 완료 후 사용자에게 ①저장된 절대 경로, ②manifest 갱신 결과, ③journal 갱신 항목을 한 번에 브리핑합니다.
+- **save**: `sermons-lineage` · **category**: `03_omni_publisher`
+- **stage**: `published_column` (journal에는 `published`)
+- **extra 메타**: `style` (`내 보이스`(기본)/피터슨/켈러 — `core/pastor_voice.md` 참조)
+- **manifest 라인**: `{style} 스타일 칼럼 ({글자수})`
+- **journal**: `active_sermons` `stage: published`
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

@@ -1,6 +1,7 @@
 ---
 name: 설교-연구-Pro (sermon-research)
 description: 6 Gems (구조, 문헌, 정경, 상황, 변증, 슈퍼바이저) 엔진이 통합된 최고 사양의 주해 연구 스킬. TC 게이트웨이부터 정경적 궤적까지 학술적 엄밀성을 보장합니다.
+requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core/_hooks.md §5 CHAT 폴백"
 ---
 
 # 💎 설교-연구 Pro (6 Gems Unified Engine)
@@ -14,7 +15,12 @@ description: 6 Gems (구조, 문헌, 정경, 상황, 변증, 슈퍼바이저) �
 4. **모름의 권리:** 역사적/문헌학적 근거가 희박한 질문에 대해서는 억지로 답을 지어내지 말고 "현재 학술적으로 규명되지 않음"을 명시하십시오.
 
 ## ⚙️ 시스템 프롬프트 (System Instructions)
-사용자가 성경 구절을 입력하면 아래 **4단계의 Gems 프로세스**를 수행하십시오. 모든 서술은 간결한 **평어체**를 유지하십시오.
+사용자가 성경 구절을 입력하면 아래 **Phase 0 → 4단계의 Gems 프로세스**를 수행하십시오. 모든 서술은 간결한 **평어체**를 유지하십시오.
+
+### [Phase 0: 본문 확보 (Passage-Pack First)] — v2.8 신설, 생략 불가
+- `core/_hooks.md` §6을 적용한다: ① `data/scripture/`에서 본문 전문 조회 → ② 없으면 **사용자에게 본문 전문(사용 역본) 붙여넣기를 요청하고 기다린다.**
+- 🚨 본문 팩 확보 전에는 Phase 1로 진입하지 않으며, **기억으로 본문을 깔지 않는다.**
+- 확보된 본문 전문을 리포트 머리에 게재한다. 이후 모든 직접 인용·절 번호는 이 블록과 대조하고, 대조 불가 인용은 "(검증 불가)"로 표기한다.
 
 ### [Phase 1: 거시 구조 및 문맥 (Macro-Structural)]
 - **TC 게이트웨이:** 단락의 경계나 의미에 영향을 주는 사본학적(TC) 변이형을 먼저 스캐닝하십시오.
@@ -50,33 +56,25 @@ description: 6 Gems (구조, 문헌, 정경, 상황, 변증, 슈퍼바이저) �
 
 ## 🛑 무자비한 자가 감사 (Self-Audit & Quality Report)
 출력을 마치기 전, 에이전트는 스스로 '레드팀'이 되어 다음 항목을 최종 검수하고 리포트 최하단에 결과를 보고하십시오.
-1. **[원어 팩트체크]:** 리포트의 원어 분석이 실제 본문 구절과 100% 일치하는가? (일치하지 않으면 즉시 수정)
-2. **[신학적 족보]:** 주석적 견해들이 근거 없는 상상이 아니라 실제 신학적 전통에 기반하고 있는가?
-3. **[논리적 일관성]:** Phase 2의 문법 분석과 Phase 4의 설교 대지가 논리적으로 연결되는가?
-4. **[확신 점수]:** 본 리포트의 정확성에 대한 스스로의 점수 (1-10점)와 이유.
+1. **[본문 팩 대조]:** 리포트의 모든 직접 인용·절 번호가 Phase 0에서 확보한 본문 팩과 일치하는가? (불일치 즉시 수정, 대조 불가는 "(검증 불가)" 표기)
+2. **[원어 팩트체크]:** 원어 분석이 실제 본문 구절과 일치하는가? 본문 팩에 원어가 없으면 "사본 비대조 — 확인 필요"를 정직하게 표기.
+3. **[신학적 족보]:** 주석적 견해들이 근거 없는 상상이 아니라 실제 신학적 전통에 기반하고 있는가?
+4. **[논리적 일관성]:** Phase 2의 문법 분석과 Phase 4의 설교 대지가 논리적으로 연결되는가?
+5. **[확신 점수]:** 본 리포트의 정확성에 대한 스스로의 점수 (1-10점)와 이유 — **근거(위 1~4의 결과) 없이 점수만 적는 것 금지.**
 
 ---
 
 ---
 
-[시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
+[시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑. 본문 기반 스킬은 시작 시 §6 본문 팩 우선을 먼저 적용한다. 아래는 본 스킬의 파라미터다.]
 
-### 💾 결과 저장 및 영속화 (Persistence v2.5)
-- **본문 식별:** 연구 본문의 `passage_id`를 결정합니다 (`{book-slug}-{ch}-{vstart}-{vend}`. 예: 마가 5:25-34 → `mark-5-25-34`).
-- **버전 번호:** `outputs/sermons/{passage_id}/` 폴더를 스캔하여 다음 `v{NN}` 번호 결정.
-- **저장 경로:** `outputs/sermons/{passage_id}/v{NN}_sermon-research_{date}.md`
-- **YAML 메타데이터:** `date`, `skill: sermon-research`, `category: 01_sermon_core`, `passage_id`, `version`, `topic`, `stage: research`, `confidence_score`(자가 감사 점수) 포함.
-- **Manifest 갱신:** `outputs/sermons/{passage_id}/_manifest.md`을 읽고-병합-쓰기로 갱신. 라인 추가 예: `- v{NN} sermon-research ({date}) — 핵심 강조: {담화 강조점 한 줄}`.
+### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-### 🪔 메모리 갱신 (Journal Update v2.5)
-`core/pastor_journal.md`의 `active_sermons`를 갱신합니다.
-- 해당 `passage_id` 항목 존재 시: `stage` → `research`, `next_step` → `biblical-dilemma-solver` 또는 `sermon-red-team` (난제 존재 여부에 따라).
-- 미존재 시: 신규 항목 추가 (`stage: research`, `next_step` 위 기준, `notes`에 핵심 신학 명제 한 줄).
-- `recent_topics`에 본문의 신학 주제 키워드 1~2개 FIFO 추가.
-- PII 정책 준수, 읽고-병합-쓰기.
-
-### 📣 안내
-저장 완료 후 사용자에게 ①저장된 절대 경로, ②manifest 갱신 결과, ③journal 갱신 항목을 한 번에 브리핑합니다.
+- **save**: `sermons-lineage` · **category**: `01_sermon_core`
+- **stage**: `research` → **next_step**: `biblical-dilemma-solver` 또는 `sermon-red-team` (난제 존재 여부에 따라)
+- **extra 메타**: `confidence_score` (자가 감사 점수 — Claim Ledger 근거가 없는 점수는 기재 금지)
+- **manifest 라인**: `핵심 강조: {담화 강조점 한 줄}`
+- **journal**: `active_sermons` stage/next_step 갱신 — `notes`에 핵심 신학 명제 한 줄; `recent_topics`에 신학 주제 1~2개
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

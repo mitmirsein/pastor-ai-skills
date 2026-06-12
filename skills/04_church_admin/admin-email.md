@@ -1,6 +1,7 @@
 ---
 name: 교회-이메일 (church-admin-email)
 description: 노회, 외부 강사 초청, 지역 관공서 등 대외/행정 업무를 위한 이메일이나 공문을 완벽한 한국식 비즈니스 격식에 맞춰 작성합니다.
+requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core/_hooks.md §5 CHAT 폴백"
 ---
 
 # 📧 교회-이메일 (Official Admin/Business Email)
@@ -34,19 +35,13 @@ description: 노회, 외부 강사 초청, 지역 관공서 등 대외/행정 �
 
 ---
 
-[시스템 지침: 결과물 출력을 마친 후, 반드시 아래 형식으로 다음 파이프라인 스킬을 추천할 것]
+[시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑. 본문 기반 스킬은 시작 시 §6 본문 팩 우선을 먼저 적용한다. 아래는 본 스킬의 파라미터다.]
 
-### 💾 결과 저장 및 영속화 (Persistence v2.5)
-- **저장 경로:** `outputs/{date}/04_church_admin/admin-email_{topic}.md` (날짜 기반)
-- **YAML 메타데이터:** `date`, `skill: admin-email`, `category: 04_church_admin`, `topic`, `recipient_role`(직책만, 예: "노회 서기"), `purpose`(섭외/요청/감사/회신) 포함. **수신자 실명/주소/이메일은 본문에는 둘 수 있으나 메타데이터·journal에는 기록 금지.**
+### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-### 🪔 메모리 갱신 (Journal Update v2.5)
-일반적으로 `pastor_journal` 갱신은 생략. 행정 이메일은 단발성 작업이므로 메모리에 누적시키지 않습니다. 단:
-- 외부 강사 섭외처럼 후속 일정이 발생하는 경우 사용자가 명시적으로 요청하면 `notes`에 행사 일자와 행사명만 한 줄 추가 가능.
-- PII 정책 엄격 준수.
-
-### 📣 안내
-저장 완료 후 사용자에게 저장된 절대 경로를 브리핑하고, 발송 전 첨부 서류 점검을 권합니다.
+- **save**: `dated` — `outputs/{date}/04_church_admin/admin-email_{topic}.md`
+- **extra 메타**: `recipient_role`(직책만, 예: "노회 서기"), `purpose`(섭외/요청/감사/회신) — **수신자 실명·주소·이메일은 본문에는 가능하나 메타데이터·journal 기록 금지**
+- **journal**: 원칙적으로 생략(단발성). 후속 일정이 발생하고 사용자가 명시 요청하면 `notes`에 행사 일자·행사명만 한 줄
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**
