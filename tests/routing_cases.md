@@ -51,3 +51,6 @@
 | 43 | "Big Idea 나왔고 주해도 했어. 이제 설교 개요 같이 세우자" | sermon-outline-codraft | v2.11 — 동반작성(대필 아님) |
 | 44 | "설교 구조 짜는 거 도와줘, 대지 내용은 내가 채울게" | sermon-outline-codraft | v2.11 |
 | 45 | (경계) "설교 개요 완성해서 줘" | 대필 거절 + 동반작성(sermon-outline-codraft) 또는 brainstorming/research 안내 | 대필 vs 동반작성 구분 |
+| 46 | "이번에 발아한 아모스 1장, 그걸로 주보 칼럼 하나 써줘" | qt-to-column | v2.11 — 큐티/씨앗 상류 칼럼 |
+| 47 | "이 묵상을 내 문체로 칼럼 만들어줘" | qt-to-column | v2.11 — 초기 묵상 문체 기반 |
+| 48 | (경계) "이 완성된 설교를 주보 칼럼으로 바꿔줘" | sermon-to-column | 완성 설교 하류 전환(≠qt-to-column 큐티 상류) |

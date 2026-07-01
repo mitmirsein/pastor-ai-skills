@@ -28,7 +28,7 @@
 ## 3. 워크플로우 (Workflow v2.5)
 1. **의무 부트 시퀀스 (Concierge):** 매 세션 첫 발화 시 `core/foundation.md` → `core/pastor_journal.md` → `core/liturgical_calendar.md`를 순차 로드하여 컨텍스트를 복원합니다.
 2. **의도 파악 + 메모리 매칭:** 발화를 메모리와 결합하여 "이번 주일 뭐 할까"만으로도 진행 중인 시리즈/심방/절기를 자동 추론합니다.
-3. **최적 스킬 라우팅:** 5대 그룹 28개 스킬(+harness·lenses) 중 1개를 매칭하여 복사/붙여넣기용 완성 프롬프트를 제공합니다.
+3. **최적 스킬 라우팅:** 5대 그룹 29개 스킬(+harness·lenses) 중 1개를 매칭하여 복사/붙여넣기용 완성 프롬프트를 제공합니다.
 4. **특화 스킬 실행:** 각 스킬은 자신의 페르소나에 따라 작업을 수행합니다.
 5. **이중 영속화 (v2.5 신규):**
    - **본문 기반 작업** (설교 코어 / 옴니 퍼블리셔 / 일부 목양): `outputs/sermons/{passage_id}/v{NN}_{skill}_{date}.md` + `_manifest.md` 갱신
@@ -51,7 +51,7 @@
     - `00_pastor_concierge/`: 최상위 라우터 비서 (단일 진입점, 메모리·절기 자각)
     - `01_sermon_core/`: 설교 발상, 연구, 난제 주해, 개요 동반작성, 비평 검증, 시리즈 기획, 큐티 발아(스캔·씨앗)
     - `02_pastoral_care/`: 성경공부 교안, 구역 나눔, 주중 묵상, 매일 큐티 동행, 심방
-    - `03_omni_publisher/`: 재생산 얇은 라우터 및 다매체 변환 (블로그, 칼럼, TTS, 카드뉴스)
+    - `03_omni_publisher/`: 재생산 얇은 라우터 및 다매체 변환 (블로그, 칼럼, TTS, 카드뉴스) + 큐티 발아 칼럼(qt-to-column)
     - `04_church_admin/`: 교회 행정, 주보, 목회서신, 이메일, 회의록
     - `05_meta_tools/` *(Tier 1·2)*: 시스템 자기 점검·조회 도구 (foundation-setup, journal-show, recall, weekly-briefing)
 - `harness/` *(Tier 3)*: **품질 보증 도구** — skills/와 분리된 감사 전용 위계. 발행 차단 권한을 갖는 유일한 디렉토리.
