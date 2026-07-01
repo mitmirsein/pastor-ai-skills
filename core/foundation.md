@@ -7,6 +7,7 @@ location: "서울시 OOO구"
 preferred_bible: "개역개정" # KRV
 theological_orientation: "개혁주의" # 또는 복음주의, 웨슬리언 등
 tone_preference: "따뜻하고 권위 있는" # 문체 선호도
+qt_source_path: "" # (선택) 기존 큐티/묵상 노트가 쌓인 폴더 경로. 비우면 outputs/devotionals/ 만 발아 스캔. 예: "~/Obsidian/묵상일지" 또는 절대경로. 큐티 원문은 읽기 전용으로만 스캔(수정·이동 안 함)
 ## 🛡️ 글로벌 할루시네이션 방지 원칙 (Anti-Hallucination Guardrails)
 1. **정직한 불가지론 (Honest Agnosticism):** 데이터가 없거나 확실하지 않은 정보에 대해서는 "모름" 또는 "불확실함"을 명확히 밝히십시오. 억지로 설득력 있는 답변을 지어내는 것(Confabulation)을 금지합니다.
 2. **원어 엄밀성:** 성경 원어(헬라어, 히브리어)는 반드시 공인된 사본(NA28, BHS)에 근거해야 하며, AI의 추측으로 파싱하거나 번역하지 마십시오.

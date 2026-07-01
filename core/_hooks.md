@@ -26,6 +26,7 @@
 | `series` | `outputs/series/{series_id}/` | 시리즈 기획 |
 | `dated` | `outputs/{date}/{category}/{skill}_{topic}.md` | 비-본문 작업물 |
 | `devotional-fallback` | 본문 식별 시 lineage, 아니면 `outputs/devotionals/{topic-slug}/` | 묵상 폴백 |
+| `qt-log` | `outputs/devotionals/{passage_id 또는 topic-slug}/v{NN}_{skill}_{date}.md` | 매일 큐티 로그 — 본문이 식별돼도 설교 lineage로 **조기 승격하지 않고** devotionals/에 누적(발아 코퍼스). 설교 lineage로의 승격은 나중에 `qt-germinate-seed`(`sermons-lineage`)가 담당 |
 
 공통 절차:
 1. **본문 식별**: `passage_id` = `{book-slug}-{ch}-{vstart}-{vend}` (예: 마가 5:25-34 → `mark-5-25-34`). 모호하면 사용자에게 확인, 본문이 없으면 `topic-{slug}` 폴백.

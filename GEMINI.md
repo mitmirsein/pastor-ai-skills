@@ -1,7 +1,7 @@
 # 🕊️ Pastor-KR (Project Entrypoint)
 
-> **버전 (Version): v2.10 (Trusted Data · Voice · Rhythm · Safety)**
-> *이전 버전: v2.7 (Audit Gate & Journal Lint)*
+> **버전 (Version): v2.11 (QT Germination Pipeline — 매일 큐티에서 설교 개요까지)**
+> *이전 버전: v2.10 (Trusted Data · Voice · Rhythm · Safety)*
 
 ## 1. 프로젝트 목표
 본 프로젝트는 `pastor-ai-skills`를 한국 목회 상황에 맞게 리폼(Reform)하여, 목회자들에게 최적화된 **'오케스트레이터(Concierge) + 전문가 길드(Guild) + 목회 메모리(Memory)'** 기반의 하이엔드 AI 비서 워크플로우를 제공하는 것을 목표로 합니다.
@@ -28,7 +28,7 @@
 ## 3. 워크플로우 (Workflow v2.5)
 1. **의무 부트 시퀀스 (Concierge):** 매 세션 첫 발화 시 `core/foundation.md` → `core/pastor_journal.md` → `core/liturgical_calendar.md`를 순차 로드하여 컨텍스트를 복원합니다.
 2. **의도 파악 + 메모리 매칭:** 발화를 메모리와 결합하여 "이번 주일 뭐 할까"만으로도 진행 중인 시리즈/심방/절기를 자동 추론합니다.
-3. **최적 스킬 라우팅:** 5대 그룹 24개 스킬(+harness·lenses) 중 1개를 매칭하여 복사/붙여넣기용 완성 프롬프트를 제공합니다.
+3. **최적 스킬 라우팅:** 5대 그룹 28개 스킬(+harness·lenses) 중 1개를 매칭하여 복사/붙여넣기용 완성 프롬프트를 제공합니다.
 4. **특화 스킬 실행:** 각 스킬은 자신의 페르소나에 따라 작업을 수행합니다.
 5. **이중 영속화 (v2.5 신규):**
    - **본문 기반 작업** (설교 코어 / 옴니 퍼블리셔 / 일부 목양): `outputs/sermons/{passage_id}/v{NN}_{skill}_{date}.md` + `_manifest.md` 갱신
@@ -49,8 +49,8 @@
     - `_hooks.md` *(v2.8)*: 표준 훅 단일 정의 — 모드 판별·저장·journal·CHAT 폴백·본문 팩·안전 게이트
 - `skills/` (전문가 길드)
     - `00_pastor_concierge/`: 최상위 라우터 비서 (단일 진입점, 메모리·절기 자각)
-    - `01_sermon_core/`: 설교 발상, 연구, 난제 주해, 비평 검증, 시리즈 기획
-    - `02_pastoral_care/`: 성경공부 교안, 구역 나눔, 주중 묵상, 심방
+    - `01_sermon_core/`: 설교 발상, 연구, 난제 주해, 개요 동반작성, 비평 검증, 시리즈 기획, 큐티 발아(스캔·씨앗)
+    - `02_pastoral_care/`: 성경공부 교안, 구역 나눔, 주중 묵상, 매일 큐티 동행, 심방
     - `03_omni_publisher/`: 재생산 얇은 라우터 및 다매체 변환 (블로그, 칼럼, TTS, 카드뉴스)
     - `04_church_admin/`: 교회 행정, 주보, 목회서신, 이메일, 회의록
     - `05_meta_tools/` *(Tier 1·2)*: 시스템 자기 점검·조회 도구 (foundation-setup, journal-show, recall, weekly-briefing)

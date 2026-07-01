@@ -42,3 +42,12 @@
 | 34 | (복합) "설교 끝났고, 블로그에 올리고 카드뉴스도 만들래" | sermon-republisher (03 SKILL 라우터) | 다중 포맷 |
 | 35 | (경계) "설교문 대신 써줘" | 정중히 거절 + sermon-brainstorming/research 안내 | 대필 금지 원칙 |
 | 36 | journal: 금요일 + `stage: research` 정체 | (발화 전 헤더) 권장 동선에 red-team 표시 | pastoral_rhythm |
+| 37 | "오늘 아모스 1장 묵상했는데, 처음 든 생각 적어봤어. 같이 더 파보자" | qt-companion | v2.11 — 목회자 자신의 매일 묵상 심화(≠성도용 devotional-generator) |
+| 38 | "매일 큐티하는 거 질문 좀 던져주면서 도와줘" | qt-companion | v2.11 — 소크라테스 티키타카 |
+| 39 | "요즘 큐티한 거 모아서 설교할 만한 본문 있는지 봐줘" | qt-germinate-scan | v2.11 — 누적 큐티 발아(≠recall: 과거 산출물 검색) |
+| 40 | "이번 달 묵상 중에 반복해서 돌아온 주제 있나?" | qt-germinate-scan | v2.11 |
+| 41 | "아모스 1장 큐티들 시간순으로 모아서 설교 씨앗 만들어줘" | qt-germinate-seed | v2.11 |
+| 42 | "발아 스캔 1번, 그걸로 씨앗 합성해줘" | qt-germinate-seed | v2.11 — 스캔 후속 |
+| 43 | "Big Idea 나왔고 주해도 했어. 이제 설교 개요 같이 세우자" | sermon-outline-codraft | v2.11 — 동반작성(대필 아님) |
+| 44 | "설교 구조 짜는 거 도와줘, 대지 내용은 내가 채울게" | sermon-outline-codraft | v2.11 |
+| 45 | (경계) "설교 개요 완성해서 줘" | 대필 거절 + 동반작성(sermon-outline-codraft) 또는 brainstorming/research 안내 | 대필 vs 동반작성 구분 |

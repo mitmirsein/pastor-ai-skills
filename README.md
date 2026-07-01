@@ -1,9 +1,9 @@
 # 🕊️ Pastor-KR (High-Precision Pastoral AI Toolkit)
 
-> **버전 (Version): v2.10 (Trusted Data · Voice · Rhythm · Safety)**
-> *이전: v2.7 (Audit Gate & Journal Lint)*
+> **버전 (Version): v2.11 (QT Germination Pipeline — 매일 큐티에서 설교 개요까지)**
+> *이전: v2.10 (Trusted Data · Voice · Rhythm · Safety)*
 
-**Agentic pastoral workflow framework with 'Concierge & Guild + Memory + Quality Gate' architecture. High-precision Korean toolkit featuring 24 specialized skills + 3 harness quality-gate tools + domain lens packs, based on '6 Gems' & 'Inferential Ontology', with persistent pastoral memory, liturgical-calendar awareness, passage-centric lineage, and forensic audit gates.**
+**Agentic pastoral workflow framework with 'Concierge & Guild + Memory + Quality Gate' architecture. High-precision Korean toolkit featuring 28 specialized skills + 3 harness quality-gate tools + domain lens packs, based on '6 Gems' & 'Inferential Ontology', with persistent pastoral memory, liturgical-calendar awareness, passage-centric lineage, and forensic audit gates.**
 
 **"오케스트레이터 + 전문가 길드 + 목회 메모리" 아키텍처 기반의 고성능 한국어 목회 지원 AI 스킬셋.**
 단 하나의 진입점(`Pastor-Concierge`)을 통해 복잡한 스킬 선택의 고민 없이 목회 워크플로우를 자동화하며, **매 세션 진입 시 진행 중인 사역(설교/시리즈/심방)과 절기 컨텍스트를 자동 복원**합니다.
@@ -33,7 +33,7 @@
 
 ## 🌟 프로젝트의 핵심 가치 (v2.10 업데이트)
 
-1. **인지 부하 최소화 (오케스트레이터):** 24개의 스킬 + 3개의 harness 도구를 외울 필요가 없습니다. `00_pastor_concierge`에게 자연어로 말하면 최적의 스킬을 매칭해 줍니다.
+1. **인지 부하 최소화 (오케스트레이터):** 28개의 스킬 + 3개의 harness 도구를 외울 필요가 없습니다. `00_pastor_concierge`에게 자연어로 말하면 최적의 스킬을 매칭해 줍니다.
 2. **단절 없는 워크플로우 (파이프라인):** 하나의 작업이 끝나면 `Call to Action`을 통해 다음 단계(예: 브레인스토밍 ➔ 주해 ➔ 검증 ➔ 블로그 발행)를 자연스럽게 제안합니다.
 3. **정밀도 최극대화 (전문가 길드):** 범용 프롬프트 대통합의 함정을 피하고, 각 목적에 특화된 개별 에이전트들의 페르소나를 완벽히 보존합니다.
 4. **추론적 온톨로지(Inferential Ontology):** 별도의 데이터베이스 없이도 AI가 본문의 핵심 개념을 엔티티(Entity)와 관계로 해체하여 분석하는 논리가 탑재되어 있습니다. (적용: `sermon-research`, `biblical-dilemma-solver`, `sermon-brainstorming`, `sermon-red-team`, `devotional-generator`, `small-group-guide`, `sermon-cardnews-maker`)
@@ -47,6 +47,7 @@
 12. **🎙️ 목회자 보이스 (v2.9 신규):** `voice-setup`이 목사님의 실제 설교문에서 문체 지문을 추출해 `core/pastor_voice.md`에 카드로 보존합니다. 칼럼·블로그 등 발행물은 거장 모사가 아니라 **목사님 자신의 문체**가 기본값이 됩니다.
 13. **🗓️ 주간 리듬 + 🔁 회고 루프 (v2.9 신규):** 비서가 먼저 챙깁니다 — 요일과 진행 상태를 교차해 "오늘의 권장 동선"을 제안하고(예: "금요일인데 아직 검증 전입니다"), 선포 후 `sermon-retro` 3분 회고가 lessons로 누적되어 다음 설교 준비에 반영됩니다.
 14. **🧯 목양 안전 + 👥 회중 페르소나 (v2.10 신규):** 위기 상황(자해·학대·급성 위기)에서는 콘텐츠보다 전문 연계 안내가 먼저이며, 장례·투병 등 상황별 금기 언어("다 하나님의 뜻")를 차단합니다. 목회자가 정의한 회중 페르소나로 레드팀이 "회중석 시뮬레이션"을 수행합니다.
+15. **🌱 큐티→설교 발아 파이프라인 (v2.11 신규):** 본문을 갑자기 정해 자료를 뒤지는 대신, *매일의 큐티가 누적되어 자연스럽게 설교로 익습니다*. `qt-companion`(소크라테스식 매일 묵상 동행 + 대화 프로토콜) → `qt-germinate-scan`(반복 본문/주제 발아 후보, 읽기 전용) → `qt-germinate-seed`(씨앗 합성) → `sermon-brainstorming` → `sermon-outline-codraft`(개요 동반작성). 목회자의 초기 묵상 원문은 불가침으로 보존되며, 어떤 단계도 설교를 대필하지 않습니다.
 
 ---
 
@@ -61,14 +62,18 @@ v2.5부터 모든 스킬은 목회자의 실제 워크플로우에 따라 5개�
 - `sermon-brainstorming.md`: 소크라테스식 문답을 통한 설교 인사이트 발굴
 - `sermon-research.md`: 6 Gems 엔진 기반의 고정밀 주해 리포트 생성
 - `biblical-dilemma-solver.md`: 성경 난제에 대한 입체적 변증 가이드
-- `sermon-red-team.md`: 설교 원고의 신학적 맹점 및 회중 시선 분석
+- `sermon-outline-codraft.md` *(v2.11)*: Big Idea·주해에서 설교 개요를 함께 세우기 — AI는 구조 비계만, 각 대지 내용은 목회자 저작(대필 아님)
+- `sermon-red-team.md`: 설교 원고나 개요의 신학적 맹점 및 회중 시선 분석
 - `sermon-series-planner.md`: 4-6주 단위의 강해 설교 시리즈 기획
 - `sermon-retro.md` *(v2.9)*: 선포 후 3분 회고 — lesson을 누적해 다음 설교에 반영
+- `qt-germinate-scan.md` *(v2.11)*: 누적 큐티에서 반복되는 본문·주제를 설교 발아 후보로 제시 (읽기 전용, 강제 승격 없음)
+- `qt-germinate-seed.md` *(v2.11)*: 발아 후보의 큐티들을 시간순 원문 그대로 모아 설교 씨앗 메모로 합성
 
 ### 🕊️ `02_pastoral_care` (목양 코어)
 - `bible-study-generator.md`: 주해(Core)-교안(Lesson)-워크북(Workbook) 통합 성경공부 설계
 - `small-group-guide.md`: 설교 메시지를 성도들의 삶으로 연결하는 나눔지(관찰/적용) 생성
 - `devotional-generator.md`: 매일/주중 공유할 수 있는 짧은 QT/묵상 콘텐츠 제작
+- `qt-companion.md` *(v2.11)*: 목회자 *자신*의 매일 큐티를 소크라테스식 문답(티키타카)으로 심화하고 대화 프로토콜로 기록 — 설교 발아의 토양
 - `visitation-guide.md`: 상황별 심방 성구 및 목회적 권면 가이드
 
 ### 📢 `03_omni_publisher` (재생산 및 다매체 확산)
