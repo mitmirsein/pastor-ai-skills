@@ -3,10 +3,10 @@
 > **버전 (Version): v2.11 (QT Germination Pipeline — 매일 큐티에서 설교 개요까지)**
 > *이전: v2.10 (Trusted Data · Voice · Rhythm · Safety)*
 
-**Agentic pastoral workflow framework with 'Concierge & Guild + Memory + Quality Gate' architecture. High-precision Korean toolkit featuring 29 specialized skills + 3 harness quality-gate tools + domain lens packs, based on '6 Gems' & 'Inferential Ontology', with persistent pastoral memory, liturgical-calendar awareness, passage-centric lineage, and forensic audit gates.**
+**Agentic pastoral workflow framework with 'Concierge & Guild + Memory + Quality Gate' architecture. High-precision Korean toolkit featuring 29 specialized skills + 3 harness quality-gate tools + domain lens packs, based on '6 Gems' & 'Inferential Ontology', with a daily-QT-to-sermon/column germination pipeline, persistent pastoral memory, liturgical-calendar awareness, passage-centric lineage, and forensic audit gates.**
 
 **"오케스트레이터 + 전문가 길드 + 목회 메모리" 아키텍처 기반의 고성능 한국어 목회 지원 AI 스킬셋.**
-단 하나의 진입점(`Pastor-Concierge`)을 통해 복잡한 스킬 선택의 고민 없이 목회 워크플로우를 자동화하며, **매 세션 진입 시 진행 중인 사역(설교/시리즈/심방)과 절기 컨텍스트를 자동 복원**합니다.
+단 하나의 진입점(`Pastor-Concierge`)을 통해 복잡한 스킬 선택의 고민 없이 목회 워크플로우를 자동화하며, **매 세션 진입 시 진행 중인 사역(설교/시리즈/심방)과 절기 컨텍스트를 자동 복원**합니다. 나아가 **매일의 큐티가 누적되어 설교와 칼럼으로 자연스럽게 발아**하도록 돕습니다 (v2.11).
 
 ![Pastor-KR Hero Image](assets/hero-image.jpg)
 
