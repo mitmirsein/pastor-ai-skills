@@ -33,7 +33,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 **2단계 — 과거 큐티 참조 (읽기 전용, 연속성).**
 문답을 시작하기 전, 지난 묵상과 오늘을 잇기 위해 아래를 **읽기 전용**으로 조회한다:
 1. `core/pastor_journal.md`의 `recent_topics` / `active_sermons.notes` (1순위, 가벼움)
-2. (선택) `recall` 방식으로 `outputs/devotionals/*/_manifest.md` + (설정 시) `foundation.md`의 `qt_source_path` 폴더를 스캔하여, **같은 본문/주제의 과거 큐티**를 찾는다.
+2. (선택) `recall` 방식으로 `outputs/devotionals/*/_manifest.md` + (설정 시) `foundation.md`의 `qt_source_path`가 가리키는 폴더(들)(**콤마로 구분된 각 경로를 모두** 스캔)를 훑어, **같은 본문/주제의 과거 큐티**를 찾는다.
 
 찾으면 한 줄로 연결해 준다(강요가 아니라 초대):
 > "지난번 아모스 1장 묵상에서 '심판의 보편성'을 붙드셨는데, 오늘 이 본문은 그 생각과 어떻게 이어지거나 부딪히나요?"

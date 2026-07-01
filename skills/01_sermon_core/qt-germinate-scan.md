@@ -21,12 +21,12 @@ description: 한 주/한 달 누적된 큐티 자산을 읽어, 반복되는 본
 ## ⚙️ 동작 프로세스
 
 ### Step 1: 컨텍스트 로드
-1. `core/foundation.md` — `qt_source_path` 확인(설정 시 외부 큐티 폴더).
+1. `core/foundation.md` — `qt_source_path` 확인(설정 시 외부 큐티 폴더; **콤마로 구분된 다중 폴더 가능**).
 2. `core/pastor_journal.md` — `recent_topics` / `active_sermons`(매칭 힌트, 읽기 전용).
 
 ### Step 2: 스캔 대상 결정
 - **내부(기본):** `outputs/devotionals/*/`에서 **목회자 자신의 큐티**(qt-companion이 `qt-log`로 남긴 `qt_kind: dialogue` 노트)의 `_manifest.md` + 각 노트 YAML(`passage_id`/`topic`) + `## 본문` 헤더를 읽는다. 성도용 `devotional-generator` 산출물은 목회자의 묵상 씨앗이 아니므로 발아 코퍼스에서 **제외**한다(`qt_kind: dialogue` 태그로 구분).
-- **외부(설정 시):** `foundation.md`의 `qt_source_path` 폴더의 마크다운. frontmatter가 없어도 본문 텍스트/`## 본문`에서 성경 본문(책·장)과 반복 어휘를 추출한다.
+- **외부(설정 시):** `foundation.md`의 `qt_source_path`가 가리키는 폴더(들). 값에 콤마가 있으면 **각 경로를 개별 폴더로 분리해 모두** 스캔한다(devotional-voice 화이트리스트 규약). frontmatter가 없어도 본문 텍스트/`## 본문`에서 성경 본문(책·장)과 반복 어휘를 추출한다.
 - **기간 창:** 사용자가 "이번 주/이번 달/최근"을 지정하면 그 창, 미지정 시 **최근 8주** 기본. 창 밖 큐티는 집계에서 제외(단, "전체 기간으로 봐줘"라 하면 무제한).
 - AGENT 모드 전제. CHAT 모드면 "이 기능은 파일 접근 환경(Claude Code·Cursor 등)이 필요합니다 — 큐티 노트를 붙여넣어 주시면 그 범위에서 훑겠습니다"로 정직하게 안내.
 
