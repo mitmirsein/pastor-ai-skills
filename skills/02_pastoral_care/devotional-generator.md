@@ -50,7 +50,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 
 - **save**: `devotional-fallback` (본문 식별 시 lineage, 아니면 `outputs/devotionals/{topic-slug}/`) · **category**: `02_pastoral_care`
 - **stage**: `devotional`
-- **journal**: 기존 `passage_id` 항목엔 `notes`에 "[묵상 카드 작성]" 태그 추가; 신규 본문이면 `active_sermons`에 `stage: devotional`로 추가; `recent_topics`에 묵상 키워드 1개
+- **journal**: `recent_topics`에 묵상 키워드 1개; 이미 `active_sermons`에 있는 본문이면 그 항목 `notes`에 "[묵상 카드 작성]" 태그만 추가. 신규 본문을 `active_sermons`에 등재하지 않는다 — 성도용 파생물은 설교 진행 항목이 아니다 (`pastor_journal.md` §3.1.1)
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

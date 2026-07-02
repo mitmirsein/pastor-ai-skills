@@ -85,7 +85,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 - **save**: `qt-log` (본문 식별 여부와 무관하게 `outputs/devotionals/{passage_id 또는 topic-slug}/`에 누적 — 발아 스캔이 읽는 큐티 코퍼스. 본문이 식별돼도 설교 lineage로 조기 승격하지 않으며, 승격은 나중에 `qt-germinate-seed`가 담당) · **category**: `02_pastoral_care`
 - **stage**: `devotional` · **extra**: `qt_kind: dialogue` (발아 스캔이 *목회자 자신의* 대화형 큐티를 식별·필터링하는 태그 — 실제로 `qt-germinate-scan`이 이 태그로 성도용 묵상과 구분해 읽는다)
 - **manifest 라인**: `큐티(대화): {본문/주제} — {초기 묵상 핵심 한 줄}`
-- **journal**: 기존 `passage_id` 항목엔 `notes`에 "[큐티 동행]" 태그 추가; 신규 본문이면 `active_sermons`에 `stage: devotional`로 추가; `recent_topics`에 묵상 키워드 1~2개
+- **journal**: `recent_topics`에 묵상 키워드 1~2개; 이미 `active_sermons`에 있는 본문이면 그 항목 `notes`에 "[큐티 동행]" 태그만 추가. **신규 본문을 `active_sermons`에 등재하지 않는다** — 큐티는 발아 코퍼스(`outputs/devotionals/`)에만 누적되고, journal 승격의 유일한 진입점은 `qt-germinate-seed`(`stage: seed`)다 (조기 승격 금지 — `_hooks.md` §2 `qt-log`와 동일 원리, `pastor_journal.md` §3.1.1)
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

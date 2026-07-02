@@ -45,13 +45,15 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 ### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
 - **save**: `sermons-lineage` · **category**: `03_omni_publisher`
-- **stage**: `published_column` (journal에는 `published`)
+- **stage**: `published_column` (journal 반영: `core/_hooks.md` §3.6 발행 전이 가드)
 - **extra 메타**: `style` (`내 보이스`(기본)/피터슨/켈러 — `core/pastor_voice.md` 참조)
 - **manifest 라인**: `{style} 스타일 칼럼 ({글자수})`
-- **journal**: `active_sermons` `stage: published`
+- **journal**: 발행 전이 가드(`_hooks.md` §3.6) 적용 — `preached_on` 채워진 항목만 `stage: published`, 선포 전이면 stage 유지 + `notes`에 `[파생 발행: 칼럼]`; journal에 없는 외부 원고면 선포 여부 확인 후 등재
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**
-이번 작업이 완료되었습니다. 사용자의 워크플로우에 맞춰 다음으로 필요할 법한 스킬을 1개 추천해 주세요.
-* **[추천 스킬명]**: (추천하는 이유 간략히 설명)
-  * 💡 실행 팁: "위 결과물의 핵심 내용을 복사하여 [추천 스킬]에 붙여넣어 주세요."
+칼럼 초안이 나왔습니다. 목사님이 마지막으로 다듬어 발행하시면 됩니다.
+* **[harness/sermon_audit] (발행 전 권장)**: 주보 1면·기고는 외부 노출이 가장 큰 발행물입니다 — 변환 과정에서 인용·수치·표현이 원 설교와 어긋나지 않았는지 Claim Ledger로 점검받으세요.
+  * 💡 실행 팁: "위 칼럼 발행 전에 감사해줘"라고 말씀하시면 됩니다.
+* **[sermon-cardnews-maker / sermon-to-tts]**: 같은 설교를 다른 매체로도 재생산하려면
+  * 💡 실행 팁: "위 결과물의 핵심 내용을 복사하여 [원하는 스킬]에 붙여넣어 주세요."

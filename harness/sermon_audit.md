@@ -30,6 +30,7 @@ triggers:
 
 1. **자동 권장:** 본문 lineage의 `stage`가 `redteam` → `drafted/preached/published`로 전이하기 직전, Concierge가 발행 전 자동 권장합니다. (강제 아님 — 사용자 선택)
 2. **명시적 호출:** 사용자가 직접 "발행 전 감사해", "검수 게이트 통과시켜", "최종 점검" 등을 요청.
+3. **발행 직전 권장:** 재생산(03_omni_publisher — 칼럼·블로그·TTS·카드뉴스) 실행 전, 해당 lineage manifest에 audit 통과 기록이 없으면 Concierge가 감사를 먼저 권장합니다. red-team을 거치지 않는 상류 경로(`qt-to-column`)도 포함합니다.
 
 ---
 

@@ -147,6 +147,7 @@ description: 목회자의 일상 언어를 분석하여 의도를 파악하고, 
 - "발행 전 검수", "감사 게이트", "최종 점검", "이 원고 검수해" → `sermon_audit`
 - "메모리 점검", "journal lint", "위생 검사", "메모리 정리" → `journal_lint`
 - ⚡ **자동 권장:** 본문 lineage `stage`가 `redteam` → `drafted/preached/published`로 전이하는 시점을 감지하면, Concierge는 `sermon_audit` 실행을 먼저 권장합니다. (강제 아님 — 사용자 선택)
+- ⚡ **발행 직전 권장:** 03_omni_publisher 스킬(칼럼·블로그·TTS·카드뉴스)로 라우팅할 때, 대상 원고의 lineage manifest에 `audit` 통과 기록이 없으면 라우팅 안내에 "발행 전 `sermon_audit` 권장" 1줄을 병기합니다. `qt-to-column`처럼 red-team을 거치지 않는 상류 칼럼 경로도 동일합니다. (강제 아님)
 
 ### Step 4: '복사/붙여넣기'용 실행 프롬프트 제공
 - 사용자가 해당 스킬을 호출할 때 사용할 **완성형 프롬프트**를 코드 블록에 담아 제공합니다.

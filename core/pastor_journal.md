@@ -78,10 +78,10 @@ active_sermons:
 
 - **파이프라인 단계 (순서 있음)** — 값은 "완료된 마지막 단계"를 뜻합니다:
   `devotional → seed → brainstorm → research → dilemma → outline → redteam → drafted → preached → published`
-  (`dilemma`는 선택 단계로 건너뛸 수 있습니다. v2.11 발아 파이프라인의 `devotional`(큐티 누적)·`seed`(씨앗 합성)·`outline`(개요 동반작성)을 포함합니다.)
+  (`dilemma`는 선택 단계로 건너뛸 수 있습니다. v2.11 발아 파이프라인의 `devotional`(큐티 누적)·`seed`(씨앗 합성)·`outline`(개요 동반작성)을 포함합니다. 단, 큐티 스킬(qt-companion·devotional-generator)은 journal에 **신규 항목을 만들지 않으므로** 발아 항목의 journal 진입은 `seed`부터입니다 — `devotional` 값은 수동·과거 항목 호환용입니다.)
 - **예약 단계**: `pending` — `sermon-series-planner`가 다음 주차 본문을 사전 등록할 때만 사용합니다.
 - **파생 작업 단계 (순서 없음)**: `study`(성경공부 교안) · `smallgroup`(나눔지) — 파생물 생성 기록이지 본체 진행 단계가 아니므로, 기존 stage가 이보다 늦으면(예: `preached`) **본체 stage를 후퇴시키지 않고 `notes`에만 기록**합니다.
-- **발행 세분값 매핑**: 파일 YAML의 `published_blog` / `published_column` / `published_tts` / `published_cardnews`는 lineage 파일 전용 표기이며 journal에는 `published`​로 기록합니다. `column_draft`(qt-to-column)는 journal의 stage를 바꾸지 않습니다(`notes`만).
+- **발행 세분값 매핑**: 파일 YAML의 `published_blog` / `published_column` / `published_tts` / `published_cardnews`는 lineage 파일 전용 표기이며, journal에는 **발행 전이 가드**(`core/_hooks.md` §3.6)를 거쳐 반영합니다 — `preached_on`이 채워진 항목만 `published`​로 전이하고, 선포 전이면 stage를 바꾸지 않고 `notes`에만 기록합니다. `column_draft`(qt-to-column)는 journal의 stage를 바꾸지 않습니다(`notes`만).
 
 ### 3.2 `active_series`
 강해/주제 시리즈의 진행 현황.

@@ -67,10 +67,10 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 ### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
 - **save**: `sermons-lineage` · **category**: `03_omni_publisher`
-- **stage**: `published_cardnews` (journal에는 `published`)
+- **stage**: `published_cardnews` (journal 반영: `core/_hooks.md` §3.6 발행 전이 가드)
 - **extra 메타**: `card_count` (컷 수)
 - **manifest 라인**: `{컷수}컷 카드뉴스 + 캡션`
-- **journal**: `active_sermons` `stage: published`
+- **journal**: 발행 전이 가드(`_hooks.md` §3.6) 적용 — `preached_on` 채워진 항목만 `stage: published`, 선포 전이면 stage 유지 + `notes`에 `[파생 발행: 카드뉴스]`
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

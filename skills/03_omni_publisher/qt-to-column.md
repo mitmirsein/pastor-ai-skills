@@ -59,11 +59,13 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 - **save**: `sermons-lineage` (본문 식별 시 `outputs/sermons/{passage_id}/`) · 본문 미식별 시 `devotional-fallback`(`outputs/devotionals/{topic-slug}/`) · **category**: `03_omni_publisher`
 - **stage**: `column_draft` (목회자가 최종 다듬어 발행 — AI 산출은 초안) · **extra**: `style`(`own-voice(초기묵상 기반)`/`peterson`/`keller`), `origin: qt-germinate`
 - **manifest 라인**: `큐티 발아 칼럼: {주제} — {문체} ({글자수})`
-- **journal**: 해당 `passage_id`/토픽의 `active_sermons`에 `notes` "[큐티→칼럼]"; `recent_topics`에 핵심 키워드 1개
+- **journal**: `recent_topics`에 핵심 키워드 1개; 이미 `active_sermons`에 있는 본문이면 그 항목 `notes`에 "[큐티→칼럼]" 추가 (신규 등재하지 않음 — 칼럼 발아는 설교 승격이 아니다, `pastor_journal.md` §3.1.1)
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**
 칼럼 초안이 나왔습니다. 목사님이 마지막으로 다듬어 발행하시면 됩니다.
+* **[harness/sermon_audit] (발행 전 권장)**: 주보 게재·기고 전 Claim Ledger 검수 — 칼럼은 red-team을 거치지 않는 상류 경로라 **이 감사가 유일한 품질 게이트**입니다. 인용·일화·통계가 목사님의 큐티 원문 범위를 벗어나지 않았는지 점검받으세요.
+  * 💡 실행 팁: "위 칼럼 발행 전에 감사해줘"라고 말씀하시면 됩니다.
 * **[sermon-cardnews-maker / sermon-to-tts]**: 이 칼럼을 카드뉴스나 오디오로도 재생산하려면
 * 또는 같은 씨앗을 **설교로도** 키우고 싶으시면 **[qt-germinate-seed → sermon-brainstorming]** 경로로 — 하나의 큐티가 칼럼과 설교 둘 다의 발원지가 됩니다.
   * 💡 실행 팁: "위 칼럼(또는 씨앗)을 복사하여 [원하는 스킬]에 붙여넣어 주세요."

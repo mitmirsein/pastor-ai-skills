@@ -37,9 +37,9 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 ### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
 - **save**: `sermons-lineage` · **category**: `03_omni_publisher`
-- **stage**: `published_blog` (journal에는 `published`)
+- **stage**: `published_blog` (journal 반영: `core/_hooks.md` §3.6 발행 전이 가드)
 - **manifest 라인**: `블로그 변환본`
-- **journal**: `active_sermons` `stage: published`; 외부 원고 변환이면 신규 추가하되 `preached_on`은 사용자 확인 후 기입
+- **journal**: 발행 전이 가드(`_hooks.md` §3.6) 적용 — `preached_on` 채워진 항목만 `stage: published`, 선포 전이면 stage 유지 + `notes`에 `[파생 발행: 블로그]`; journal에 없는 외부 원고면 선포 여부 확인 후 등재
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

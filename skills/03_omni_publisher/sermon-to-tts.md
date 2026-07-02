@@ -74,10 +74,10 @@ AI가 생성한 대본을 그대로 쓰기보다, 목사님의 평소 언어 습
 ### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
 - **save**: `sermons-lineage` · **category**: `03_omni_publisher`
-- **stage**: `published_tts` (journal에는 `published`)
+- **stage**: `published_tts` (journal 반영: `core/_hooks.md` §3.6 발행 전이 가드 — 토요일 낭독 점검처럼 선포 전 생성 시 stage를 올리지 않음)
 - **extra 메타**: `target_duration` (분)
 - **manifest 라인**: `{분량}분 오디오 대본`
-- **journal**: `active_sermons` `stage: published`
+- **journal**: 발행 전이 가드(`_hooks.md` §3.6) 적용 — `preached_on` 채워진 항목만 `stage: published`, 선포 전이면 stage 유지 + `notes`에 `[파생 발행: TTS]`
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**
