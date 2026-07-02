@@ -34,9 +34,9 @@
 | 26 | "내 설교 문체 등록하고 싶어" | voice-setup | v2.9 |
 | 27 | "어제 설교 돌아보자" | sermon-retro | v2.9 |
 | 28 | journal: `active_series.next_passage: 엡 2:11-22` + "이번 주일 뭐 하지?" | sermon-brainstorming(또는 research) — 엡 2:11-22 1순위 제시 | 시리즈 > 절기 |
-| 29 | journal: `active_sermons[mark-5-25-34].stage: research_done` + "혈루증 여인 좀 더 가보자" | sermon-red-team (stage 기반 next_step) | 메모리 매칭 |
+| 29 | journal: `active_sermons[mark-5-25-34].stage: research` + "혈루증 여인 좀 더 가보자" | sermon-red-team (stage 기반 next_step) | 메모리 매칭 |
 | 30 | journal: `recent_topics: [은혜]` + "은혜 주제로 묵상 하나" | devotional-generator — 중복 회피 신호와 함께 다른 각도 제안 | |
-| 31 | "고전 3장 성전 본문으로 설교하는데 점검 질문 좀" | lenses/paulus-temple | 렌즈 자동 권장 |
+| 31 | lenses: 고전 3:16-17을 `applies_to`로 갖는 렌즈 설치 가정 + "고전 3장 성전 본문으로 설교하는데 점검 질문 좀" | 해당 렌즈 자동 권장 (렌즈 미설치 환경은 sermon-red-team) | 렌즈 자동 권장 |
 | 32 | (모호) "설교 준비 도와줘" | 보완 질문 1~2개 → 본문/단계 확인 후 라우팅 | 즉답 금지 |
 | 33 | (모호) "K집사님 일 때문에 마음이 무겁네" | 보완 질문 → 심방이면 visitation-guide (위기 신호 시 care_safety 우선) | |
 | 34 | (복합) "설교 끝났고, 블로그에 올리고 카드뉴스도 만들래" | sermon-republisher (03 SKILL 라우터) | 다중 포맷 |

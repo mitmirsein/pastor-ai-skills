@@ -36,7 +36,7 @@ triggers:
 
 | 카테고리 | 검증 내용 | 심각도 |
 |---|---|---|
-| **C1. 스키마** | YAML 파싱 가능, 필수 필드 존재 (`active_sermons`, `active_series`, `active_visitations`, `recent_topics`, `open_prayer_requests`) | 🚨 critical |
+| **C1. 스키마** | YAML 파싱 가능, 필수 필드 존재 (`active_sermons`, `active_series`, `active_visitations`, `recent_topics`, `open_prayer_requests`, `lessons` — schema v2) | 🚨 critical |
 | **C2. 타입** | `active_sermons[].stage` ∈ enum 값, 날짜 필드가 ISO 8601 (`YYYY-MM-DD`) 형식 | ⚠️ warn |
 | **C3. PII 위반** | 실명 의심 패턴, 전화번호, 이메일, 병원명/약물명 상세, 주소 | 🚨 critical |
 | **C4. 표류 (Drift)** | `active_sermons[].id`에 매칭되는 `outputs/sermons/{id}/` 폴더 존재 여부, 역방향 orphan 폴더 존재 여부 | 📋 info |
@@ -72,10 +72,11 @@ LLM이 추론 기반으로 판단합니다. 다음 휴리스틱을 적용합니�
 
 ## 5. Stage Enum 정의 (C2 검증 기준)
 
-`active_sermons[].stage`의 유효 값:
+**SSOT는 `core/pastor_journal.md` §3.1.1이며, 아래는 그 사본입니다** (표류 시 SSOT가 우선). `active_sermons[].stage`의 유효 값:
 ```
-brainstorm | research | dilemma | redteam | drafted | preached | published
+devotional | seed | brainstorm | research | dilemma | outline | redteam | drafted | preached | published | pending | study | smallgroup
 ```
+- `published_blog`·`published_column`·`published_tts`·`published_cardnews`·`column_draft`는 lineage 파일 YAML 전용 세분값입니다 — journal에 나타나면 §3.1.1 매핑 위반으로 ⚠️ warn 처리합니다.
 
 ---
 

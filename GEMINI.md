@@ -60,7 +60,7 @@
     - `routing_eval.md` *(v2.10)*: Concierge 라우팅 회귀를 `tests/routing_cases.md` 골든셋으로 자가 평가
     - `_README.md`: harness/ 운용 정책 및 skills/와의 책임 경계
 - `data/` *(v2.8)*: **비서의 서재 (Data Shelf)** — 정본 데이터 슬롯. `scripture/`(성경 본문, 사용자 로컬 주입·커밋 금지)·`terms/`(신학 용어 대조표). 규약: `data/_README.md`
-- `lenses/` *(v2.10)*: 주제 영역 red-team 렌즈 팩 (예: `paulus-temple.md`). 본문이 `applies_to`와 겹치면 자동 권장. 포맷: `lenses/_README.md`
+- `lenses/` *(v2.10)*: 주제 영역 red-team 렌즈 팩 — 사용자 제작·주입 슬롯 (커밋 금지, `data/`와 동일 원칙). 본문이 `applies_to`와 겹치면 자동 권장. 포맷: `lenses/_README.md`
 - `tests/` *(v2.10)*: `routing_cases.md` — 라우팅 골든셋 (스킬 추가 시 케이스 2건 동반 규약)
 - `docs/`: 아키텍처 설계, 기획, 리뷰 문서 보관소
 - `outputs/`:

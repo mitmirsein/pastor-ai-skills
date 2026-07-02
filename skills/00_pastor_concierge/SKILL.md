@@ -94,7 +94,7 @@ description: 목회자의 일상 언어를 분석하여 의도를 파악하고, 
 - `routing_eval` *(v2.10)*: 스킬 추가·Concierge 수정 후 라우팅 회귀를 골든셋으로 검사할 때. → `harness/routing_eval.md`
 
 **🔭 [L. 렌즈 팩 (lenses/)]**
-- 설교 본문이 렌즈의 적용 본문(`applies_to`)과 겹치면 해당 렌즈를 자동 권장 (예: 고전 3:16-17 → `lenses/paulus-temple.md`). 목록: `lenses/_README.md`
+- 설교 본문이 `lenses/`에 설치된 렌즈의 적용 본문(`applies_to`)과 겹치면 해당 렌즈를 자동 권장. 렌즈는 사용자 제작·주입 자산 — 슬롯 규약·팩 포맷: `lenses/_README.md`
 
 ---
 
@@ -109,7 +109,7 @@ description: 목회자의 일상 언어를 분석하여 의도를 파악하고, 
 - 발화 내용 + `pastor_journal`을 결합하여 의도를 추론합니다.
 - 예시:
   - 사용자: "이번 주일 뭐 할까?" → `active_series.next_passage`가 비어있지 않으면 그것을 1순위로 제시.
-  - 사용자: "혈루증 여인 좀 더 파보자" → `active_sermons[id=mark-5-25-34]`를 찾아 `stage`에 따라 다음 스킬 결정 (research_done이면 redteam 추천).
+  - 사용자: "혈루증 여인 좀 더 파보자" → `active_sermons[id=mark-5-25-34]`를 찾아 `stage`에 따라 다음 스킬 결정 (`research`면 outline 동반작성 또는 red-team 추천 — stage enum: `pastor_journal.md` §3.1.1).
   - 사용자: "은혜 주제로 묵상 하나" → `recent_topics`에 "은혜"가 있으면 *중복 회피* 신호로 다른 각도(예: "값비싼 은혜")를 제안.
 - 누락된 핵심 정보는 짧은 1~2개 질문으로 보완합니다. 단, **메모리에서 추론 가능한 정보는 다시 묻지 않습니다.**
 

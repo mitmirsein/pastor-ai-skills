@@ -63,7 +63,7 @@ YAML 프론트매터의 각 필드는 다음 의미를 가집니다.
 active_sermons:
   - id: mark-5-25-34            # passage_id (book-ch-vstart-vend)
     title: "혈루증 여인의 손길"   # 임시 제목
-    stage: research_done         # brainstorm | research | dilemma | redteam | drafted | preached | published
+    stage: research              # 유효 값: §3.1.1 stage enum (SSOT) 참조
     next_step: redteam           # 다음 권장 스킬
     started_on: 2026-05-06
     preached_on: null            # 선포일 (강단 후 채움)
@@ -71,6 +71,17 @@ active_sermons:
     series_id: null              # 시리즈에 속할 경우 series.id 참조
     notes: "사회적 수치 vs 개인적 믿음 긴장 강조"
 ```
+
+#### 3.1.1 stage enum — 단일 정의 (SSOT)
+
+`active_sermons[].stage`의 유효 값은 아래 목록이 **유일한 정의**입니다. `harness/journal_lint.md`(C2 타입 검사)와 `core/pastoral_rhythm.md`(지연 감지의 단계 순서)는 이 목록을 따르며, 다른 파일의 enum 사본과 어긋나면 이 목록이 우선합니다.
+
+- **파이프라인 단계 (순서 있음)** — 값은 "완료된 마지막 단계"를 뜻합니다:
+  `devotional → seed → brainstorm → research → dilemma → outline → redteam → drafted → preached → published`
+  (`dilemma`는 선택 단계로 건너뛸 수 있습니다. v2.11 발아 파이프라인의 `devotional`(큐티 누적)·`seed`(씨앗 합성)·`outline`(개요 동반작성)을 포함합니다.)
+- **예약 단계**: `pending` — `sermon-series-planner`가 다음 주차 본문을 사전 등록할 때만 사용합니다.
+- **파생 작업 단계 (순서 없음)**: `study`(성경공부 교안) · `smallgroup`(나눔지) — 파생물 생성 기록이지 본체 진행 단계가 아니므로, 기존 stage가 이보다 늦으면(예: `preached`) **본체 stage를 후퇴시키지 않고 `notes`에만 기록**합니다.
+- **발행 세분값 매핑**: 파일 YAML의 `published_blog` / `published_column` / `published_tts` / `published_cardnews`는 lineage 파일 전용 표기이며 journal에는 `published`​로 기록합니다. `column_draft`(qt-to-column)는 journal의 stage를 바꾸지 않습니다(`notes`만).
 
 ### 3.2 `active_series`
 강해/주제 시리즈의 진행 현황.
