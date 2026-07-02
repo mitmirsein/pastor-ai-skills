@@ -1,7 +1,7 @@
 # 🕊️ Pastor-KR (High-Precision Pastoral AI Toolkit)
 
-> **버전 (Version): v2.11 (QT Germination Pipeline — 매일 큐티에서 설교 개요까지)**
-> *이전: v2.10 (Trusted Data · Voice · Rhythm · Safety)*
+> **버전 (Version): v2.12 (Pipeline Integrity — 정합 · 주간 루프 통합 · 발행 게이트)**
+> *이전: v2.11 (QT Germination Pipeline — 매일 큐티에서 설교 개요까지)*
 
 **Agentic pastoral workflow framework with 'Concierge & Guild + Memory + Quality Gate' architecture. High-precision Korean toolkit featuring 29 specialized skills + 3 harness quality-gate tools + domain lens packs, based on '6 Gems' & 'Inferential Ontology', with a daily-QT-to-sermon/column germination pipeline, persistent pastoral memory, liturgical-calendar awareness, passage-centric lineage, and forensic audit gates.**
 
@@ -48,6 +48,7 @@
 13. **🗓️ 주간 리듬 + 🔁 회고 루프 (v2.9 신규):** 비서가 먼저 챙깁니다 — 요일과 진행 상태를 교차해 "오늘의 권장 동선"을 제안하고(예: "금요일인데 아직 검증 전입니다"), 선포 후 `sermon-retro` 3분 회고가 lessons로 누적되어 다음 설교 준비에 반영됩니다.
 14. **🧯 목양 안전 + 👥 회중 페르소나 (v2.10 신규):** 위기 상황(자해·학대·급성 위기)에서는 콘텐츠보다 전문 연계 안내가 먼저이며, 장례·투병 등 상황별 금기 언어("다 하나님의 뜻")를 차단합니다. 목회자가 정의한 회중 페르소나로 레드팀이 "회중석 시뮬레이션"을 수행합니다.
 15. **🌱 큐티→설교/칼럼 발아 파이프라인 (v2.11 신규):** 본문을 갑자기 정해 자료를 뒤지는 대신, *매일의 큐티가 누적되어 자연스럽게 설교·칼럼으로 익습니다*. `qt-companion`(소크라테스식 매일 묵상 동행 + 대화 프로토콜) → `qt-germinate-scan`(반복 본문/주제 발아 후보, 읽기 전용) → `qt-germinate-seed`(씨앗 합성) → `sermon-brainstorming` → `sermon-outline-codraft`(개요 동반작성). 같은 씨앗은 `qt-to-column`으로 **칼럼**으로도 갈라집니다(초기 묵상 문체 기반 '내 문체' 또는 거장 문체 선택). 목회자의 초기 묵상 원문은 불가침으로 보존되며, 어떤 단계도 설교를 대필하지 않습니다.
+16. **🧩 파이프라인 정합 (v2.12 신규):** v2.11이 놓은 발아 파이프라인을 시스템 전체와 **맞물리게** 했습니다 — ① stage 유효값의 단일 정의(`pastor_journal.md` §3.1.1 SSOT — 위생 검사 오탐 제거) ② **발행 전이 가드**(`_hooks.md` §3.6): 선포 전 칼럼·TTS 선작성이 설교를 조기 '발행 완료'로 만들지 않음 ③ **칼럼도 감사 게이트**: red-team을 거치지 않는 큐티 상류 칼럼까지 발행 전 `sermon_audit` 권장 ④ 주간 루프 통합: 리듬표·weekly-briefing·recall이 매일 큐티와 발아 상태를 인지(`outputs/devotionals/_index.md` 인덱스) ⑤ 원어 팩 게이트: 원어 정본(`data/scripture/source/`) 없이는 형태소 파싱 표를 만들지 않는 정직 강등.
 
 ---
 

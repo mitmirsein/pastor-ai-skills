@@ -1,7 +1,7 @@
 # 🕊️ Pastor-KR (Project Entrypoint)
 
-> **버전 (Version): v2.11 (QT Germination Pipeline — 매일 큐티에서 설교 개요까지)**
-> *이전 버전: v2.10 (Trusted Data · Voice · Rhythm · Safety)*
+> **버전 (Version): v2.12 (Pipeline Integrity — 정합 · 주간 루프 통합 · 발행 게이트)**
+> *이전 버전: v2.11 (QT Germination Pipeline — 매일 큐티에서 설교 개요까지)*
 
 ## 1. 프로젝트 목표
 본 프로젝트는 `pastor-ai-skills`를 한국 목회 상황에 맞게 리폼(Reform)하여, 목회자들에게 최적화된 **'오케스트레이터(Concierge) + 전문가 길드(Guild) + 목회 메모리(Memory)'** 기반의 하이엔드 AI 비서 워크플로우를 제공하는 것을 목표로 합니다.
@@ -24,6 +24,7 @@
 - **목양 안전 (v2.10):** 목양 스킬은 `core/care_safety.md`(위기 신호 프로토콜·금기 언어·욥의 친구 경보)를 의무 로드. 위기 신호 시 콘텐츠보다 전문 연계 안내가 먼저입니다.
 - **회중 페르소나 (v2.10):** 목회자가 작성·확정한 가상 회중 렌즈로 red-team/audit L4를 구조화. AI가 회중을 추정해 만들지 않습니다.
 - **대필 거절 (원칙):** 설교문 대필 요청은 정중히 거절하고 사유를 돕는 경로로 안내합니다. 초안 집필은 목회자의 자리입니다.
+- **발행 전이 가드 (v2.12):** 파생 발행물(칼럼·블로그·TTS·카드뉴스)은 `preached_on` 확인 전에 본체 설교의 stage를 `published`로 만들지 않습니다(`core/_hooks.md` §3.6). 발행물은 발행 전 `sermon_audit` 권장 — red-team을 거치지 않는 칼럼 상류 경로(qt-to-column) 포함. stage 유효값의 단일 정의는 `pastor_journal.md` §3.1.1.
 
 ## 3. 워크플로우 (Workflow v2.5)
 1. **의무 부트 시퀀스 (Concierge):** 매 세션 첫 발화 시 `core/foundation.md` → `core/pastor_journal.md` → `core/liturgical_calendar.md`를 순차 로드하여 컨텍스트를 복원합니다.
@@ -53,7 +54,7 @@
     - `02_pastoral_care/`: 성경공부 교안, 구역 나눔, 주중 묵상, 매일 큐티 동행, 심방
     - `03_omni_publisher/`: 재생산 얇은 라우터 및 다매체 변환 (블로그, 칼럼, TTS, 카드뉴스) + 큐티 발아 칼럼(qt-to-column)
     - `04_church_admin/`: 교회 행정, 주보, 목회서신, 이메일, 회의록
-    - `05_meta_tools/` *(Tier 1·2)*: 시스템 자기 점검·조회 도구 (foundation-setup, journal-show, recall, weekly-briefing)
+    - `05_meta_tools/` *(Tier 1·2)*: 시스템 자기 점검·조회 도구 (foundation-setup, journal-show, recall, weekly-briefing, voice-setup)
 - `harness/` *(Tier 3)*: **품질 보증 도구** — skills/와 분리된 감사 전용 위계. 발행 차단 권한을 갖는 유일한 디렉토리.
     - `sermon_audit.md`: 발행 전 사역물 5렌즈 포렌식 검수 (80점 fail-fast + **Claim Ledger 증거표·검증 불가 채점 보류**, v2.8)
     - `journal_lint.md`: `pastor_journal.md` 스키마·PII·표류 점검
@@ -62,7 +63,7 @@
 - `data/` *(v2.8)*: **비서의 서재 (Data Shelf)** — 정본 데이터 슬롯. `scripture/`(성경 본문, 사용자 로컬 주입·커밋 금지)·`terms/`(신학 용어 대조표). 규약: `data/_README.md`
 - `lenses/` *(v2.10)*: 주제 영역 red-team 렌즈 팩 — 사용자 제작·주입 슬롯 (커밋 금지, `data/`와 동일 원칙). 본문이 `applies_to`와 겹치면 자동 권장. 포맷: `lenses/_README.md`
 - `tests/` *(v2.10)*: `routing_cases.md` — 라우팅 골든셋 (스킬 추가 시 케이스 2건 동반 규약)
-- `docs/`: 아키텍처 설계, 기획, 리뷰 문서 보관소
+- `docs/`: 아키텍처 설계, 기획, 리뷰 문서 보관소 (로컬 전용 — `.gitignore` 대상, 공개 배포에는 포함되지 않음)
 - `outputs/`:
     - `sermons/{passage_id}/`: 본문 중심 lineage (`_manifest.md` + `v01..vNN`)
     - `series/{series_id}/`: 시리즈 기획·진행 (`_manifest.md` + 기획안)
