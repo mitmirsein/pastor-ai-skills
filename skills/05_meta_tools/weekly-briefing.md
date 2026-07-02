@@ -54,6 +54,11 @@ description: 지정 기간(기본: 최근 7일) 동안의 outputs/ 작업물과 
 [비-본문 작업]
 - outputs/{since ≤ date ≤ until}/{category}/*.md  →  파일 목록 수집
   - category 매핑: 02_pastoral_care(목양), 04_church_admin(행정), 03_omni_publisher(출판)
+
+[큐티 발아 코퍼스 — v2.12]
+- outputs/devotionals/_index.md 가 있으면 그것을 1차 소스로 date ∈ [since, until] 큐티를 카운트
+  (없으면 outputs/devotionals/*/ 의 qt_kind: dialogue 노트 YAML date로 집계)
+- 기간 내 반복 본문/주제 상위 1~2개를 관찰 (판정은 qt-germinate-scan의 몫 — 여기서는 스냅샷만)
 ```
 
 집계 결과가 비어있어도 브리핑을 중단하지 않는다. 해당 섹션에 "이 기간 outputs/ 기록 없음"을 명시한다.
@@ -83,9 +88,9 @@ description: 지정 기간(기본: 최근 7일) 동안의 outputs/ 작업물과 
 | 체크 항목 | 경고 기준 | 권장 행동 (사용자 확인 후) |
 |---|---|---|
 | active_sermons 항목 수 | 5건 초과 | 완료·보류 항목 archive 검토 |
-| followup_due 경과 | 7일 이상 초과 | archive 또는 날짜 재지정 |
+| followup_due 만료 | 14일 이상 초과 (`pastor_journal.md` §1.4 만료 기준) | archive 또는 날짜 재지정 |
 | recent_topics 중복 | 최근 4주 내 동일 키워드 3회 이상 | 주제 다양성 검토 |
-| active_series 미진행 | last_updated ≥ 3주 경과 | 시리즈 상태 재확인 |
+| active_series 미진행 | last_updated ≥ 21일 경과 (§1.4 정체 기준) | 시리즈 상태 재확인 |
 
 ---
 
@@ -111,6 +116,11 @@ description: 지정 기간(기본: 최근 7일) 동안의 outputs/ 작업물과 
 **목양** ({N}건)
 - 심방 {N}건 ({직분+이니셜 목록}), 묵상 {N}건, 성경공부 {N}건
 *(이 기간 기록 없음)*
+
+**🌱 큐티·발아 스냅샷** (v2.12)
+- 이번 주 큐티 {N}건 — 반복 관찰: {본문/주제: n회} {또는 "누적 중"}
+- {반복 2회 이상이 보이면} 💡 "요즘 큐티 모아서 설교감 있는지 봐줘"(qt-germinate-scan)를 권합니다
+*(큐티 기록이 없으면 이 블록 생략 — 지어내기 금지)*
 
 **행정** ({N}건)
 - {category}: {파일명 또는 1줄 설명}

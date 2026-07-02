@@ -21,6 +21,17 @@
 - 다른 포맷(JSON 등)도 무방합니다 — 에이전트가 책/장/절을 식별할 수 있으면 됩니다.
 - 여러 역본을 쓰려면 하위 폴더로 구분: `data/scripture/KRV/`, `data/scripture/NKRV/` 등. 기본 역본은 `core/foundation.md`의 `preferred_bible`을 따릅니다.
 
+### 슬롯 1-b: `data/scripture/source/` — 원어 정본 (선택, v2.12)
+
+원어 분석(파싱·Aspect·강조 표지)의 **대조 기준**입니다. 이 슬롯이 있으면 `sermon-research`의 원어 분석과 `sermon_audit` L1이 실제 텍스트 대조로 격상됩니다.
+
+- 저작권상 자유로운 정본을 직접 받아 넣으십시오:
+  - **신약**: SBLGNT (자유 라이선스)
+  - **구약**: WLC (Westminster Leningrad Codex — public domain)
+  - **칠십인역**: Rahlfs 구판 등 (라이선스 확인 후)
+- 포맷 자유 — 책/장/절 식별만 가능하면 됩니다.
+- **이 슬롯이 비어 있으면**: 스킬은 원어 형태소 파싱 표를 **생략**하고 의미 범위 논의로 강등합니다. 사전 없는 파싱 단정은 금지 — "요구하되 검증 못 하는" 상태를 만들지 않기 위한 규약입니다.
+
 ## 슬롯 2: `data/terms/` — 신학 용어 대조표
 
 신학 용어의 표준 표기를 담은 CSV/TSV를 넣으면, `harness/sermon_audit`(L2)와 발행 스킬들이 용어 표기를 대조합니다.

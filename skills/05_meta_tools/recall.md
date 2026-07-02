@@ -44,10 +44,13 @@ description: 목회자의 자연어 질의를 받아 outputs/ 의 과거 사역 
 ### Step 3: 계층적 검색 (Cascade)
 
 ```
-[1차] outputs/sermons/*/_manifest.md  →  passage_id·핵심 요약·lineage 스캔
-[2차] outputs/series/*/_manifest.md   →  시리즈 제목·본문 범위 스캔
-[3차] outputs/{date}/{category}/*.md  →  파일명·날짜 기반 필터 (비-본문)
+[1차] outputs/sermons/*/_manifest.md    →  passage_id·핵심 요약·lineage 스캔
+[2차] outputs/series/*/_manifest.md     →  시리즈 제목·본문 범위 스캔
+[3차] outputs/{date}/{category}/*.md    →  파일명·날짜 기반 필터 (비-본문)
+[4차] outputs/devotionals/ (v2.12)      →  _index.md 우선, 없으면 폴더별 _manifest.md — 큐티·묵상 자산
 ```
+
+> [4차] 주의: 목회자 개인 큐티도 검색 *대상*이지만, "반복 본문이 설교로 익었는가"의 발아 판정은 `qt-germinate-scan`의 몫이다 — recall은 위치와 lineage만 알려준다.
 
 - 1차에서 충분한 결과가 나오면 2·3차는 생략한다.
 - 빈 outputs/ 또는 매칭 없음 → 즉시 "검색된 자료 없음" 보고. 채울 내용을 지어내지 않는다.

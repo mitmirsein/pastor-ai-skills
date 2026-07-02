@@ -20,6 +20,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
    - `lenses/` *(v2.10)* — 설교 본문이 렌즈 팩의 적용 본문과 겹치면 해당 렌즈의 자문 질문을 1️⃣에 병합.
 3. **입력 분석:** 사용자가 제공한 설교 원고나 개요를 정독합니다.
 4. **출력 구조:** 반드시 아래의 4단계 프레임워크에 맞춰 피드백 리포트를 작성합니다.
+5. **근거 인용 의무 (v2.12):** 모든 지적(1️⃣~4️⃣)은 원고의 해당 문장·대목을 **짧게 직접 인용**해 근거로 답니다 — 원고에서 인용할 수 없는 지적은 싣지 않습니다. `severity_score`는 점수만 적지 않고 **가장 심각한 지적 1~2건 + 해당 인용**을 근거로 병기합니다 (근거 없는 점수 기재 금지 — `sermon_audit` Claim Ledger와 같은 원칙).
 
 ---
 
@@ -55,7 +56,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 
 - **save**: `sermons-lineage` · **category**: `01_sermon_core`
 - **stage**: `redteam` → **next_step**: `drafted`(재작성 후 발행) 또는 `preached`(검수 결과 양호 시)
-- **extra 메타**: `severity_score` (검수 결과 심각도 1-10)
+- **extra 메타**: `severity_score` (검수 결과 심각도 1-10 — 근거 인용 없는 점수 기재 금지, 실행 지침 5)
 - **manifest 라인**: `핵심 지적: {대표 risk 한 줄}`
 - **journal**: `active_sermons` 갱신 — 심각도 8 이상 시 `notes` 앞에 `⚠️` 표시
 

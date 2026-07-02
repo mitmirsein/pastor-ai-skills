@@ -18,3 +18,14 @@ data/scripture/*
 data/terms/*
 !data/scripture/.gitkeep
 !data/terms/.gitkeep
+
+# Lens packs (사용자 제작·주입 사설 자산 — 커밋 금지, v2.12; 규약: lenses/_README.md)
+lenses/*
+!lenses/_README.md
+
+# User outputs (사역 산출물 — 주보 교우소식 등 성도 실명이 불가피하게 포함될 수 있어
+# 공개 포크 실수 커밋을 기본 차단, v2.12. 사역 자산을 git으로 백업하려면
+# "반드시 private 저장소에서" 아래 세 줄을 제거하십시오.)
+outputs/**
+!outputs/**/
+!outputs/**/_README.md

@@ -34,6 +34,7 @@ description: pastor_journal.md의 현재 상태를 시각화된 대시보드로 
 4. `outputs/` 폴더 스캔 (manifest 위주, 토큰 절약):
    - `outputs/sermons/*/_manifest.md`의 `last_updated` 추출
    - `outputs/series/*/_manifest.md`의 `progress` / `total` 추출
+   - `outputs/devotionals/_index.md` — 최근 7일 큐티 카운트 (인덱스 없으면 폴더 카운트, v2.12)
    - `outputs/{currentDate-7d ~ currentDate}/` 비-본문 작업 카운트
 
 ### 2단계: 헬스 체크 (Read-Only Diagnostics)
@@ -44,9 +45,9 @@ description: pastor_journal.md의 현재 상태를 시각화된 대시보드로 
 |---|---|---|
 | H1 | foundation 미설정 | `foundation.md`에 `OOO` 플레이스홀더 잔존 |
 | H2 | journal 비어있음 | `active_*` 배열 모두 빈 상태 |
-| H3 | followup 임박 | `active_visitations[].followup_due` ≤ currentDate + 3d |
-| H4 | followup 만료 | `active_visitations[].followup_due` ≤ currentDate - 7d (장기 미갱신) |
-| H5 | 시리즈 정체 | `active_series[].last_updated` ≥ 30일 경과 |
+| H3 | followup 임박 | `active_visitations[].followup_due` ≤ currentDate + 7d (`pastor_journal.md` §1.4 임박 기준) |
+| H4 | followup 만료 | `active_visitations[].followup_due` ≤ currentDate - 14d (§1.4 만료 기준) |
+| H5 | 시리즈 정체 | `active_series[].last_updated` ≥ 21일 경과 (§1.4 정체 기준) |
 | H6 | 본문 lineage 정체 | `active_sermons[stage != preached]` 중 `started_on` ≥ 21일 경과 |
 | H7 | PII 의심 | journal 내 한글 풀네임 + 직분 패턴 (예: "김철수 집사") 또는 전화번호 패턴 발견 |
 
@@ -131,6 +132,7 @@ H1·H7은 🚨 critical, H3·H6은 ⚠️ attention, H4·H5는 📋 info, H2는 
 ## 📊 지난 7일 outputs 요약
 - 본문 작업: {a}건
 - 시리즈 갱신: {b}건
+- 🌱 큐티: {q}건 (`outputs/devotionals/`)
 - 비-본문 (심방/행정/공지): {c}건
 - 총 누적 파일: {d}개
 

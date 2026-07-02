@@ -23,10 +23,11 @@ description: 한 주/한 달 누적된 큐티 자산을 읽어, 반복되는 본
 ### Step 1: 컨텍스트 로드
 1. `core/foundation.md` — `qt_source_path` 확인(설정 시 외부 큐티 폴더; **콤마로 구분된 다중 폴더 가능**).
 2. `core/pastor_journal.md` — `recent_topics` / `active_sermons`(매칭 힌트, 읽기 전용).
+3. **이미 발아된 클러스터 식별:** `active_sermons` 중 `stage`가 파이프라인 진행 단계(`seed` 이상 — `pastor_journal.md` §3.1.1 순서 기준)인 `passage_id` 목록을 만든다. 이 본문들은 **발아 후보에서 제외**하고 응답의 "이미 발아됨" 섹션에 분리 표시한다 — 같은 클러스터를 매주 재제안하지 않기 위함이다.
 
 ### Step 2: 스캔 대상 결정
-- **내부(기본):** `outputs/devotionals/*/`에서 **목회자 자신의 큐티**(qt-companion이 `qt-log`로 남긴 `qt_kind: dialogue` 노트)의 `_manifest.md` + 각 노트 YAML(`passage_id`/`topic`) + `## 본문` 헤더를 읽는다. 성도용 `devotional-generator` 산출물은 목회자의 묵상 씨앗이 아니므로 발아 코퍼스에서 **제외**한다(`qt_kind: dialogue` 태그로 구분).
-- **외부(설정 시):** `foundation.md`의 `qt_source_path`가 가리키는 폴더(들). 값에 콤마가 있으면 **각 경로를 개별 폴더로 분리해 모두** 스캔한다(devotional-voice 화이트리스트 규약). frontmatter가 없어도 본문 텍스트/`## 본문`에서 성경 본문(책·장)과 반복 어휘를 추출한다.
+- **내부(기본):** 먼저 `outputs/devotionals/_index.md`(qt-log 훅이 누적하는 1줄 인덱스 — `core/_hooks.md` §2)를 읽는다. **인덱스가 있으면 그것이 1차 스캔 소스**이며, 인덱스에 없는 폴더만 보충 스캔한다(코퍼스가 커져도 조용한 누락 없이 전수 집계하기 위한 장치). 인덱스가 없으면 종전 방식 — `outputs/devotionals/*/`에서 **목회자 자신의 큐티**(qt-companion이 `qt-log`로 남긴 `qt_kind: dialogue` 노트)의 `_manifest.md` + 각 노트 YAML(`passage_id`/`topic`) + `## 본문` 헤더를 읽는다. 성도용 `devotional-generator` 산출물은 목회자의 묵상 씨앗이 아니므로 발아 코퍼스에서 **제외**한다(`qt_kind: dialogue` 태그로 구분).
+- **외부(설정 시):** `foundation.md`의 `qt_source_path`가 가리키는 폴더(들). 값에 콤마가 있으면 **각 경로를 개별 폴더로 분리해 모두** 스캔한다(`foundation.md` 설정 가이드 §4의 다중 폴더 규약). frontmatter가 없어도 본문 텍스트/`## 본문`에서 성경 본문(책·장)과 반복 어휘를 추출한다.
 - **기간 창:** 사용자가 "이번 주/이번 달/최근"을 지정하면 그 창, 미지정 시 **최근 8주** 기본. 창 밖 큐티는 집계에서 제외(단, "전체 기간으로 봐줘"라 하면 무제한).
 - AGENT 모드 전제. CHAT 모드면 "이 기능은 파일 접근 환경(Claude Code·Cursor 등)이 필요합니다 — 큐티 노트를 붙여넣어 주시면 그 범위에서 훑겠습니다"로 정직하게 안내.
 
@@ -59,6 +60,10 @@ description: 한 주/한 달 누적된 큐티 자산을 읽어, 반복되는 본
 ### 🌿 아직 누적 중 (후보 미달 — 접어둠, 투명 공개)
 - 요한복음 3장 — 2회 (창 밖 1건 포함), 조금 더 익기를
 - …
+
+### 🌾 이미 발아됨 (진행 중 — 재제안하지 않음)
+- 아모스 1장 — `stage: seed` (씨앗 합성 완료, `outputs/sermons/amos-1-…/`) · 이 창의 큐티 {n}건은 집계에서 제외
+- (해당 없으면 이 섹션 생략)
 
 ### 📊 스캔 메타
 - 스캔 범위: outputs/devotionals/ {내부}건 + qt_source_path {외부}건

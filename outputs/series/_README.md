@@ -1,5 +1,7 @@
 # 📂 outputs/series/ — 시리즈 사역 자산 트리
 
+> 🚨 **PII 주의 (v2.12)**: `outputs/`는 기본 `.gitignore` 대상입니다 — 산출물에 성도 정보가 담길 수 있으므로 공개 저장소(포크 포함)에 커밋하지 마십시오 (`outputs/sermons/_README.md` 상단 참조).
+
 본 디렉토리는 `Pastor-KR v2.5`의 **시리즈 단위 lineage** 저장소입니다.
 강해 시리즈, 절기 시리즈, 주제 시리즈의 기획안과 진행 manifest가 보관됩니다. 시리즈에 속한 개별 주차 본문 자체는 `outputs/sermons/{passage_id}/` 트리에 저장되며, 본 디렉토리는 그것들을 묶는 *상위 인덱스*로 작동합니다.
 
@@ -43,6 +45,7 @@ title: "그리스도 안에서: 에베소서 강해"
 total: 6
 progress: 3
 started_on: 2026-04-12
+last_updated: 2026-05-10  # 주차 작업이 반영될 때마다 갱신 — weekly-briefing 기간 필터·§5 Archive 정책의 기준 필드
 target_end: 2026-05-24
 status: in_progress       # in_progress | paused | completed | archived
 ---

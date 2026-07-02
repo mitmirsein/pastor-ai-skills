@@ -35,6 +35,13 @@ lessons: []
 - `active_visitations`: `followup_due` 경과 후 **2주** 미갱신 시 archived 로그로 이동.
 - archived 항목은 본 파일 하단 `## Archive` 섹션에 압축 보관 (한 줄 요약).
 
+### 1.4 심방 기한 기준 — 단일 정의 (SSOT)
+모든 도구는 `followup_due`에 대해 아래 세 계층을 따릅니다 (도구별 자의 기준 금지):
+- **동선 병기** (오늘 갈 곳): `followup_due ≤ 오늘 + 2일` — `pastoral_rhythm` §2.3
+- **임박 경고**: `followup_due ≤ 오늘 + 7일` — Concierge 로드 프로토콜·`journal-show` H3·`weekly-briefing` 우선순위
+- **만료** (archive 후보): `followup_due < 오늘 − 14일` — §1.3·`journal_lint` C6·`journal-show` H4·`weekly-briefing` 헬스
+- **시리즈/lineage 정체 경고**: 마지막 갱신 **21일** 경과 — `journal-show` H5·H6·`weekly-briefing` 헬스
+
 ---
 
 ## 2. PII 정책 (Privacy)
@@ -95,6 +102,7 @@ active_series:
     next_passage: "엡 2:11-22"
     next_passage_id: eph-2-11-22
     started_on: 2026-04-12
+    last_updated: 2026-05-10     # 시리즈 관련 작업이 있을 때마다 갱신 (정체 감지용 — journal-show H5·weekly-briefing)
     notes: "2장 후반부터 윤리장(章) 진입"
 ```
 

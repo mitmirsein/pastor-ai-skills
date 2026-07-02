@@ -1,7 +1,7 @@
 # 👥 회중 페르소나 렌즈 (Congregation Personas) — v2.10 P2-7
 
 <!-- Concierge 요약 헤더 (부트 시 이 블록만 로드) -->
-> **요약**: 목회자가 직접 정의·확정한 가상 회중 3~5인. `status: confirmed`일 때 `sermon-red-team`과 `harness/sermon_audit`(L4)가 "이 설교가 각 자리에 가닿는가"를 구조화 점검한다. 미설정이면 보편 회중으로 폴백한다. 설정은 `foundation-setup` 인터뷰에서 함께.
+> **요약**: 목회자가 직접 정의·확정한 가상 회중 3~5인. `status: confirmed`일 때 `sermon-red-team`과 `harness/sermon_audit`(L4)가 "이 설교가 각 자리에 가닿는가"를 구조화 점검한다. 미설정이면 보편 회중으로 폴백한다. 설정은 `foundation-setup` 6단계(옵션 인터뷰)에서 함께, 또는 이 파일을 직접 작성.
 <!-- /요약 헤더 -->
 
 ```yaml

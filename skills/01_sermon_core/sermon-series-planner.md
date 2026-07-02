@@ -40,7 +40,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 - **save**: `series` — `outputs/series/{series_id}/plan_{date}.md` + `_manifest.md` (`series_id` = `{book|theme-slug}-{year}-{season}`, 예: `ephesians-2026-spring`)
 - **extra 메타**: `total`(편수), `theme`, `start_target`(예정 시작 주일), `weekly_passages`(편당 본문 목록)
 - **manifest 구조**: 시리즈 개요 + 주차별 본문 + 진행 상태 표 — 각 주차 본문은 별도 `passage_id`로 관리, `outputs/sermons/{passage_id}/`와 양방향 링크
-- **journal**: `active_series` 신규 등록 (`id`/`title`/`total`/`progress: 0`/`next_passage`/`next_passage_id`/`started_on`/`notes` 1-2줄) — **동일 id 존재 시 갱신 거부·충돌 보고**; `active_sermons`에 1주차 본문 사전 등록 (`stage: pending`, `series_id` 연결)
+- **journal**: `active_series` 신규 등록 (`id`/`title`/`total`/`progress: 0`/`next_passage`/`next_passage_id`/`started_on`/`last_updated`/`notes` 1-2줄) — **동일 id 존재 시 갱신 거부·충돌 보고**; `active_sermons`에 1주차 본문 사전 등록 (`stage: pending`, `series_id` 연결)
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**

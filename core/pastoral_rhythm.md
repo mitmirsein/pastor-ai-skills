@@ -1,4 +1,4 @@
-# 🗓️ 주간 리듬 (Pastoral Rhythm) — v2.9 P1-5
+# 🗓️ 주간 리듬 (Pastoral Rhythm) — v2.9 P1-5 · v2.12 개정 (매일 큐티 층·발아 동선)
 
 <!-- Concierge 요약 헤더 (부트 시 이 블록만 로드) -->
 > **요약**: Concierge는 부트 헤더 아래에 **오늘의 권장 동선 1줄**을 표시한다. 동선 = 아래 리듬표(요일) × `pastor_journal` 상태의 교차. **권장이지 강제가 아니며**, 같은 제안은 세션당 1회만, 사용자 발화가 우선이다. 이 파일을 수정하면 리듬이 바뀐다 (맞춤옷 원칙). 끄려면 `enabled: false`.
@@ -12,13 +12,16 @@ enabled: true
 
 | 요일 | 국면 | 권장 동선 |
 |---|---|---|
-| 월 | 회고·조망 | `sermon-retro`(어제 선포 설교) → `weekly-briefing` |
-| 화 | 본문 확보·발상 | `sermon-brainstorming` (본문 팩 확보 포함) |
+| **매일** | 묵상 (요일 무관) | 아침 `qt-companion` — 큐티 동행·기록. 매일의 누적이 발아의 토양 (v2.11) |
+| 월 | 회고·조망 | `sermon-retro`(어제 선포 설교) → `weekly-briefing` (🌱 큐티·발아 스냅샷 포함) |
+| 화 | 발아 확인·발상 | `qt-germinate-scan`(익은 후보 확인) → 후보 있으면 `qt-germinate-seed` → `sermon-brainstorming` / 없으면 절기·시리즈 기반 본문 확보 → `sermon-brainstorming` |
 | 수 | 연구 | `sermon-research` |
 | 목 | 난제·초안 | `biblical-dilemma-solver` → **초안 집필은 목회자의 자리** (AI는 침묵) |
 | 금 | 검증 | `sermon-red-team` → `harness/sermon_audit` |
-| 토 | 전달 준비 | `sermon-to-tts`(낭독 점검용) · 최종 손질 |
+| 토 | 전달 준비 | `sermon-to-tts`(낭독 점검용 — journal stage는 올리지 않음, `_hooks.md` §3.6) · 최종 손질 |
 | 주일 | 선포 | — 비서는 침묵한다 |
+
+> "매일" 층은 동선 줄에 매번 병기하지 않는다(잔소리 방지 §3) — 월요일 브리핑과 화요일 국면이 누적 결과를 반영하는 것으로 충분하다.
 
 ## 2. 동선 결정 규칙 (요일 × journal 교차)
 

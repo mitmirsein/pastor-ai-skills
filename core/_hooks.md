@@ -26,7 +26,7 @@
 | `series` | `outputs/series/{series_id}/` | 시리즈 기획 |
 | `dated` | `outputs/{date}/{category}/{skill}_{topic}.md` | 비-본문 작업물 |
 | `devotional-fallback` | 본문 식별 시 lineage, 아니면 `outputs/devotionals/{topic-slug}/` | 묵상 폴백 |
-| `qt-log` | `outputs/devotionals/{passage_id 또는 topic-slug}/v{NN}_{skill}_{date}.md` | 매일 큐티 로그 — 본문이 식별돼도 설교 lineage로 **조기 승격하지 않고** devotionals/에 누적(발아 코퍼스). 설교 lineage로의 승격은 나중에 `qt-germinate-seed`(`sermons-lineage`)가 담당 |
+| `qt-log` | `outputs/devotionals/{passage_id 또는 topic-slug}/v{NN}_{skill}_{date}.md` | 매일 큐티 로그 — 본문이 식별돼도 설교 lineage로 **조기 승격하지 않고** devotionals/에 누적(발아 코퍼스). 설교 lineage로의 승격은 나중에 `qt-germinate-seed`(`sermons-lineage`)가 담당. **인덱스 누적**: 저장 시 `outputs/devotionals/_index.md`에 한 줄 append — `- {date} · {passage_id 또는 topic-slug} · {키워드 1~2개} · {파일 경로}` (없으면 생성; 발아 스캔·주간 브리핑의 1차 스캔 소스 — 코퍼스가 커져도 전수 집계 가능) |
 
 공통 절차:
 1. **본문 식별**: `passage_id` = `{book-slug}-{ch}-{vstart}-{vend}` (예: 마가 5:25-34 → `mark-5-25-34`). 모호하면 사용자에게 확인, 본문이 없으면 `topic-{slug}` 폴백.
@@ -38,7 +38,7 @@
 
 `core/pastor_journal.md`를 **읽고-병합-쓰기**로 갱신합니다. 절대 통째로 덮어쓰지 않습니다.
 
-1. 스킬의 `journal` 파라미터에 따라 `active_sermons` / `active_series` / `active_visitations` 항목을 갱신 또는 추가 (`stage`, `next_step`, `notes` 한 줄).
+1. 스킬의 `journal` 파라미터에 따라 `active_sermons` / `active_series` / `active_visitations` 항목을 갱신 또는 추가 (`stage`, `next_step`, `notes` 한 줄). 시리즈 항목을 갱신할 때는 `active_series.last_updated`도 함께 갱신합니다 (정체 감지용).
 2. `recent_topics`에 핵심 키워드 1~2개 FIFO 추가 (12개 한도, 중복 제거).
 3. `last_updated` 갱신.
 4. **PII 정책 엄수** (`pastor_journal.md` §2): 실명 → 직분+이니셜 변환, 연락처·병명 상세·재정 기록 금지. 사용자가 실명을 입력해도 변환 후 저장.
