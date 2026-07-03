@@ -1,6 +1,6 @@
 # 🕊️ Pastor-KR (High-Precision Pastoral AI Toolkit)
 
-> **버전 (Version): v2.12 (Pipeline Integrity — 정합 · 주간 루프 통합 · 발행 게이트)**
+> **버전 (Version): v2.13 (Exegetical Precision — 주해 스키마 정밀화 · 구조 완결성 사전 게이트)**
 > *이전: v2.11 (QT Germination Pipeline — 매일 큐티에서 설교 개요까지)*
 
 **Agentic pastoral workflow framework with 'Concierge & Guild + Memory + Quality Gate' architecture. High-precision Korean toolkit featuring 29 specialized skills + 3 harness quality-gate tools + domain lens packs, based on '6 Gems' & 'Inferential Ontology', with a daily-QT-to-sermon/column germination pipeline, persistent pastoral memory, liturgical-calendar awareness, passage-centric lineage, and forensic audit gates.**
@@ -33,7 +33,7 @@
 
 ---
 
-## 🌟 프로젝트의 핵심 가치 (v2.12 업데이트)
+## 🌟 프로젝트의 핵심 가치 (v2.13 업데이트)
 
 1. **인지 부하 최소화 (오케스트레이터):** 29개의 스킬 + 3개의 harness 도구를 외울 필요가 없습니다. `00_pastor_concierge`에게 자연어로 말하면 최적의 스킬을 매칭해 줍니다.
 2. **단절 없는 워크플로우 (파이프라인):** 하나의 작업이 끝나면 `Call to Action`을 통해 다음 단계(예: 큐티 발아 ➔ 브레인스토밍 ➔ 주해 ➔ 개요 동반작성 ➔ 검증 ➔ 블로그 발행)를 자연스럽게 제안합니다.
@@ -51,6 +51,7 @@
 14. **🧯 목양 안전 + 👥 회중 페르소나 (v2.10 신규):** 위기 상황(자해·학대·급성 위기)에서는 콘텐츠보다 전문 연계 안내가 먼저이며, 장례·투병 등 상황별 금기 언어("다 하나님의 뜻")를 차단합니다. 목회자가 정의한 회중 페르소나로 레드팀이 "회중석 시뮬레이션"을 수행합니다.
 15. **🌱 큐티→설교/칼럼 발아 파이프라인 (v2.11 신규):** 본문을 갑자기 정해 자료를 뒤지는 대신, *매일의 큐티가 누적되어 자연스럽게 설교·칼럼으로 익습니다*. `qt-companion`(소크라테스식 매일 묵상 동행 + 대화 프로토콜) → `qt-germinate-scan`(반복 본문/주제 발아 후보, 읽기 전용) → `qt-germinate-seed`(씨앗 합성) → `sermon-brainstorming` → `sermon-outline-codraft`(개요 동반작성). 같은 씨앗은 `qt-to-column`으로 **칼럼**으로도 갈라집니다(초기 묵상 문체 기반 '내 문체' 또는 거장 문체 선택). 목회자의 초기 묵상 원문은 불가침으로 보존되며, 어떤 단계도 설교를 대필하지 않습니다.
 16. **🧩 파이프라인 정합 (v2.12 신규):** v2.11이 놓은 발아 파이프라인을 시스템 전체와 **맞물리게** 했습니다 — ① stage 유효값의 단일 정의(`pastor_journal.md` §3.1.1 SSOT — 위생 검사 오탐 제거) ② **발행 전이 가드**(`_hooks.md` §3.6): 선포 전 칼럼·TTS 선작성이 설교를 조기 '발행 완료'로 만들지 않음 ③ **칼럼도 감사 게이트**: red-team을 거치지 않는 큐티 상류 칼럼까지 발행 전 `sermon_audit` 권장 ④ 주간 루프 통합: 리듬표·weekly-briefing·recall이 매일 큐티와 발아 상태를 인지(`outputs/devotionals/_index.md` 인덱스) ⑤ 원어 팩 게이트: 원어 정본(`data/scripture/source/`) 없이는 형태소 파싱 표를 만들지 않는 정직 강등.
+17. **🔬 주해 스키마 정밀화 + 🧱 구조 완결성 사전 게이트 (v2.13 신규):** ① `sermon-research`의 주해 산출을 명시적 계약으로 정밀화했습니다 — 문맥적 위치(Pre/Post-text 논리 유형), Table A/B 표준 컬럼 스키마(상↔어휘상 분리·Louw-Nida·상호본문성/LXX·현대 렌즈), 목회적 리스크 관리, 그리고 **Big Idea·Action Plan 후보**(연구 제안이며 확정은 목회자와 `sermon-outline-codraft`의 몫 — 대필 아님). ② `harness/sermon_audit`에 **구조 사전 게이트(§4.0)**를 신설했습니다 — 절단·거부 시그니처·섹션 누락이 발견되면 채점을 진행하지 않고 `🛑 구조 결함`으로 즉시 반환합니다(5렌즈 산술 불변). *(자동 산출 파이프라인의 하드 게이트 개념을 마크다운 검수로 이식)*
 
 ---
 
@@ -63,7 +64,7 @@ v2.5부터 모든 스킬은 목회자의 실제 워크플로우에 따라 5개�
 
 ### 💎 `01_sermon_core` (설교 코어)
 - `sermon-brainstorming.md`: 소크라테스식 문답을 통한 설교 인사이트 발굴
-- `sermon-research.md`: 6 Gems 엔진 기반의 고정밀 주해 리포트 생성
+- `sermon-research.md`: 6 Gems 엔진 기반의 고정밀 주해 리포트 생성 (Table A/B 표준 스키마·문맥적 위치·목회적 리스크·Big Idea/Action Plan 후보, v2.13)
 - `biblical-dilemma-solver.md`: 성경 난제에 대한 입체적 변증 가이드
 - `sermon-outline-codraft.md` *(v2.11)*: Big Idea·주해에서 설교 개요를 함께 세우기 — AI는 구조 비계만, 각 대지 내용은 목회자 저작(대필 아님)
 - `sermon-red-team.md`: 설교 원고나 개요의 신학적 맹점 및 회중 시선 분석
@@ -103,7 +104,7 @@ v2.5부터 모든 스킬은 목회자의 실제 워크플로우에 따라 5개�
 
 ### 🛑 `harness/` (품질 보증 — v2.7 신규)
 `skills/`와 분리된 **감사 전용 위계**입니다. 사역 *작업* 도구가 아니라 사역 *품질 보증* 도구로, 발행 차단 권한을 갖는 유일한 디렉토리입니다.
-- `sermon_audit.md`: 발행 직전 사역물 5렌즈 포렌식 검수 (80점 fail-fast + Claim Ledger 증거표, v2.8)
+- `sermon_audit.md`: 발행 직전 사역물 5렌즈 포렌식 검수 (80점 fail-fast + Claim Ledger 증거표, v2.8 · 구조 사전 게이트 §4.0, v2.13)
 - `journal_lint.md`: `pastor_journal.md` 스키마·PII·표류·만료 점검 (주 1회 권장)
 - `routing_eval.md` *(v2.10)*: Concierge 라우팅 회귀 골든셋 평가 (`tests/routing_cases.md`)
 - `_README.md`: harness/ 운용 정책 및 책임 경계 문서

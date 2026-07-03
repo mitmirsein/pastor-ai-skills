@@ -1,7 +1,7 @@
 # 🕊️ Pastor-KR (Project Entrypoint)
 
-> **버전 (Version): v2.12 (Pipeline Integrity — 정합 · 주간 루프 통합 · 발행 게이트)**
-> *이전 버전: v2.11 (QT Germination Pipeline — 매일 큐티에서 설교 개요까지)*
+> **버전 (Version): v2.13 (Exegetical Precision — 주해 스키마 정밀화 · 구조 완결성 사전 게이트)**
+> *이전 버전: v2.12 (Pipeline Integrity — 정합 · 주간 루프 통합 · 발행 게이트)*
 
 ## 1. 프로젝트 목표
 본 프로젝트는 `pastor-ai-skills`를 한국 목회 상황에 맞게 리폼(Reform)하여, 목회자들에게 최적화된 **'오케스트레이터(Concierge) + 전문가 길드(Guild) + 목회 메모리(Memory)'** 기반의 하이엔드 AI 비서 워크플로우를 제공하는 것을 목표로 합니다.
@@ -25,6 +25,8 @@
 - **회중 페르소나 (v2.10):** 목회자가 작성·확정한 가상 회중 렌즈로 red-team/audit L4를 구조화. AI가 회중을 추정해 만들지 않습니다.
 - **대필 거절 (원칙):** 설교문 대필 요청은 정중히 거절하고 사유를 돕는 경로로 안내합니다. 초안 집필은 목회자의 자리입니다.
 - **발행 전이 가드 (v2.12):** 파생 발행물(칼럼·블로그·TTS·카드뉴스)은 `preached_on` 확인 전에 본체 설교의 stage를 `published`로 만들지 않습니다(`core/_hooks.md` §3.6). 발행물은 발행 전 `sermon_audit` 권장 — red-team을 거치지 않는 칼럼 상류 경로(qt-to-column) 포함. stage 유효값의 단일 정의는 `pastor_journal.md` §3.1.1.
+- **주해 스키마 정밀화 (v2.13):** `sermon-research`의 주해 산출은 명시적 계약을 따릅니다 — 문맥적 위치(Pre/Post-text 논리 유형), Table A/B 표준 컬럼 스키마(상↔어휘상 분리·Louw-Nida·상호본문성/LXX), 목회적 리스크 관리, Big Idea·Action Plan **후보**. 단, 이 후보들은 연구 제안(재료)이며 확정·개요 작성은 목회자와 `sermon-outline-codraft`의 몫입니다(대필 거절 원칙 유지). Table A/B의 원어 표기는 원어 팩 게이트를 따릅니다(정본 없으면 정직 강등).
+- **구조 완결성 사전 게이트 (v2.13):** `harness/sermon_audit`은 Claim Ledger·5렌즈 채점에 앞서 **구조 사전 게이트(§4.0)**를 실행합니다 — 절단·거부 시그니처·선언된 섹션 누락이 발견되면 채점하지 않고 `🛑 구조 결함`으로 즉시 반환합니다(5렌즈 산술 불변).
 
 ## 3. 워크플로우 (Workflow v2.5)
 1. **의무 부트 시퀀스 (Concierge):** 매 세션 첫 발화 시 `core/foundation.md` → `core/pastor_journal.md` → `core/liturgical_calendar.md`를 순차 로드하여 컨텍스트를 복원합니다.
@@ -56,7 +58,7 @@
     - `04_church_admin/`: 교회 행정, 주보, 목회서신, 이메일, 회의록
     - `05_meta_tools/` *(Tier 1·2)*: 시스템 자기 점검·조회 도구 (foundation-setup, journal-show, recall, weekly-briefing, voice-setup)
 - `harness/` *(Tier 3)*: **품질 보증 도구** — skills/와 분리된 감사 전용 위계. 발행 차단 권한을 갖는 유일한 디렉토리.
-    - `sermon_audit.md`: 발행 전 사역물 5렌즈 포렌식 검수 (80점 fail-fast + **Claim Ledger 증거표·검증 불가 채점 보류**, v2.8)
+    - `sermon_audit.md`: 발행 전 사역물 5렌즈 포렌식 검수 (80점 fail-fast + **Claim Ledger 증거표·검증 불가 채점 보류**, v2.8 · **구조 사전 게이트 §4.0**, v2.13)
     - `journal_lint.md`: `pastor_journal.md` 스키마·PII·표류 점검
     - `routing_eval.md` *(v2.10)*: Concierge 라우팅 회귀를 `tests/routing_cases.md` 골든셋으로 자가 평가
     - `_README.md`: harness/ 운용 정책 및 skills/와의 책임 경계

@@ -55,4 +55,6 @@
 | 47 | "이 묵상을 내 문체로 칼럼 만들어줘" | qt-to-column | v2.11 — 초기 묵상 문체 기반 |
 | 48 | (경계) "이 완성된 설교를 주보 칼럼으로 바꿔줘" | sermon-to-column | 완성 설교 하류 전환(≠qt-to-column 큐티 상류) |
 | 49 | "이 칼럼 발행 전에 감사해줘" | sermon_audit | harness — 칼럼도 감사 대상 |
-| 50 | journal: `active_sermons[amos-1-1-15].preached_on: null` (audit 기록 없음) + "이 설교 초안 주보 칼럼으로 바꿔줘" | sermon-to-column + 안내에 "발행 전 sermon_audit 권장" 병기 · journal stage 유지(발행 전이 가드 §3.6) | 발행 직전 권장 + 조기 published 방지 |
+| 50 | "이 본문 원어 정밀 분석표(Table A)로 상·어휘상까지 뽑아줘" | sermon-research | v2.13 — 주해 스키마(원어 팩 게이트 준수) |
+| 51 | "설교 전에 이 본문 오독 리스크랑 문맥 위치도 같이 짚어줘" | sermon-research | v2.13 — 목회적 리스크·문맥적 위치 |
+| 52 | journal: `active_sermons[amos-1-1-15].preached_on: null` (audit 기록 없음) + "이 설교 초안 주보 칼럼으로 바꿔줘" | sermon-to-column + 안내에 "발행 전 sermon_audit 권장" 병기 · journal stage 유지(발행 전이 가드 §3.6) | 발행 직전 권장 + 조기 published 방지 |
