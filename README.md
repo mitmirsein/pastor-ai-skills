@@ -6,7 +6,7 @@
 **Agentic pastoral workflow framework with 'Concierge & Guild + Memory + Quality Gate' architecture. High-precision Korean toolkit featuring 29 specialized skills + 3 harness quality-gate tools + domain lens packs, based on '6 Gems' & 'Inferential Ontology', with a daily-QT-to-sermon/column germination pipeline (now with pre-meditation passage briefing, aporia-tension germination, post-exegesis re-meditation, and a commentary data slot), persistent pastoral memory, liturgical-calendar awareness, passage-centric lineage, and forensic audit gates.**
 
 **"오케스트레이터 + 전문가 길드 + 목회 메모리" 아키텍처 기반의 고성능 한국어 목회 지원 AI 스킬셋.**
-단 하나의 진입점(`Pastor-Concierge`)을 통해 복잡한 스킬 선택의 고민 없이 목회 워크플로우를 자동화하며, **매 세션 진입 시 진행 중인 사역(설교/시리즈/심방)과 절기 컨텍스트를 자동 복원**합니다. 나아가 **매일의 큐티가 누적되어 설교와 칼럼으로 자연스럽게 발아**하도록 돕습니다 (v2.11). v2.12에서는 이 발아 파이프라인이 주간 리듬·품질 게이트·메모리와 빈틈없이 맞물리도록 정합을 마쳤습니다.
+단 하나의 진입점(`Pastor-Concierge`)을 통해 복잡한 스킬 선택의 고민 없이 목회 워크플로우를 자동화하며, **매 세션 진입 시 진행 중인 사역(설교/시리즈/심방)과 절기 컨텍스트를 자동 복원**합니다. 나아가 **매일의 큐티가 누적되어 설교와 칼럼으로 자연스럽게 발아**하도록 돕습니다 (v2.11). v2.12에서는 이 발아 파이프라인이 주간 리듬·품질 게이트·메모리와 빈틈없이 맞물리도록 정합을 마쳤고, **v2.14에서는 묵상 자체를 더 깊이 떠받칩니다** — 큐티 시작에 본문 컨텍스트를 마련하고(브리핑), 주해 이후 다시 묵상하며(재묵상), 반복해 돌아오는 긴장까지 발아 후보로 삼는 '깊은 렉시오(Deep Lectio)' 층을 더했습니다.
 
 > **처음 쓰시나요?** AI 도구가 익숙하지 않은 목회자를 위한 단계별 안내는 [USER_GUIDE.md](USER_GUIDE.md)에 있습니다. 아래 "1분 가동"이 어렵게 느껴지시면 그쪽을 먼저 보십시오.
 
@@ -71,7 +71,7 @@ v2.5부터 모든 스킬은 목회자의 실제 워크플로우에 따라 5개�
 - `sermon-red-team.md`: 설교 원고나 개요의 신학적 맹점 및 회중 시선 분석
 - `sermon-series-planner.md`: 4-6주 단위의 강해 설교 시리즈 기획
 - `sermon-retro.md` *(v2.9)*: 선포 후 3분 회고 — lesson을 누적해 다음 설교에 반영
-- `qt-germinate-scan.md` *(v2.11)*: 누적 큐티에서 반복되는 본문·주제를 설교 발아 후보로 제시 (읽기 전용, 강제 승격 없음)
+- `qt-germinate-scan.md` *(v2.11 · v2.14)*: 누적 큐티에서 반복되는 본문·주제를 설교 발아 후보로 제시 (읽기 전용, 강제 승격 없음). v2.14 — `## 남은 긴장`의 반복(아포리아)을 세 번째 발아 축으로, 재소환 유래는 분리 집계(에코 루프 차단)
 - `qt-germinate-seed.md` *(v2.11)*: 발아 후보의 큐티들을 시간순 원문 그대로 모아 설교 씨앗 메모로 합성
 
 ### 🕊️ `02_pastoral_care` (목양 코어)
@@ -105,7 +105,7 @@ v2.5부터 모든 스킬은 목회자의 실제 워크플로우에 따라 5개�
 
 ### 🛑 `harness/` (품질 보증 — v2.7 신규)
 `skills/`와 분리된 **감사 전용 위계**입니다. 사역 *작업* 도구가 아니라 사역 *품질 보증* 도구로, 발행 차단 권한을 갖는 유일한 디렉토리입니다.
-- `sermon_audit.md`: 발행 직전 사역물 5렌즈 포렌식 검수 (80점 fail-fast + Claim Ledger 증거표, v2.8 · 구조 사전 게이트 §4.0, v2.13)
+- `sermon_audit.md`: 발행 직전 사역물 5렌즈 포렌식 검수 (80점 fail-fast + Claim Ledger 증거표, v2.8 · 구조 사전 게이트 §4.0, v2.13 · 서재 팩 존재 시 Ledger 유형 ②·④ 실제 대조 격상, v2.14)
 - `journal_lint.md`: `pastor_journal.md` 스키마·PII·표류·만료 점검 (주 1회 권장)
 - `routing_eval.md` *(v2.10)*: Concierge 라우팅 회귀 골든셋 평가 (`tests/routing_cases.md`)
 - `_README.md`: harness/ 운용 정책 및 책임 경계 문서
