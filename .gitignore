@@ -16,8 +16,10 @@ docs/
 # Data Shelf slots (사용자 로컬 자산 — 저작권·로컬 데이터는 커밋 금지, v2.8 P0-1)
 data/scripture/*
 data/terms/*
+data/commentary/*
 !data/scripture/.gitkeep
 !data/terms/.gitkeep
+!data/commentary/.gitkeep
 
 # Lens packs (사용자 제작·주입 사설 자산 — 커밋 금지, v2.12; 규약: lenses/_README.md)
 lenses/*

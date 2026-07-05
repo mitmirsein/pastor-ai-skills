@@ -29,7 +29,7 @@
 | `qt-log` | `outputs/devotionals/{passage_id 또는 topic-slug}/v{NN}_{skill}_{date}.md` | 매일 큐티 로그 — 본문이 식별돼도 설교 lineage로 **조기 승격하지 않고** devotionals/에 누적(발아 코퍼스). 설교 lineage로의 승격은 나중에 `qt-germinate-seed`(`sermons-lineage`)가 담당. **인덱스 누적**: 저장 시 `outputs/devotionals/_index.md`에 한 줄 append — `- {date} · {passage_id 또는 topic-slug} · {키워드 1~2개} · {파일 경로}` (없으면 생성; 발아 스캔·주간 브리핑의 1차 스캔 소스 — 코퍼스가 커져도 전수 집계 가능) |
 
 공통 절차:
-1. **본문 식별**: `passage_id` = `{book-slug}-{ch}-{vstart}-{vend}` (예: 마가 5:25-34 → `mark-5-25-34`). 모호하면 사용자에게 확인, 본문이 없으면 `topic-{slug}` 폴백.
+1. **본문 식별**: `passage_id` = `{book-slug}-{ch}-{vstart}-{vend}` (예: 마가 5:25-34 → `mark-5-25-34`). 장 전체를 아우르는 묵상이라 절 범위가 불명확하면 `{book-slug}-{ch}`로 축약할 수 있다(예: `leviticus-4`·`amos-1` — 발아 코퍼스의 장 단위 큐티 관례). 모호하면 사용자에게 확인, 본문이 없으면 `topic-{slug}` 폴백.
 2. **버전 번호**: 대상 폴더를 스캔하여 다음 `v{NN}` 결정.
 3. **YAML 메타데이터**: `date`, `skill`, `category`, `passage_id`(해당 시), `version`, `topic`, `stage` + 스킬별 `extra` 필드.
 4. **Manifest 갱신**: `_manifest.md`를 **읽고-병합-쓰기** (없으면 신규 생성). 라인 형식: `- v{NN} {skill} ({date}) — {스킬별 manifest_line}`.

@@ -15,7 +15,7 @@ enabled: true
 | **매일** | 묵상 (요일 무관) | 아침 `qt-companion` — 큐티 동행·기록. 매일의 누적이 발아의 토양 (v2.11) |
 | 월 | 회고·조망 | `sermon-retro`(어제 선포 설교) → `weekly-briefing` (🌱 큐티·발아 스냅샷 포함) |
 | 화 | 발아 확인·발상 | `qt-germinate-scan`(익은 후보 확인) → 후보 있으면 `qt-germinate-seed` → `sermon-brainstorming` / 없으면 절기·시리즈 기반 본문 확보 → `sermon-brainstorming` |
-| 수 | 연구 | `sermon-research` |
+| 수 | 연구 | `sermon-research` → (선택) `qt-companion` 재묵상 모드 — 주해가 처음 묵상을 어디서 확증·전복했나 되짚기 (stage 불변) |
 | 목 | 난제·초안 | `biblical-dilemma-solver` → **초안 집필은 목회자의 자리** (AI는 침묵) |
 | 금 | 검증 | `sermon-red-team` → `harness/sermon_audit` |
 | 토 | 전달 준비 | `sermon-to-tts`(낭독 점검용 — journal stage는 올리지 않음, `_hooks.md` §3.6) · 최종 손질 |
