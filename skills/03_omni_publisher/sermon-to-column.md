@@ -53,6 +53,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 - **stage**: `published_column` (journal 반영: `core/_hooks.md` §3.6 발행 전이 가드)
 - **extra 메타**: `style` (`내 보이스`(기본)/피터슨/켈러 — `core/pastor_voice.md` 참조), `venue`(지면 프로파일 적용 시 지면명 — v2.16)
 - **manifest 라인**: `{style} 스타일 칼럼 ({글자수})`
+- **인덱스** *(v2.17)*: 저장 시 `outputs/columns/_index.md`에 1줄 append (`core/_hooks.md` §2.5)
 - **journal**: 발행 전이 가드(`_hooks.md` §3.6) 적용 — `preached_on` 채워진 항목만 `stage: published`, 선포 전이면 stage 유지 + `notes`에 `[파생 발행: 칼럼]`; journal에 없는 외부 원고면 선포 여부 확인 후 등재
 
 ---

@@ -65,6 +65,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 - **save**: `sermons-lineage` (본문 식별 시 `outputs/sermons/{passage_id}/`) · 본문 미식별 시 `devotional-fallback`(`outputs/devotionals/{topic-slug}/`) · **category**: `03_omni_publisher`
 - **stage**: `column_draft` (목회자가 최종 다듬어 발행 — AI 산출은 초안) · **extra**: `style`(`own-voice(초기묵상 기반)`/`peterson`/`keller`), `origin: qt-germinate`, `seed_refs`(사용한 큐티/씨앗의 레포 상대 경로 리스트 — `core/_hooks.md` §2, v2.15), `venue`(지면 프로파일 적용 시 지면명 — v2.16)
 - **manifest 라인**: `큐티 발아 칼럼: {주제} — {문체} ({글자수})`
+- **인덱스** *(v2.17)*: 저장 시 `outputs/columns/_index.md`에 1줄 append (`core/_hooks.md` §2.5)
 - **journal**: `recent_topics`에 핵심 키워드 1개; 이미 `active_sermons`에 있는 본문이면 그 항목 `notes`에 "[큐티→칼럼]" 추가 (신규 등재하지 않음 — 칼럼 발아는 설교 승격이 아니다, `pastor_journal.md` §3.1.1)
 
 ---

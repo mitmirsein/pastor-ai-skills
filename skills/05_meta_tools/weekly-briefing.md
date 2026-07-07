@@ -59,6 +59,9 @@ description: 지정 기간(기본: 최근 7일) 동안의 outputs/ 작업물과 
 - outputs/devotionals/_index.md 가 있으면 그것을 1차 소스로 date ∈ [since, until] 큐티를 카운트
   (없으면 outputs/devotionals/*/ 의 qt_kind: dialogue 노트 YAML date로 집계)
 - 기간 내 반복 본문/주제 상위 1~2개를 관찰 (판정은 qt-germinate-scan의 몫 — 여기서는 스냅샷만)
+
+[칼럼 — v2.17]
+- outputs/columns/_index.md 가 있으면 date ∈ [since, until] 칼럼을 카운트 (지면별 병기; 없으면 생략 — 지어내기 금지)
 ```
 
 집계 결과가 비어있어도 브리핑을 중단하지 않는다. 해당 섹션에 "이 기간 outputs/ 기록 없음"을 명시한다.
