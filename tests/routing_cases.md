@@ -37,7 +37,7 @@
 | 29 | journal: `active_sermons[mark-5-25-34].stage: research` + "혈루증 여인 좀 더 가보자" | sermon-red-team (stage 기반 next_step) | 메모리 매칭 |
 | 30 | journal: `recent_topics: [은혜]` + "은혜 주제로 묵상 하나" | devotional-generator — 중복 회피 신호와 함께 다른 각도 제안 | |
 | 31 | lenses: 고전 3:16-17을 `applies_to`로 갖는 렌즈 설치 가정 + "고전 3장 성전 본문으로 설교하는데 점검 질문 좀" | 해당 렌즈 자동 권장 (렌즈 미설치 환경은 sermon-red-team) | 렌즈 자동 권장 |
-| 32 | (모호) "설교 준비 도와줘" | 보완 질문 1~2개 → 본문/단계 확인 후 라우팅 | 즉답 금지 |
+| 32 | (모호) "설교 준비 도와줘" | 보완 질문 1회(본문 확정 여부) → 정해짐: qt-germinate-scan 모드 2 / 미정: 모드 1(창 2주) | 즉답 금지 · v2.15 설교 준비 패턴 |
 | 33 | (모호) "K집사님 일 때문에 마음이 무겁네" | 보완 질문 → 심방이면 visitation-guide (위기 신호 시 care_safety 우선) | |
 | 34 | (복합) "설교 끝났고, 블로그에 올리고 카드뉴스도 만들래" | sermon-republisher (03 SKILL 라우터) | 다중 포맷 |
 | 35 | (경계) "설교문 대신 써줘" | 정중히 거절 + sermon-brainstorming/research 안내 | 대필 금지 원칙 |
@@ -68,3 +68,7 @@
 | 60 | (경계) "주해 끝났으니 이제 설교 개요 세워줘" | sermon-outline-codraft | v2.14 E 경계 — 개요 요청은 재묵상 아님(codraft) |
 | 61 | "칼뱅 주석에서 이 구절 어떻게 봤는지 서재 팩에서 찾아 인용해줘" | sermon-research (서재 팩 인용 — `data/commentary/` 조회, 출처 표기) | v2.14 D — 슬롯 3 격상 경로 |
 | 62 | (경계) `data/commentary/` 비어 있음 + "주석 근거로 이 견해 뒷받침해줘" | sermon-research — 서재 팩 없음 정직 폴백(LLM 지식 + 학파 명시) | v2.14 D — 슬롯 폴백(강등 없음) |
+| 63 | "다음 주 본문 로마서 8장인데 관련된 큐티 있었나 봐줘" | qt-germinate-scan (모드 2 본문 정박 수확) | v2.15 — 본문 지정 수확 |
+| 64 | journal: `active_series.next_passage: 엡 2:11-22` + "설교 준비 시작하자" | qt-germinate-scan 모드 2 — 엡 2:11-22 정박 제안 | v2.15 — 시리즈 본문 자동 정박 |
+| 65 | (경계) "지난번 로마서 8장 설교 어떻게 했었지?" | recall | 과거 산출물 검색 ≠ 정박 수확(과거 묵상) |
+| 66 | (경계) "로마서 8장으로 그냥 아이디어부터 굴려보자" | sermon-brainstorming | 큐티 무관 신규 발상 ≠ 수확 |
