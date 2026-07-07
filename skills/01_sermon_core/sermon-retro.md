@@ -13,7 +13,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 1. **월요일 자동 제안**: Concierge가 `preached_on`이 직전 주일로 채워졌고 `retro_done: false`인 설교를 감지하면 회고를 1순위로 제안 (`core/pastoral_rhythm.md` §2.2). 강제 아님.
 2. **명시적 호출**: "어제 설교 회고하자", "지난 설교 돌아보기".
 
-## ⚙️ 동작 프로세스 — 3분 문답 (가볍게, 4문항 고정)
+## ⚙️ 동작 프로세스 — 3분 문답 (가볍게, 4문항 + 선택 코다 1)
 
 한 번에 하나씩 묻고 기다린다. 답이 짧아도 캐묻지 않는다 — 회고는 부담이 되는 순간 죽는다.
 
@@ -21,6 +21,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 2. **헛돈 부분**: "준비할 때 기대와 달리 헛돌았던 대목이 있었습니까?"
 3. **회중 반응 한 줄**: "예배 후 들은 반응이나 표정 중 기억나는 것 하나만요." — 🚨 기록 시 PII 정책: 익명·집합 묘사만 ("한 청년이" / "장년석에서"). 실명 입력 시 변환.
 4. **다음에 다르게**: "다음 설교에서 하나만 다르게 한다면 무엇입니까?" → 이것이 `lesson`이 된다.
+5. **남은 긴장 (선택 코다, v2.15)**: "설교가 다 담지 못해 마음에 남은 긴장이 있습니까? 없으면 '없음'이라고만 답하셔도 됩니다." → "없음"이거나 답이 비면 **즉시 종료**하고 카드에서 이 줄을 생략한다. **캐묻지 않는다** — 회고는 부담이 되는 순간 죽는다. 답이 있으면 목회자의 표현 그대로 한 문장으로 받는다(요약·세련화 금지). 이것이 journal `open_tensions`(§3.7)에 남아 다음 큐티의 재소환 씨앗이 된다 — 선포는 묵상의 끝이 아니라 다음 묵상의 시작이다(나선).
 
 ## 출력: 회고 카드 (10줄 이내)
 
@@ -30,6 +31,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 - 헛돎: {2 답변 요약}
 - 회중: {3 답변 요약 — 익명}
 - ✏️ Lesson: {4 답변 — 한 문장}
+- 🌱 남은 긴장: {5 답변 — 목회자의 표현 한 문장 · "없음"이면 이 줄째 생략}
 ```
 
 [시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑.]
@@ -39,8 +41,8 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 - **save**: `sermons-lineage` · **category**: `01_sermon_core`
 - **stage**: 변경 없음 (`preached`/`published` 유지)
 - **manifest 라인**: `회고 — Lesson: {한 문장}`
-- **journal**: 해당 `active_sermons` 항목에 `retro_done: true`; `lessons`에 `{passage_id, date, lesson}` 추가 (최근 5건 FIFO — `pastor_journal.md` §3.6); 보존 기한 정책에 따라 archive 이동 대상이면 이동 제안
-- **소비처**: 누적 `lessons`는 `sermon-red-team`(반복 패턴 검증 항목)과 `weekly-briefing`(미해소 패턴 신호)이 참조한다
+- **journal**: 해당 `active_sermons` 항목에 `retro_done: true`; `lessons`에 `{passage_id, date, lesson}` 추가 (최근 5건 FIFO — `pastor_journal.md` §3.6); 코다 답이 있으면 `open_tensions`에 `{passage_id, date, tension, source: retro}` 추가 (최근 5건 FIFO — §3.7, PII 정책 적용, v2.15); 보존 기한 정책에 따라 archive 이동 대상이면 이동 제안
+- **소비처**: 누적 `lessons`는 `sermon-red-team`(반복 패턴 검증 항목)과 `weekly-briefing`(미해소 패턴 신호)이 참조한다. `open_tensions`는 `qt-companion` 2단계(재소환 초대)와 `qt-germinate-scan` 축 3(맥락 병기 — 집계 아님)이 읽는다 (v2.15)
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**
