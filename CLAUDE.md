@@ -1,7 +1,7 @@
 # 🕊️ Pastor-KR (Project Entrypoint)
 
-> **버전 (Version): v2.14 (Deep Lectio — 묵상 전 본문 브리핑 · 남은 긴장 발아 · 주해 이후 재묵상 · 서재 팩)**
-> *이전 버전: v2.13 (Exegetical Precision — 주해 스키마 정밀화 · 구조 완결성 사전 게이트)*
+> **버전 (Version): v2.15 (Spiral Harvest — 나선 되먹임 · 본문 정박 수확 · 혈통 태그 · 씨앗 거울 · 일화 검증)**
+> *이전 버전: v2.14 (Deep Lectio — 묵상 전 본문 브리핑 · 남은 긴장 발아 · 주해 이후 재묵상 · 서재 팩)*
 
 ## 1. 프로젝트 목표
 본 프로젝트는 `pastor-ai-skills`를 한국 목회 상황에 맞게 리폼(Reform)하여, 목회자들에게 최적화된 **'오케스트레이터(Concierge) + 전문가 길드(Guild) + 목회 메모리(Memory)'** 기반의 하이엔드 AI 비서 워크플로우를 제공하는 것을 목표로 합니다.
@@ -32,6 +32,9 @@
 - **남은 긴장 발아 (v2.14):** `qt-germinate-scan`은 본문·주제에 더해 `## 남은 긴장`의 반복(축 3, 내부 노트 한정)을 발아 축으로 봅니다. 아포리아는 본문 발아 후에도 존속하며, `(재소환)` 유래는 자발 등장과 **분리 집계**하여 시스템이 스스로 만든 반복으로 임계를 채우지 않습니다. 긴장 태생 씨앗은 `qt-germinate-seed` 화이트리스트에 `## 남은 긴장`을 포함합니다.
 - **주해 이후 재묵상 (v2.14):** `qt-companion` 재묵상 모드는 `sermon-research` 이후 "주해가 초기 묵상을 어디서 확증·전복했나"를 되짚습니다. 산출은 lineage에 저장하되 **YAML `stage: research` 고정**으로 manifest `current_stage` 후퇴를 막고, `qt_kind: secunda`라 발아 코퍼스에 섞이지 않으며, journal은 `notes`에 `[재묵상]`만 남겨 **본체 stage를 전진·후퇴시키지 않습니다**(§3.1.1 파생 작업 원리).
 - **서재 팩 (v2.14):** `data/commentary/` 슬롯(2차 문헌)이 있으면 `sermon-research`(Phase 3)·`biblical-dilemma-solver`·`qt-companion` 브리핑이 **파일 출처를 표기하며 인용**하고, `sermon_audit` Claim Ledger 유형 ②·④ 검증이 **실제 대조로 격상**됩니다(원어 팩이 L1을 격상하는 것과 동형). 없으면 현행대로 LLM 지식 + 학파 명시로 정직 폴백합니다. 슬롯 내용물은 `.gitignore` 제외(저작권 자료 커밋 금지), 파일 최소 메타(저자·전통·서지) 의무 — 규약: `data/_README.md` 슬롯 3.
+- **나선 되먹임 (v2.15):** 선포는 묵상의 끝이 아니라 다음 묵상의 씨앗입니다. `sermon-retro`의 선택 코다("설교가 다 담지 못한 긴장")가 journal `open_tensions`(§3.7, 5건 FIFO)로 남고, `qt-companion` 2단계가 이를 재소환 소스로 읽습니다. 재소환 게이트·`(재소환)` 태그·분리 집계가 동일 적용되며, `open_tensions` 자체는 발아 집계에 들어가지 않습니다(에코 루프 차단).
+- **본문 정박 수확 (v2.15):** 설교 본문이 정해지면 `qt-germinate-scan` 모드 2가 코퍼스 전체에서 연관 큐티를 4계층(직접>긴장>인접>주제 — 근거는 목회자 문구 인용, 본문 쪽 판단은 출처 태그)으로 거둬 오고, `qt-germinate-seed`가 설교 본문에 정박된 교차 본문 씨앗으로 합성합니다. "설교 준비" 발화의 라우팅: 본문 미정이면 모드 1(기본 창 2주). 신규 스킬 없음 — 단일 진입점 원칙. 수확이 비면 정직하게 보고하고 brainstorming 직행을 안내합니다.
+- **혈통 태그·씨앗 거울·일화 검증 (v2.15):** 발아 산출물에 선택 YAML `seed_refs`(뿌리 큐티 상대 경로)가 남고(`core/_hooks.md` §2), `sermon-outline-codraft`는 조립 후 씨앗의 반복된 초점 반영 여부를 관찰로만 비추며(4.5단계 씨앗 거울 — 내용 제안 금지), `sermon_audit` Claim Ledger 유형 ⑤가 일화의 실재성을 상류 원문(`seed_refs`)과 대조합니다(유령 일화 → L2 감점, 각색은 무감점, 검증 불가는 채점 보류).
 
 ## 3. 워크플로우 (Workflow v2.5)
 1. **의무 부트 시퀀스 (Concierge):** 매 세션 첫 발화 시 `core/foundation.md` → `core/pastor_journal.md` → `core/liturgical_calendar.md`를 순차 로드하여 컨텍스트를 복원합니다.
