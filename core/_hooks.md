@@ -32,6 +32,7 @@
 1. **본문 식별**: `passage_id` = `{book-slug}-{ch}-{vstart}-{vend}` (예: 마가 5:25-34 → `mark-5-25-34`). 장 전체를 아우르는 묵상이라 절 범위가 불명확하면 `{book-slug}-{ch}`로 축약할 수 있다(예: `leviticus-4`·`amos-1` — 발아 코퍼스의 장 단위 큐티 관례). 모호하면 사용자에게 확인, 본문이 없으면 `topic-{slug}` 폴백.
 2. **버전 번호**: 대상 폴더를 스캔하여 다음 `v{NN}` 결정.
 3. **YAML 메타데이터**: `date`, `skill`, `category`, `passage_id`(해당 시), `version`, `topic`, `stage` + 스킬별 `extra` 필드.
+   - *(v2.15, 선택)* `seed_refs`: 뿌리 큐티/씨앗의 **레포 상대 경로 리스트** (절대 경로 금지). 기록 주체 — `qt-germinate-seed`(수집한 큐티 전체 자동) · `qt-to-column`(사용한 큐티/씨앗). 이후 lineage 단계(brainstorming·outline 등)는 AGENT 모드에서 같은 lineage 폴더에 씨앗 파일이 있으면 그 `seed_refs`를 상속하고, 붙여넣기만 받은 CHAT 모드에서는 생략한다(모르는 출처를 지어내지 않는다). 소비처 — 씨앗 거울(`sermon-outline-codraft` 4.5단계)·`sermon_audit` Claim Ledger ⑤(일화 대조)·가계도(v2.17 예정).
 4. **Manifest 갱신**: `_manifest.md`를 **읽고-병합-쓰기** (없으면 신규 생성). 라인 형식: `- v{NN} {skill} ({date}) — {스킬별 manifest_line}`.
 
 ## §3. 메모리 갱신 (Journal Update)
