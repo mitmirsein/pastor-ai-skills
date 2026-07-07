@@ -27,6 +27,11 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 > **[1] 유진 피터슨 스타일:** 시적·관상적, 일상의 평범한 것에서 영적 진리를 길어올리는 문체.
 > **[2] 팀 켈러 스타일:** 문화의 우상을 짚고 복음의 은혜를 지성적으로 변증하는 대조(Contrast) 기법."
 
+`foundation.md`의 `column_venues`가 설정되어 있으면 **지면**도 함께 묻는다 (v2.16):
+> "어느 지면에 실을 칼럼인가요? {venue 목록 — 이름·분량·독자}"
+
+선택된 지면의 분량·독자·톤을 4단계 출력에 적용한다. **미설정이면 묻지 않고** 기본 분량을 쓴다(정직 폴백). `pastor_voice.md` §6 '지면' 변주와 결합하되, 충돌 시 **문체는 voice 카드, 분량·독자는 지면 프로파일**을 따른다.
+
 ### 2단계 — 문체 원천: 초기 묵상이 최우선 (이 스킬의 핵심)
 
 **[0] 목사님 자신의 문체**를 고르면:
@@ -48,8 +53,8 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 ### 4단계 — 출력
 
 - **제목**: 품격 있으면서 호기심을 유발하는 문장으로 제안.
-- **분량**: A4 반 장~한 장 (약 1,000~1,500자), 읽기 편한 문단.
-- **말미 표기(투명성)**: 적용한 문체와 원천을 한 줄로 — 예: "이 칼럼은 목사님의 초기 묵상 문체를 반영했습니다" / "피터슨 스타일을 적용했으며 내용은 목사님의 묵상에서 왔습니다".
+- **분량**: 지면 프로파일 선택 시 **그 지면의 분량·독자** (v2.16), 미설정 시 A4 반 장~한 장 (약 1,000~1,500자). 읽기 편한 문단.
+- **말미 표기(투명성)**: 적용한 문체와 원천을 한 줄로 — 예: "이 칼럼은 목사님의 초기 묵상 문체를 반영했습니다" / "피터슨 스타일을 적용했으며 내용은 목사님의 묵상에서 왔습니다". 지면을 적용했으면 지면명도 병기한다 (v2.16).
 
 ---
 
@@ -58,7 +63,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 ### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
 - **save**: `sermons-lineage` (본문 식별 시 `outputs/sermons/{passage_id}/`) · 본문 미식별 시 `devotional-fallback`(`outputs/devotionals/{topic-slug}/`) · **category**: `03_omni_publisher`
-- **stage**: `column_draft` (목회자가 최종 다듬어 발행 — AI 산출은 초안) · **extra**: `style`(`own-voice(초기묵상 기반)`/`peterson`/`keller`), `origin: qt-germinate`, `seed_refs`(사용한 큐티/씨앗의 레포 상대 경로 리스트 — `core/_hooks.md` §2, v2.15)
+- **stage**: `column_draft` (목회자가 최종 다듬어 발행 — AI 산출은 초안) · **extra**: `style`(`own-voice(초기묵상 기반)`/`peterson`/`keller`), `origin: qt-germinate`, `seed_refs`(사용한 큐티/씨앗의 레포 상대 경로 리스트 — `core/_hooks.md` §2, v2.15), `venue`(지면 프로파일 적용 시 지면명 — v2.16)
 - **manifest 라인**: `큐티 발아 칼럼: {주제} — {문체} ({글자수})`
 - **journal**: `recent_topics`에 핵심 키워드 1개; 이미 `active_sermons`에 있는 본문이면 그 항목 `notes`에 "[큐티→칼럼]" 추가 (신규 등재하지 않음 — 칼럼 발아는 설교 승격이 아니다, `pastor_journal.md` §3.1.1)
 

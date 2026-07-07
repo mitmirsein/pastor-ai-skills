@@ -8,6 +8,7 @@ preferred_bible: "개역개정" # KRV
 theological_orientation: "개혁주의" # 또는 복음주의, 웨슬리언 등
 tone_preference: "따뜻하고 권위 있는" # 문체 선호도
 qt_source_path: "" # (선택) 기존 큐티/묵상 노트 폴더 — 콤마로 다중 지정 가능. 상세: 아래 설정 가이드 §4
+column_venues: [] # (선택, v2.16) 칼럼 지면 프로파일 — 상세: 아래 설정 가이드 §5
 ---
 
 # ⚓ Pastor-KR Foundation
@@ -27,6 +28,18 @@ qt_source_path: "" # (선택) 기존 큐티/묵상 노트 폴더 — 콤마로 �
 2. 각 스킬 실행 시 이 설정을 기반으로 '우리 교회 맞춤형' 톤앤매너가 적용됩니다.
 3. 신학 용어의 표준 표기는 `data/terms/`에 용어 대조표를 넣으면 발행 전 감사(`sermon_audit` L2)가 자동 대조합니다 (`data/_README.md` 참고).
 4. `qt_source_path`(선택): 기존 큐티/묵상 노트 폴더의 경로. **콤마로 여러 폴더를 지정할 수 있습니다** (예: `"~/Obsidian/묵상일지"` 또는 `"묵상일지/, 성경연구/"`). 비우면 `outputs/devotionals/`​만 발아 스캔 대상이 됩니다. 지정된 폴더의 큐티 원문은 **읽기 전용으로만** 스캔하며 수정·이동하지 않습니다.
+5. `column_venues`(선택, v2.16): 칼럼을 싣는 **지면 프로파일** 목록. 설정하면 칼럼 스킬(`qt-to-column`·`sermon-to-column`)이 지면을 먼저 묻고 분량·독자·톤을 맞추며, `sermon_audit` 칼럼 프로파일(§4.4)이 지면 분량을 대조합니다. 비우면 현행 기본(약 1,000~1,500자)이 유지됩니다. 예:
+   ```yaml
+   column_venues:
+     - name: "주보"
+       length: "600자 내외"
+       audience: "전 세대 성도"
+       tone: "따뜻하고 간결"
+     - name: "지역신문 기고"
+       length: "2,000자 내외"
+       audience: "비신자 포함 일반 독자"
+       tone: "보편 언어, 교회 내부어 자제"
+   ```
 
 ---
 마지막 업데이트: 2026-07-02 (frontmatter 정화 — 가드레일을 본문으로 이동, YAML 파서 호환)

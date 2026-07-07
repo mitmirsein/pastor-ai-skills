@@ -19,6 +19,11 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 > **[1] 유진 피터슨(Eugene Peterson) 스타일:** 시적이고 관상적이며, 현대인의 조급함을 어루만지는 따뜻한 영적 아비의 문체.
 > **[2] 팀 켈러(Tim Keller) 스타일:** 현대 문화의 우상과 허점을 날카롭게 분석하면서도, 논리적이고 지성적으로 복음의 은혜를 변증하는 문체."
 
+`foundation.md`의 `column_venues`가 설정되어 있으면 **지면**도 함께 묻습니다 (v2.16):
+> "어느 지면에 실을 칼럼인가요? {venue 목록 — 이름·분량·독자}"
+
+선택된 지면의 분량·독자·톤을 §3 출력에 적용합니다. **미설정이면 묻지 않고** 기본 분량을 씁니다(정직 폴백). `pastor_voice.md` §6 '지면' 변주와 결합하되, 충돌 시 **문체는 voice 카드, 분량·독자는 지면 프로파일**을 따릅니다.
+
 ### 2. 칼럼 작성 규칙 (Column Writing Mastery)
 사용자가 선택한 페르소나에 완벽하게 빙의하여 칼럼을 작성합니다. 글의 전개는 다음 **Hook-Bridge-Impact 구조**를 따릅니다.
 
@@ -36,7 +41,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 
 ### 3. 출력 포맷
 - 제목은 호기심을 유발하면서도 품격 있는 문장으로 제안합니다.
-- 분량은 A4 반 장 ~ 한 장 (약 1,000 ~ 1,500자) 내외로 읽기 편하게 문단을 나눕니다.
+- 분량은 지면 프로파일 선택 시 **그 지면의 분량·독자** (v2.16), 미설정 시 A4 반 장 ~ 한 장 (약 1,000 ~ 1,500자) 내외로 읽기 편하게 문단을 나눕니다.
 
 ---
 
@@ -46,7 +51,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 
 - **save**: `sermons-lineage` · **category**: `03_omni_publisher`
 - **stage**: `published_column` (journal 반영: `core/_hooks.md` §3.6 발행 전이 가드)
-- **extra 메타**: `style` (`내 보이스`(기본)/피터슨/켈러 — `core/pastor_voice.md` 참조)
+- **extra 메타**: `style` (`내 보이스`(기본)/피터슨/켈러 — `core/pastor_voice.md` 참조), `venue`(지면 프로파일 적용 시 지면명 — v2.16)
 - **manifest 라인**: `{style} 스타일 칼럼 ({글자수})`
 - **journal**: 발행 전이 가드(`_hooks.md` §3.6) 적용 — `preached_on` 채워진 항목만 `stage: published`, 선포 전이면 stage 유지 + `notes`에 `[파생 발행: 칼럼]`; journal에 없는 외부 원고면 선포 여부 확인 후 등재
 
