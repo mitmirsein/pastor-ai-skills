@@ -38,6 +38,7 @@ description: 목회자의 자연어 질의를 받아 outputs/ 의 과거 사역 
 | **주제/키워드** | 신학 키워드 ("은혜", "소망", "십자가") | 전체 `_manifest.md`의 `핵심 요약` 섹션 스캔 |
 | **시기 지정** | 날짜·기간 언급 ("한 달 전", "3월 주일 설교") | `_manifest.md`의 `last_updated` 필드 필터링 |
 | **사람/상황** | 성도 직분+이니셜·상황 ("K집사 위로 서신") | `outputs/{date}/02_pastoral_care/` + `04_church_admin/` 스캔 |
+| **가계도** *(v2.17)* | "가계도", "전체 흐름/발자취", "어디까지 왔지" + 본문 지명 | 아래 §가계도 모드 (frontmatter 한정 심층 취합) |
 
 형태가 복합적이면 가장 구체적인 기준을 우선한다. (본문 > 시기 > 주제 > 사람)
 
@@ -48,6 +49,7 @@ description: 목회자의 자연어 질의를 받아 outputs/ 의 과거 사역 
 [2차] outputs/series/*/_manifest.md     →  시리즈 제목·본문 범위 스캔
 [3차] outputs/{date}/{category}/*.md    →  파일명·날짜 기반 필터 (비-본문)
 [4차] outputs/devotionals/ (v2.12)      →  _index.md 우선, 없으면 폴더별 _manifest.md — 큐티·묵상 자산
+[5차] outputs/columns/_index.md (v2.17) →  칼럼 발행 이력 (주제·문체·지면 1줄 인덱스)
 ```
 
 > [4차] 주의: 목회자 개인 큐티도 검색 *대상*이지만, "반복 본문이 설교로 익었는가"의 발아 판정은 `qt-germinate-scan`의 몫이다 — recall은 위치와 lineage만 알려준다.
@@ -63,6 +65,26 @@ Top 1–3을 선정하는 기준:
 2. 주제 질의: manifest 핵심 요약에 키워드가 더 많이 등장하는 것 우선
 3. 시기 질의: `last_updated`가 질의 기간에 가장 가까운 것 우선
 4. 동점 시: lineage 단계 수가 많은 것 우선 (더 많이 작업된 본문이 더 관련성 높음)
+
+### 🌳 가계도 모드 (Passage Family Tree, v2.17)
+
+특정 본문의 **전 생애**를 한 화면으로 — 큐티(발아 코퍼스) → 씨앗 → 브레인스토밍 → 주해 → 재묵상 → 개요 → 선포 → 재생산(칼럼·성도묵상 등) → 회고·남은 긴장.
+
+- **소스 취합(읽기 전용):** ① `outputs/devotionals/_index.md`에서 해당 passage_id 필터 ② `outputs/sermons/{passage_id}/_manifest.md` ③ 그 폴더 v{NN} 파일들의 **YAML frontmatter만** (`stage`·`skill`·`date`·`seed_refs`·`qt_kind`) ④ `outputs/columns/_index.md`(해당 본문 칼럼) ⑤ journal `open_tensions`(해당 본문).
+- **경계:** 이 모드에 한해 v{NN} 파일의 frontmatter를 열 수 있다 — 단 **본문 내용은 읽지도 인용하지도 않는다**(제약 3·5의 정신 유지). `seed_refs`에 다른 본문의 뿌리 큐티가 있으면 교차 본문 가지로 표시한다. 온톨로지 확장 금지 불변 — 기계적 취합만, 주제가 비슷한 다른 본문을 임의로 붙이지 않는다.
+
+```markdown
+🌳 **가계도:** {passage_id} — {N}개 마디
+- {date} 🌱 큐티 · `{경로}`
+- {date} 🌱 큐티 (뿌리: {원 본문} — 교차) · `{경로}`
+- {date} 🌰 씨앗 — 큐티 {N}건 합성{ (정박 수확)}
+- {date} 💡 브레인스토밍 → {date} 🔬 주해 → {date} 🔁 재묵상
+- {date} 🏛️ 개요 → {date} 🛡️ red-team → {date} 🛑 감사 {score}/100
+- {preached_on} ⛪ 선포 → {date} 🖋️ 칼럼({지면}) · {date} 🕊️ 성도묵상
+- {date} 🔁 회고 — 🌱 남은 긴장 1건 (journal open_tensions)
+```
+
+(마디가 없으면 그 줄은 생략 — 지어내지 않는다. 큐티만 있고 lineage가 없으면 "아직 발아 전 — 큐티 {N}건 누적 중"으로 정직하게 보고한다.)
 
 ---
 
