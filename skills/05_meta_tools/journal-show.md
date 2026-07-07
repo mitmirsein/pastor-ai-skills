@@ -122,6 +122,13 @@ H1·H7은 🚨 critical, H3·H6은 ⚠️ attention, H4·H5는 📋 info, H2는 
 
 ---
 
+## 🌱 남은 긴장 (open_tensions) — {N}건 *(v2.15)*
+- `leviticus-4` (2026-07-12): "{tension 한 문장}" — 출처: retro
+
+(없으면) > _선포 후 남은 긴장이 없습니다._
+
+---
+
 ## 📜 본문 lineage 누적 현황
 - 등록된 본문 폴더: **{N}개** (`outputs/sermons/`)
 - 가장 최근 갱신: `eph-1-15-23` (2026-05-08)

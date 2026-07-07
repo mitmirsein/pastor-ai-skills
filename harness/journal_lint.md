@@ -36,9 +36,9 @@ triggers:
 
 | 카테고리 | 검증 내용 | 심각도 |
 |---|---|---|
-| **C1. 스키마** | YAML 파싱 가능, 필수 필드 존재 (`active_sermons`, `active_series`, `active_visitations`, `recent_topics`, `open_prayer_requests`, `lessons` — schema v2) | 🚨 critical |
-| **C2. 타입** | `active_sermons[].stage` ∈ enum 값, 날짜 필드가 ISO 8601 (`YYYY-MM-DD`) 형식 | ⚠️ warn |
-| **C3. PII 위반** | 실명 의심 패턴, 전화번호, 이메일, 병원명/약물명 상세, 주소 | 🚨 critical |
+| **C1. 스키마** | YAML 파싱 가능, 필수 필드 존재 (`active_sermons`, `active_series`, `active_visitations`, `recent_topics`, `open_prayer_requests`, `lessons` — schema v2). 선택 필드 `open_tensions`(v2.15, §3.7)는 부재 시 정상 | 🚨 critical |
+| **C2. 타입** | `active_sermons[].stage` ∈ enum 값, 날짜 필드가 ISO 8601 (`YYYY-MM-DD`) 형식. `open_tensions[]`(존재 시): `date` ISO 8601 · `tension` 문자열 · `source` ∈ {retro, manual} · 5건 이하(FIFO — §3.7) | ⚠️ warn |
+| **C3. PII 위반** | 실명 의심 패턴, 전화번호, 이메일, 병원명/약물명 상세, 주소 (`open_tensions[].tension` 등 자유 텍스트 필드 포함) | 🚨 critical |
 | **C4. 표류 (Drift)** | `active_sermons[].id`에 매칭되는 `outputs/sermons/{id}/` 폴더 존재 여부, 역방향 orphan 폴더 존재 여부 | 📋 info |
 | **C5. 설교 만료** | `active_sermons[stage=preached]` 중 `preached_on`으로부터 4주(28일) 경과 항목 | 📋 info |
 | **C6. 심방 만료** | `active_visitations[].followup_due`가 `currentDate - 14일` 이전인 항목 | 📋 info |
