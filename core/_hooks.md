@@ -34,6 +34,7 @@
 3. **YAML 메타데이터**: `date`, `skill`, `category`, `passage_id`(해당 시), `version`, `topic`, `stage` + 스킬별 `extra` 필드.
    - *(v2.15, 선택)* `seed_refs`: 뿌리 큐티/씨앗의 **레포 상대 경로 리스트** (절대 경로 금지). 기록 주체 — `qt-germinate-seed`(수집한 큐티 전체 자동) · `qt-to-column`(사용한 큐티/씨앗). 이후 lineage 단계(brainstorming·outline 등)는 AGENT 모드에서 같은 lineage 폴더에 씨앗 파일이 있으면 그 `seed_refs`를 상속하고, 붙여넣기만 받은 CHAT 모드에서는 생략한다(모르는 출처를 지어내지 않는다). 소비처 — 씨앗 거울(`sermon-outline-codraft` 4.5단계)·`sermon_audit` Claim Ledger ⑤(일화 대조)·가계도(v2.17 예정).
 4. **Manifest 갱신**: `_manifest.md`를 **읽고-병합-쓰기** (없으면 신규 생성). 라인 형식: `- v{NN} {skill} ({date}) — {스킬별 manifest_line}`.
+5. **칼럼 인덱스 (v2.17):** 칼럼 스킬(`sermon-to-column`·`qt-to-column`)의 저장 시 `outputs/columns/_index.md`에 한 줄 append — `- {date} · {주제} · {문체} · {지면 또는 "-"} · {파일 경로}` (없으면 생성). 저장 위치 자체는 불변(lineage)이며 인덱스만 추가 — `weekly-briefing`·`recall`(5차·가계도)의 칼럼 축 소스.
 
 ## §3. 메모리 갱신 (Journal Update)
 
@@ -75,3 +76,16 @@
 ## §7. 목양 안전 게이트 (Care-Safety Gate) — 목양·서신 스킬 공통
 
 성도의 상황(심방·위로·묵상·서신)을 다루는 스킬은 콘텐츠 생성 **전에** `core/care_safety.md`를 로드하고 위기 신호 스크리닝을 수행합니다. 위기 신호 감지 시 콘텐츠 생성보다 전문 연계 안내가 먼저입니다.
+
+## §8. 입양·원고 등록 (Adopt & Register-Draft) — v2.17
+
+시스템 **밖**에서 태어난 산출물(종이에 쓴 개요, 챗에서 쓴 칼럼, 과거 설교 원고)을 lineage에 소급 편입하는 절차 — 어느 단계든 정문이 됩니다(독립 진행의 양방향 문).
+
+1. **대상·출처 확인:** 무엇이며 언제 만들어졌는지 1회 확인. **내용은 수정하지 않는다** — 입양은 보관이지 개작이 아니다.
+2. **passage_id 판정:** §2 규약. 본문 없으면 `topic-{slug}`.
+3. **YAML 소급 부여:** `date`(원 작성일 — 모르면 입양일 + `adopted_date_unknown: true`), `skill: adopted`, `stage`(내용에 맞는 값 — 목회자와 확인), `adopted: true`.
+4. **버전 번호:** 대상 폴더 스캔 후 다음 `v{NN}`.
+5. **Manifest:** `- v{NN} (입양) {설명} ({원 작성일})` — 읽고-병합-쓰기.
+6. **Journal:** 선포 여부를 **확인한 후에만** 반영 — 선포됨: `preached_on` 채움 / 미선포: stage만 갱신. 확인 없이 등재하지 않는다. PII 정책 동일 적용.
+
+**register-draft (특수형):** 목회자가 직접 쓴 설교 초안·최종 원고의 등록 — `stage: drafted`(선포된 원고면 `preached`). 이로써 `drafted` 단계가 실체를 갖고, `sermon_audit`·`sermon-retro`·재생산 스킬·주간 세트(심화)가 **실제 원고를 참조**할 수 있게 됩니다. 대필 거절 원칙과 무관합니다 — AI는 원고를 쓰지 않고 보관만 합니다.
