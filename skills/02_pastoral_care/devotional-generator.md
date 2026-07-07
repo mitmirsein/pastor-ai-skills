@@ -24,6 +24,15 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 - **Ignatian Examen (의식 성찰):** 하루의 감정과 사건을 돌아보며 하나님의 현존을 발견하는 5단계 성찰.
 - **Aporia Sitting (긴장 머무름):** 해결되지 않는 삶의 난제와 본문의 긴장 앞에 정직하게 머물기.
 
+### 1.5 발행 단위 — 회중 동행 주간 세트 (Weekly Set, v2.16)
+기본은 단일 묵상 1편이다. 목회자가 "주간 묵상표", "월~토 세트"를 청하면 **6일치(월~토) 묶음**으로 설계한다 — 교회 전체가 한 주간 같은 본문 안에 살게 하는 회중 동행 리듬.
+- **두 리듬 중 확인:**
+  - **심화 세트** — 지난 주일 **선포된** 본문. lineage의 개요·원고(있으면)에서 대지·적용을 일별 초점으로 파생한다(설교의 주중 연장).
+  - **예습 세트** — **다음 주일** 본문. 본문을 단락으로 나눠 미리 머문다(선포 전 준비).
+- **본문 팩 우선(`core/_hooks.md` §6):** 6일 분할 전에 본문 전문을 확보한다. 각 일자 = 소본문(1~5절) + 짧은 묵상(3~5문장) + 질문 1 + Tiny Practice 1. 위 §1의 설계 모드는 세트 전체에 하나를 골라 일관 적용한다.
+- **정직한 분할:** 짧은 본문을 6일로 늘리려 내용을 지어 붓지 않는다 — "이 본문은 {n}일 세트가 자연스럽습니다"로 제안한다.
+- **저장·가드:** save `sermons-lineage`(해당 본문 폴더, `v{NN}_devotional-weekly_{date}.md`) — **발행 전이 가드(`core/_hooks.md` §3.6) 적용**: journal은 해당 항목 `notes`에 "[파생 발행: 주간묵상세트]"만, stage 불변. 예습 세트가 journal에 없는 본문이면 **신규 등재하지 않고** 저장 경로만 안내한다(조기 승격 금지 원리). 발행 전 `sermon_audit`(성도 묵상 프로파일 §4.4) 권장.
+
 ### 2. 핵심 설계 규칙
 - **정직함 우선:** 감정이나 모순을 덮지 않고 하나님 앞에 드러내도록 질문을 정교하게 만듭니다.
 - **긴장 보존:** 아포리아를 "해결할 문제"가 아니라 "머무를 자리"로 다룹니다. 결론을 서둘러 강요하지 않습니다.
@@ -48,7 +57,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 
 ### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-- **save**: `devotional-fallback` (본문 식별 시 lineage, 아니면 `outputs/devotionals/{topic-slug}/`) · **category**: `02_pastoral_care`
+- **save**: `devotional-fallback` (본문 식별 시 lineage, 아니면 `outputs/devotionals/{topic-slug}/`) · **weekly-set 모드(v2.16)**: `sermons-lineage`(`v{NN}_devotional-weekly_{date}.md`) + 발행 전이 가드 §3.6 (§1.5 참조) · **category**: `02_pastoral_care`
 - **stage**: `devotional`
 - **journal**: `recent_topics`에 묵상 키워드 1개; 이미 `active_sermons`에 있는 본문이면 그 항목 `notes`에 "[묵상 카드 작성]" 태그만 추가. 신규 본문을 `active_sermons`에 등재하지 않는다 — 성도용 파생물은 설교 진행 항목이 아니다 (`pastor_journal.md` §3.1.1)
 
