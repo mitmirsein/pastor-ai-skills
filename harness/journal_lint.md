@@ -76,7 +76,7 @@ LLM이 추론 기반으로 판단합니다. 다음 휴리스틱을 적용합니�
 ```
 devotional | seed | brainstorm | research | dilemma | outline | redteam | drafted | preached | published | pending | study | smallgroup
 ```
-- `published_blog`·`published_column`·`published_tts`·`published_cardnews`·`column_draft`는 lineage 파일 YAML 전용 세분값입니다 — journal에 나타나면 §3.1.1 매핑 위반으로 ⚠️ warn 처리합니다.
+- `published_blog`·`published_column`·`published_tts`·`published_cardnews`·`column_draft`·`devotional_draft`(v2.16)는 lineage 파일 YAML 전용 세분값입니다 — journal에 나타나면 §3.1.1 매핑 위반으로 ⚠️ warn 처리합니다.
 
 ---
 
