@@ -145,6 +145,19 @@ lessons:
     lesson: "적용이 추상적이었다 — 다음엔 구체적 한 장면으로"
 ```
 
+### 3.7 `open_tensions` *(v2.15 — sermon-retro가 기록)*
+선포된 설교가 다 담지 못해 남은 신학적 긴장(잔여 아포리아). `lessons`(§3.6, 기술 회고)와 대칭인 신학적 잔여다. `qt-companion` 2단계가 재소환 소스로 읽어 다음 묵상으로 되먹인다(나선 구조). 최근 5건 FIFO 회전. 자동 삭제 없음 — 해소 판단은 목회자의 몫이다.
+
+```yaml
+open_tensions:
+  - passage_id: leviticus-4
+    date: 2026-07-12            # 기록일 (선포 직후 회고일)
+    tension: "..."              # 목회자의 표현 그대로 한 문장 (PII 정책 §2 적용)
+    source: retro               # retro | manual
+```
+
+> 🔄 **에코 루프 차단 (불변식):** `open_tensions`는 `qt-germinate-scan` 축 3의 반복 횟수 집계에 **들어가지 않는다** — 재소환을 거쳐 큐티 노트에 자발적으로 다시 등장한 것만 집계된다. journal 항목 자체는 맥락 병기용이다.
+
 ---
 
 ## 4. Concierge 로드 프로토콜
