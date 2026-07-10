@@ -33,15 +33,15 @@
 | 25 | "메모리 위생 검사 한번 돌리자" | journal_lint | harness |
 | 26 | "내 설교 문체 등록하고 싶어" | voice-setup | v2.9 |
 | 27 | "어제 설교 돌아보자" | sermon-retro | v2.9 |
-| 28 | journal: `active_series.next_passage: 엡 2:11-22` + "이번 주일 뭐 하지?" | sermon-brainstorming(또는 research) — 엡 2:11-22 1순위 제시 | 시리즈 > 절기 |
-| 29 | journal: `active_sermons[mark-5-25-34].stage: research` + "혈루증 여인 좀 더 가보자" | sermon-red-team (stage 기반 next_step) | 메모리 매칭 |
+| 28 | journal: `active_series.next_passage: 엡 2:11-22` + "이번 주일 뭐 하지?" | 엡 2:11-22 1순위 제시 + qt-germinate-scan 모드 2(정박 수확) 제안 | 시리즈 > 절기 · v2.15 정박 수확 우선 (eval 2026-07-10 현행화) |
+| 29 | journal: `active_sermons[mark-5-25-34].stage: research` + "혈루증 여인 좀 더 가보자" | sermon-outline-codraft 또는 sermon-red-team (stage 기반 next_step — Concierge Step 2 예시) | 메모리 매칭 · v2.11 outline 도입 반영 (eval 2026-07-10 현행화) |
 | 30 | journal: `recent_topics: [은혜]` + "은혜 주제로 묵상 하나" | devotional-generator — 중복 회피 신호와 함께 다른 각도 제안 | |
 | 31 | lenses: 고전 3:16-17을 `applies_to`로 갖는 렌즈 설치 가정 + "고전 3장 성전 본문으로 설교하는데 점검 질문 좀" | 해당 렌즈 자동 권장 (렌즈 미설치 환경은 sermon-red-team) | 렌즈 자동 권장 |
 | 32 | (모호) "설교 준비 도와줘" | 보완 질문 1회(본문 확정 여부) → 정해짐: qt-germinate-scan 모드 2 / 미정: 모드 1(창 2주) | 즉답 금지 · v2.15 설교 준비 패턴 |
 | 33 | (모호) "K집사님 일 때문에 마음이 무겁네" | 보완 질문 → 심방이면 visitation-guide (위기 신호 시 care_safety 우선) | |
 | 34 | (복합) "설교 끝났고, 블로그에 올리고 카드뉴스도 만들래" | sermon-republisher (03 SKILL 라우터) | 다중 포맷 |
 | 35 | (경계) "설교문 대신 써줘" | 정중히 거절 + sermon-brainstorming/research 안내 | 대필 금지 원칙 |
-| 36 | journal: 금요일 + `stage: research` 정체 | (발화 전 헤더) 권장 동선에 red-team 표시 | pastoral_rhythm |
+| 36 | journal: 금요일 + `stage: research` 정체 (rhythm 요약 헤더 로드 가정) | (발화 전 헤더) 권장 동선에 지연 감지 표시 — 스킬은 pastoral_rhythm §2.1 따름(red-team) | pastoral_rhythm · 로드 전제 명시 (eval 2026-07-10 현행화) |
 | 37 | "오늘 아모스 1장 묵상했는데, 처음 든 생각 적어봤어. 같이 더 파보자" | qt-companion | v2.11 — 목회자 자신의 매일 묵상 심화(≠성도용 devotional-generator) |
 | 38 | "매일 큐티하는 거 질문 좀 던져주면서 도와줘" | qt-companion | v2.11 — 소크라테스 티키타카 |
 | 39 | "요즘 큐티한 거 모아서 설교할 만한 본문 있는지 봐줘" | qt-germinate-scan | v2.11 — 누적 큐티 발아(≠recall: 과거 산출물 검색) |
