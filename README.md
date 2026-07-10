@@ -1,12 +1,12 @@
 # 🕊️ Pastor-KR (High-Precision Pastoral AI Toolkit)
 
-> **버전 (Version): v2.17 (Companion Depth — 동행 강도 · 질문 각도 메모리 · 절기 렌즈 · 본문 가계도 · 입양/원고 등록)**
-> *이전: v2.16 (Fourth Stream — 네 번째 물길 · 층위 분리 · 회중 동행 주간 세트 · 감사 프로파일 · 지면 프로파일)*
+> **버전 (Version): v2.18 (Closed Loops — 상류 자동 참조 · 회고 앞단 상기 · 칼럼 아카이브 조회 · 씨앗 접합 블록 · 발아 퍼널 · 구술성 렌즈 · 낭독 리허설 · 설교 인덱스)**
+> *이전: v2.17 (Companion Depth — 동행 강도 · 질문 각도 메모리 · 절기 렌즈 · 본문 가계도 · 입양/원고 등록)*
 
-**Agentic pastoral workflow framework with 'Concierge & Guild + Memory + Quality Gate' architecture. High-precision Korean toolkit featuring 30 specialized skills + 3 harness quality-gate tools + domain lens packs, based on '6 Gems' & 'Inferential Ontology', with a daily-QT-to-sermon/column germination pipeline (now with pre-meditation passage briefing, aporia-tension germination, post-exegesis re-meditation, a commentary data slot, and v2.15: a passage-anchored harvest mode for sermon prep, post-sermon tension feedback closing the spiral, lineage provenance tags, a seed-mirror outline check, and anecdote-reality auditing; and v2.16: a QT-to-congregational-devotional fourth stream with an inner-layer gate, weekly devotional sets, target-type audit profiles, and column venue profiles; and v2.17: a QT depth dial, question-angle memory, a liturgical lens, passage family trees, adopt/register-draft onboarding, genre-aware outline scaffolds, a column index, and persona-tuned devotionals), persistent pastoral memory, liturgical-calendar awareness, passage-centric lineage, and forensic audit gates.**
+**Agentic pastoral workflow framework with 'Concierge & Guild + Memory + Quality Gate' architecture. High-precision Korean toolkit featuring 31 specialized skills + 3 harness quality-gate tools + domain lens packs, based on '6 Gems' & 'Inferential Ontology', with a daily-QT-to-sermon/column germination pipeline (now with pre-meditation passage briefing, aporia-tension germination, post-exegesis re-meditation, a commentary data slot, and v2.15: a passage-anchored harvest mode for sermon prep, post-sermon tension feedback closing the spiral, lineage provenance tags, a seed-mirror outline check, and anecdote-reality auditing; and v2.16: a QT-to-congregational-devotional fourth stream with an inner-layer gate, weekly devotional sets, target-type audit profiles, and column venue profiles; and v2.17: a QT depth dial, question-angle memory, a liturgical lens, passage family trees, adopt/register-draft onboarding, genre-aware outline scaffolds, a column index, and persona-tuned devotionals; and v2.18: closed-loop wiring — upstream auto-reference between lineage stages, lessons surfaced at planning time, column-archive reads, compact seed splice blocks, a germination funnel metric, an orality lens, a sermon index, and a pre-pulpit read-aloud rehearsal skill), persistent pastoral memory, liturgical-calendar awareness, passage-centric lineage, and forensic audit gates.**
 
 **"오케스트레이터 + 전문가 길드 + 목회 메모리" 아키텍처 기반의 고성능 한국어 목회 지원 AI 스킬셋.**
-단 하나의 진입점(`Pastor-Concierge`)을 통해 복잡한 스킬 선택의 고민 없이 목회 워크플로우를 자동화하며, **매 세션 진입 시 진행 중인 사역(설교/시리즈/심방)과 절기 컨텍스트를 자동 복원**합니다. 나아가 **매일의 큐티가 누적되어 설교와 칼럼으로 자연스럽게 발아**하도록 돕습니다 (v2.11). v2.12에서는 이 발아 파이프라인이 주간 리듬·품질 게이트·메모리와 빈틈없이 맞물리도록 정합을 마쳤고, **v2.14에서는 묵상 자체를 더 깊이 떠받칩니다** — 큐티 시작에 본문 컨텍스트를 마련하고(브리핑), 주해 이후 다시 묵상하며(재묵상), 반복해 돌아오는 긴장까지 발아 후보로 삼는 '깊은 렉시오(Deep Lectio)' 층을 더했습니다. **v2.15는 이 파이프라인을 나선으로 완성합니다** — 선포가 남긴 긴장이 다음 묵상으로 되먹이고(되먹임 루프), 본문이 먼저 정해진 주간에는 과거 큐티를 거둬 와 씨앗을 만들며(본문 정박 수확), 발아의 혈통이 산출물에 남습니다(seed_refs·씨앗 거울·일화 검증). v2.16은 **네 번째 물길**을 엽니다 — 목회자의 큐티가 성도용 묵상으로도 흘러가고(층위 분리로 내면은 보호), 주간 세트가 교회 전체를 한 본문 안에 살게 하며, 감사와 칼럼이 대상·지면을 알게 됩니다. v2.17은 **동행 자체를 오래가게** 다듬습니다 — 매일 큐티가 그날의 결(강도·질문 각도·절기)을 알고, 한 본문의 전 생애가 가계도로 보이며, 시스템 밖에서 태어난 원고도 입양으로 합류합니다.
+단 하나의 진입점(`Pastor-Concierge`)을 통해 복잡한 스킬 선택의 고민 없이 목회 워크플로우를 자동화하며, **매 세션 진입 시 진행 중인 사역(설교/시리즈/심방)과 절기 컨텍스트를 자동 복원**합니다. 나아가 **매일의 큐티가 누적되어 설교와 칼럼으로 자연스럽게 발아**하도록 돕습니다 (v2.11). v2.12에서는 이 발아 파이프라인이 주간 리듬·품질 게이트·메모리와 빈틈없이 맞물리도록 정합을 마쳤고, **v2.14에서는 묵상 자체를 더 깊이 떠받칩니다** — 큐티 시작에 본문 컨텍스트를 마련하고(브리핑), 주해 이후 다시 묵상하며(재묵상), 반복해 돌아오는 긴장까지 발아 후보로 삼는 '깊은 렉시오(Deep Lectio)' 층을 더했습니다. **v2.15는 이 파이프라인을 나선으로 완성합니다** — 선포가 남긴 긴장이 다음 묵상으로 되먹이고(되먹임 루프), 본문이 먼저 정해진 주간에는 과거 큐티를 거둬 와 씨앗을 만들며(본문 정박 수확), 발아의 혈통이 산출물에 남습니다(seed_refs·씨앗 거울·일화 검증). v2.16은 **네 번째 물길**을 엽니다 — 목회자의 큐티가 성도용 묵상으로도 흘러가고(층위 분리로 내면은 보호), 주간 세트가 교회 전체를 한 본문 안에 살게 하며, 감사와 칼럼이 대상·지면을 알게 됩니다. v2.17은 **동행 자체를 오래가게** 다듬습니다 — 매일 큐티가 그날의 결(강도·질문 각도·절기)을 알고, 한 본문의 전 생애가 가계도로 보이며, 시스템 밖에서 태어난 원고도 입양으로 합류합니다. v2.18은 **끊긴 되먹임 루프를 잇습니다** — 하류 스킬이 상류 산출물을 자동으로 읽고(복붙 인수인계 종식), 지난 회고가 다음 설교의 기획에서 먼저 만나지며, 칼럼이 자기 아카이브를 돌아보고, 설교가 강단에 오르기 전 '귀'로 점검받습니다(낭독 리허설).
 
 > **처음 쓰시나요?** AI 도구가 익숙하지 않은 목회자를 위한 단계별 안내는 [USER_GUIDE.md](USER_GUIDE.md)에 있습니다. 아래 "1분 가동"이 어렵게 느껴지시면 그쪽을 먼저 보십시오.
 
@@ -31,9 +31,9 @@
 
 ---
 
-## 🌟 프로젝트의 핵심 가치 (v2.17 업데이트)
+## 🌟 프로젝트의 핵심 가치 (v2.18 업데이트)
 
-1. **인지 부하 최소화 (오케스트레이터):** 30개의 스킬 + 3개의 harness 도구를 외울 필요가 없습니다. `00_pastor_concierge`에게 자연어로 말하면 최적의 스킬을 매칭해 줍니다.
+1. **인지 부하 최소화 (오케스트레이터):** 31개의 스킬 + 3개의 harness 도구를 외울 필요가 없습니다. `00_pastor_concierge`에게 자연어로 말하면 최적의 스킬을 매칭해 줍니다.
 2. **단절 없는 워크플로우 (파이프라인):** 하나의 작업이 끝나면 `Call to Action`을 통해 다음 단계(예: 큐티 발아 ➔ 브레인스토밍 ➔ 주해 ➔ 개요 동반작성 ➔ 검증 ➔ 블로그 발행)를 자연스럽게 제안합니다.
 3. **정밀도 최극대화 (전문가 길드):** 범용 프롬프트 대통합의 함정을 피하고, 각 목적에 특화된 개별 에이전트들의 페르소나를 완벽히 보존합니다.
 4. **추론적 온톨로지(Inferential Ontology):** 별도의 데이터베이스 없이도 AI가 본문의 핵심 개념을 엔티티(Entity)와 관계로 해체하여 분석하는 논리가 탑재되어 있습니다. (적용: `sermon-research`, `biblical-dilemma-solver`, `sermon-brainstorming`, `sermon-red-team`, `devotional-generator`, `small-group-guide`, `sermon-cardnews-maker`)
@@ -54,6 +54,7 @@
 19. **🌀 Spiral Harvest — 나선 되먹임·본문 정박 수확 (v2.15 신규):** 발아 파이프라인이 직선에서 **나선**이 됩니다(신규 스킬 0). ① **되먹임 루프**: `sermon-retro`의 선택 코다("설교가 다 담지 못한 긴장")가 journal `open_tensions`(§3.7)로 남고 `qt-companion`이 재소환 소스로 읽습니다 — 선포는 묵상의 끝이 아니라 다음 묵상의 씨앗. 재소환 분리 집계가 에코 루프를 차단합니다. ② **본문 정박 수확**: 설교 본문이 정해졌으면 `qt-germinate-scan` 모드 2가 코퍼스 전체에서 연관 큐티를 4계층(직접>긴장>인접>주제, 근거는 목회자 문구 인용)으로 거둬 오고, 씨앗은 설교 본문에 정박된 교차 본문 합성이 됩니다. "설교 준비하자" 한마디로 진입하며 본문 미정이면 최근 2주 발아 스캔으로 — 수확이 비면 "맨땅 시작도 정당한 길"로 정직하게 안내합니다. ③ **혈통 태그**: 발아 산출물 YAML에 뿌리 큐티의 상대 경로(`seed_refs`)가 남습니다. ④ **씨앗 거울**: 개요 조립 후 씨앗의 반복된 초점이 개요에 살아있는지 **관찰로만** 비춥니다(내용 제안 금지 — 대필 거절 불변). ⑤ **일화도 Claim이다**: `sermon_audit` Claim Ledger 유형 ⑤가 일화·경험담의 실재성을 상류 원문과 대조합니다(유령 일화 → 감점, 각색은 무감점).
 20. **🌊 Fourth Stream — 큐티→성도 묵상·회중 동행 (v2.16 신규):** 하나의 큐티가 설교·칼럼에 이어 **성도용 묵상**으로도 흘러갑니다(신규 스킬 `qt-to-devotional`, 스킬 30개). ① **층위 분리 게이트**: 큐티를 본문 통찰 층(성도와 나눔)과 목회자 내면 층(직무 성찰·자기 점검)으로 분류해 먼저 보여주고, 내면 층은 **기본 제외·옵트인** — 목회자의 내면을 보호하면서 묵상의 열매만 회중의 식탁에 올립니다. ② **회중 동행 주간 세트**: `devotional-generator`가 6일치(월~토) 세트를 빚습니다 — 지난 주일 설교의 주중 연장(심화) 또는 다음 주일 본문 예습. 교회 전체가 한 주간 같은 본문 안에 삽니다. ③ **감사 프로파일**: `sermon_audit`이 대상 유형(설교/칼럼/성도 묵상)별로 렌즈를 재조준합니다(산술 불변, §4.4) — 성도 묵상은 목양 안전 중점, 칼럼은 문체 충실도·클리셰 검출. ④ **지면 프로파일**: `foundation.md`에 지면(`column_venues`)을 등록하면 칼럼이 주보 600자와 기고 2,000자를 구분해 입습니다.
 21. **🎚️ Companion Depth — 동행 심화·가계도·입양 (v2.17 신규):** 매일의 동행을 오래가게 다듬는 여덟 확장입니다(신규 스킬 0). ① **강도 다이얼**: "오늘은 짧게" 한마디로 침묵 동행(질문 0~1)/기본/깊음을 오갑니다 — 신호가 없으면 묻지 않습니다(매일의 마찰 금지). ② **질문 각도 메모리**: 동행자가 최근 큐티들의 질문 각도(관찰/긴장/이미지/형성/적용)를 기억해 어제와 다른 각도로 들어옵니다. ③ **절기 렌즈**: 브리핑에 교회력 1줄(`[교회력]` 태그 — 해석은 목회자 몫). ④ **본문 가계도**: "레위기 4장 가계도 보여줘" 한마디로 큐티→씨앗→주해→선포→칼럼→남은 긴장까지 한 본문의 전 생애를 시간축으로 봅니다(`recall`). ⑤ **입양·원고 등록**(`_hooks` §8): 종이 개요·과거 설교 원고를 무수정 보관으로 lineage에 편입 — `drafted` 단계가 실체를 갖고, 감사·회고·재생산이 실제 원고를 참조합니다. ⑥ **장르 문법**: 개요 골격이 본문 장르(내러티브/시가/서신/예언·율법)의 결을 따릅니다. ⑦ **칼럼 인덱스**: 발행 칼럼이 `outputs/columns/_index.md`에 1줄씩 누적됩니다. ⑧ **페르소나 변주**: 성도 묵상이 회중 페르소나(장년/청년/새신자)에 맞춰 옷을 갈아입습니다.
+22. **🔗 Closed Loops — 되먹임 루프 폐쇄 (v2.18 신규):** 부지런히 쌓기만 하고 되읽지 않던 자산을 창작의 입력으로 되살립니다(신규 스킬 1 — `sermon-rehearse`, 스킬 31개). ① **상류 자동 참조**(`_hooks` §9): AGENT 모드에서 주해→개요→red-team이 직전 산출물을 자동으로 읽습니다 — 매주 반복되던 "복사해서 붙여넣기" 인수인계가 CHAT 폴백으로 물러납니다. 씨앗은 대화 원문을 뺀 `접합 블록`​만 넘겨 브레인스토밍 입력이 가벼워집니다. ② **회고 앞단 상기**: 지난 회고의 lesson이 검증 단계가 아니라 **다음 설교를 기획하는 자리**에서 1줄로 먼저 만나집니다. ③ **칼럼 아카이브 조회**: 칼럼을 쓰기 전에 과거 칼럼 주제와의 중복·연작 여지를 돌아봅니다. ④ **발아 퍼널**: 주간 브리핑이 "씨앗 {s}건 → 설교 진입 {b}건 → 선포 {p}건"으로 큐티→설교 전환을 처음으로 계량합니다. ⑤ **구술성 렌즈**: red-team이 '귀로 듣기'(호흡·입말·Big Idea 가청성)를 점검하고, ⑥ **낭독 리허설**(`sermon-rehearse`): 강단에 오르기 전 예상 소요 시간·긴 문장·문어체를 표지합니다 — 원고를 고쳐 쓰지 않습니다(대필 거절 불변). ⑦ **설교 인덱스**: `outputs/sermons/_index.md`가 쌓여 수백 본문 시대에도 회상·집계가 한 파일 스캔으로 끝납니다.
 
 ---
 
@@ -69,9 +70,10 @@ v2.5부터 모든 스킬은 목회자의 실제 워크플로우에 따라 5개�
 - `sermon-research.md`: 6 Gems 엔진 기반의 고정밀 주해 리포트 생성 (Table A/B 표준 스키마·문맥적 위치·목회적 리스크·Big Idea/Action Plan 후보, v2.13 · 서재 팩 2차 문헌 인용 격상, v2.14)
 - `biblical-dilemma-solver.md`: 성경 난제에 대한 입체적 변증 가이드
 - `sermon-outline-codraft.md` *(v2.11 · v2.15 · v2.17)*: Big Idea·주해에서 설교 개요를 함께 세우기 — AI는 구조 비계만, 각 대지 내용은 목회자 저작(대필 아님). v2.15 — 조립 후 씨앗 거울(반복된 초점 반영 관찰, 내용 제안 금지). v2.17 — 본문 장르 문법(장르 판정 시 그 결의 골격 우선)
-- `sermon-red-team.md`: 설교 원고나 개요의 신학적 맹점 및 회중 시선 분석
+- `sermon-red-team.md` *(v2.18)*: 설교 원고나 개요의 신학적 맹점 및 회중 시선 분석. v2.18 — 4️⃣ 귀로 듣기 렌즈(호흡·입말·Big Idea 가청성·전환 신호)
 - `sermon-series-planner.md`: 4-6주 단위의 강해 설교 시리즈 기획
-- `sermon-retro.md` *(v2.9 · v2.15)*: 선포 후 3분 회고 — lesson을 누적해 다음 설교에 반영. v2.15 — 선택 코다 "남은 긴장"이 journal `open_tensions`로 남아 다음 큐티로 되먹임(나선)
+- `sermon-retro.md` *(v2.9 · v2.15)*: 선포 후 3분 회고 — lesson을 누적해 다음 설교에 반영. v2.15 — 선택 코다 "남은 긴장"이 journal `open_tensions`로 남아 다음 큐티로 되먹임(나선). v2.18 — lessons가 brainstorming·outline 시작 시에도 상기됨(기획 앞단 폐쇄 루프)
+- `sermon-rehearse.md` *(v2.18 신규)*: 선포 직전 낭독 리허설 — 예상 소요 시간·호흡이 걸리는 문장·문어체·들리지 않는 개념어를 표지 (원고 개작 없음, stage 불변 — retro의 선포 전 대칭)
 - `qt-germinate-scan.md` *(v2.11 · v2.14 · v2.15)*: 누적 큐티에서 반복되는 본문·주제를 설교 발아 후보로 제시 (읽기 전용, 강제 승격 없음). v2.14 — `## 남은 긴장`의 반복(아포리아)을 세 번째 발아 축으로, 재소환 유래는 분리 집계(에코 루프 차단). v2.15 — **모드 2(본문 정박 수확)**: 설교 본문이 정해졌을 때 연관 과거 큐티를 4계층으로 거둬 씨앗 재료로 추천
 - `qt-germinate-seed.md` *(v2.11 · v2.15)*: 발아 후보의 큐티들을 시간순 원문 그대로 모아 설교 씨앗 메모로 합성. v2.15 — 정박 수확 태생 씨앗(설교 본문에 정박, 교차 본문 포함)·`seed_refs` 혈통 태그 자동 기록
 

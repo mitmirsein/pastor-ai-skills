@@ -35,6 +35,7 @@
    - *(v2.15, 선택)* `seed_refs`: 뿌리 큐티/씨앗의 **레포 상대 경로 리스트** (절대 경로 금지). 기록 주체 — `qt-germinate-seed`(수집한 큐티 전체 자동) · `qt-to-column`(사용한 큐티/씨앗). 이후 lineage 단계(brainstorming·outline 등)는 AGENT 모드에서 같은 lineage 폴더에 씨앗 파일이 있으면 그 `seed_refs`를 상속하고, 붙여넣기만 받은 CHAT 모드에서는 생략한다(모르는 출처를 지어내지 않는다). 소비처 — 씨앗 거울(`sermon-outline-codraft` 4.5단계)·`sermon_audit` Claim Ledger ⑤(일화 대조)·가계도(v2.17 예정).
 4. **Manifest 갱신**: `_manifest.md`를 **읽고-병합-쓰기** (없으면 신규 생성). 라인 형식: `- v{NN} {skill} ({date}) — {스킬별 manifest_line}`.
 5. **칼럼 인덱스 (v2.17):** 칼럼 스킬(`sermon-to-column`·`qt-to-column`)의 저장 시 `outputs/columns/_index.md`에 한 줄 append — `- {date} · {주제} · {문체} · {지면 또는 "-"} · {파일 경로}` (없으면 생성). 저장 위치 자체는 불변(lineage)이며 인덱스만 추가 — `weekly-briefing`·`recall`(5차·가계도)의 칼럼 축 소스.
+6. **설교 인덱스 (v2.18):** `save: sermons-lineage` 저장마다 `outputs/sermons/_index.md`에 한 줄 append — `- {date} · {passage_id} · v{NN} {skill} · {stage} · {키워드 1~2개} · {파일 경로}` (없으면 생성). devotionals `_index.md`(qt-log)·columns `_index.md`(§2.5)와 대칭 — 설교 축만 인덱스가 없어 코퍼스가 커지면 `recall`·`weekly-briefing`이 전 `_manifest.md`를 전수 스캔해야 했던 공백을 메운다. 소비처: `recall`(주제·시기 질의 1차 소스)·`weekly-briefing`(설교 축 집계)·가계도. 새 파일 저장 없이 stage만 바뀐 경우에는 append하지 않는다(라인 = 파일 1개).
 
 ## §3. 메모리 갱신 (Journal Update)
 
@@ -89,3 +90,13 @@
 6. **Journal:** 선포 여부를 **확인한 후에만** 반영 — 선포됨: `preached_on` 채움 / 미선포: stage만 갱신. 확인 없이 등재하지 않는다. PII 정책 동일 적용.
 
 **register-draft (특수형):** 목회자가 직접 쓴 설교 초안·최종 원고의 등록 — `stage: drafted`(선포된 원고면 `preached`). 이로써 `drafted` 단계가 실체를 갖고, `sermon_audit`·`sermon-retro`·재생산 스킬·주간 세트(심화)가 **실제 원고를 참조**할 수 있게 됩니다. 대필 거절 원칙과 무관합니다 — AI는 원고를 쓰지 않고 보관만 합니다.
+
+## §9. 상류 자동 참조 (Upstream Auto-Reference) — v2.18
+
+lineage 하류 스킬(주해·난제·개요·red-team 등)이 상류 산출물을 매번 "복사해 붙여넣어" 받던 인수인계를 AGENT 모드에서 자동화합니다. 씨앗 거울(`sermon-outline-codraft` 4.5단계)·red-team의 SSOT 로드와 **동형 패턴**의 일반화입니다.
+
+1. **AGENT 모드:** 스킬 실행 시작 시 같은 `outputs/sermons/{passage_id}/` 폴더의 `_manifest.md`를 읽고, 자신의 직전 단계 산출물(해당 skill의 최신 `v{NN}`)을 자동 로드한다. 로드 후 1줄 브리핑: `📎 v{NN} {skill}({date})를 참조합니다.` 목회자가 다른 버전·다른 파일을 지정하면 그것이 우선한다.
+2. **씨앗 파일 특례:** `qt-germinate-seed` 산출물을 참조할 때는 `## 접합 블록 (브레인스토밍 입력)` 섹션만 컨텍스트에 올린다 (대화 프로토콜 원문 제외).
+3. **폴더에 상류 산출물이 없으면:** 없다고 정직하게 말하고 붙여넣기를 요청한다. 있는 척 진행하거나 기억으로 채우지 않는다.
+4. **CHAT 모드:** 현행대로 사용자에게 상류 산출물 붙여넣기를 요청한다.
+5. **경계:** 자동 참조는 **읽기**만이다. 상류 파일을 수정하지 않으며, 상류의 `stage`를 되돌리지 않는다(§3.6 원리).

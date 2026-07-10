@@ -35,8 +35,8 @@ description: 목회자의 자연어 질의를 받아 outputs/ 의 과거 사역 
 | 형태 | 판별 기준 | 검색 진입점 |
 |---|---|---|
 | **본문 지명** | 성경 책·장·절 명시 ("마태 5장", "혈루증 여인") | `outputs/sermons/{passage_id}/_manifest.md` 직접 조회 |
-| **주제/키워드** | 신학 키워드 ("은혜", "소망", "십자가") | 전체 `_manifest.md`의 `핵심 요약` 섹션 스캔 |
-| **시기 지정** | 날짜·기간 언급 ("한 달 전", "3월 주일 설교") | `_manifest.md`의 `last_updated` 필드 필터링 |
+| **주제/키워드** | 신학 키워드 ("은혜", "소망", "십자가") | `outputs/sermons/_index.md` 키워드 스캔 (v2.18) → 부재 시 전체 `_manifest.md`의 `핵심 요약` 섹션 스캔 |
+| **시기 지정** | 날짜·기간 언급 ("한 달 전", "3월 주일 설교") | `outputs/sermons/_index.md` date 필터 (v2.18) → 부재 시 `_manifest.md`의 `last_updated` 필드 필터링 |
 | **사람/상황** | 성도 직분+이니셜·상황 ("K집사 위로 서신") | `outputs/{date}/02_pastoral_care/` + `04_church_admin/` 스캔 |
 | **가계도** *(v2.17)* | "가계도", "전체 흐름/발자취", "어디까지 왔지" + 본문 지명 | 아래 §가계도 모드 (frontmatter 한정 심층 취합) |
 
@@ -45,7 +45,8 @@ description: 목회자의 자연어 질의를 받아 outputs/ 의 과거 사역 
 ### Step 3: 계층적 검색 (Cascade)
 
 ```
-[1차] outputs/sermons/*/_manifest.md    →  passage_id·핵심 요약·lineage 스캔
+[1차] outputs/sermons/_index.md (v2.18) →  date·passage_id·skill·stage·키워드 1줄 인덱스 스캔
+       (부재 시 폴백: outputs/sermons/*/_manifest.md 전수 스캔 — 정직 폴백)
 [2차] outputs/series/*/_manifest.md     →  시리즈 제목·본문 범위 스캔
 [3차] outputs/{date}/{category}/*.md    →  파일명·날짜 기반 필터 (비-본문)
 [4차] outputs/devotionals/ (v2.12)      →  _index.md 우선, 없으면 폴더별 _manifest.md — 큐티·묵상 자산

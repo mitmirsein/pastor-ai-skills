@@ -45,7 +45,8 @@ description: 지정 기간(기본: 최근 7일) 동안의 outputs/ 작업물과 
 
 ```
 [본문 lineage]
-- outputs/sermons/*/_manifest.md  →  last_updated ∈ [since, until] 필터
+- outputs/sermons/_index.md 가 있으면 그것을 1차 소스로 date ∈ [since, until] 라인 필터 (v2.18)
+  (부재 시 폴백: outputs/sermons/*/_manifest.md → last_updated ∈ [since, until] 필터)
   - 해당 범위 내 갱신된 v{NN} 항목만 추출 (전체 lineage 아님)
 
 [시리즈]
@@ -59,6 +60,12 @@ description: 지정 기간(기본: 최근 7일) 동안의 outputs/ 작업물과 
 - outputs/devotionals/_index.md 가 있으면 그것을 1차 소스로 date ∈ [since, until] 큐티를 카운트
   (없으면 outputs/devotionals/*/ 의 qt_kind: dialogue 노트 YAML date로 집계)
 - 기간 내 반복 본문/주제 상위 1~2개를 관찰 (판정은 qt-germinate-scan의 몫 — 여기서는 스냅샷만)
+
+[발아 퍼널 — v2.18]
+- 씨앗 {s} = outputs/sermons/_index.md에서 skill이 qt-germinate-seed인 라인 수 (date ∈ [since, until])
+- 진입 {b} = 그 씨앗 passage_id 중 stage가 brainstorm 이상으로 진행된 본문 수 (journal active_sermons 또는 인덱스 최신 stage 기준)
+- 선포 {p} = 그중 stage가 preached/published에 도달한 본문 수
+- sermons/_index.md가 없으면 퍼널 줄을 "집계 불가(설교 인덱스 부재)"로 정직 보고 — 지어내기 금지
 
 [칼럼 — v2.17]
 - outputs/columns/_index.md 가 있으면 date ∈ [since, until] 칼럼을 카운트 (지면별 병기; 없으면 생략 — 지어내기 금지)
@@ -123,6 +130,7 @@ description: 지정 기간(기본: 최근 7일) 동안의 outputs/ 작업물과 
 **🌱 큐티·발아 스냅샷** (v2.12)
 - 이번 주 큐티 {N}건 — 반복 관찰: {본문/주제: n회} {또는 "누적 중"}
 - {반복 2회 이상이 보이면} 💡 "요즘 큐티 모아서 설교감 있는지 봐줘"(qt-germinate-scan)를 권합니다
+- 🌱 발아 퍼널: 씨앗 {s}건 → 설교 진입 {b}건 → 선포 {p}건 (집계창: {since}~{until}) *(v2.18)*
 *(큐티 기록이 없으면 이 블록 생략 — 지어내기 금지)*
 
 **행정** ({N}건)

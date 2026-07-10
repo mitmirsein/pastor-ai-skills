@@ -42,7 +42,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 - **stage**: 변경 없음 (`preached`/`published` 유지)
 - **manifest 라인**: `회고 — Lesson: {한 문장}`
 - **journal**: 해당 `active_sermons` 항목에 `retro_done: true`; `lessons`에 `{passage_id, date, lesson}` 추가 (최근 5건 FIFO — `pastor_journal.md` §3.6); 코다 답이 있으면 `open_tensions`에 `{passage_id, date, tension, source: retro}` 추가 (최근 5건 FIFO — §3.7, PII 정책 적용, v2.15); 보존 기한 정책에 따라 archive 이동 대상이면 이동 제안
-- **소비처**: 누적 `lessons`는 `sermon-red-team`(반복 패턴 검증 항목)과 `weekly-briefing`(미해소 패턴 신호)이 참조한다. `open_tensions`는 `qt-companion` 2단계(재소환 초대)와 `qt-germinate-scan` 축 3(맥락 병기 — 집계 아님)이 읽는다 (v2.15)
+- **소비처**: 누적 `lessons`는 `sermon-red-team`(반복 패턴 검증 항목)·`weekly-briefing`(미해소 패턴 신호), 그리고 *(v2.18)* `sermon-brainstorming`·`sermon-outline-codraft`(시작 시 "지난 회고" 1줄 상기 — 회고가 검증 단계가 아니라 **다음 설교의 기획**에서 만나지도록)가 참조한다. `open_tensions`는 `qt-companion` 2단계(재소환 초대)와 `qt-germinate-scan` 축 3(맥락 병기 — 집계 아님)이 읽는다 (v2.15)
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**
