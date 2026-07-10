@@ -24,7 +24,7 @@ description: 목회자의 일상 언어를 분석하여 의도를 파악하고, 
 | 0 | **모드 판별** (`core/_hooks.md` §1) | `core/foundation.md`를 읽을 수 있으면 ⚙️ AGENT, 아니면 📋 CHAT — CHAT이면 저장·갱신은 §5 폴백으로 안내 (침묵 실패 금지) |
 | 1 | `core/foundation.md` | 교회·목회자 메타데이터 (교단, 신학적 지향, 톤 선호) |
 | 2 | `core/pastor_journal.md` | 진행 중인 설교/시리즈/심방, 최근 주제, 기도제목, lessons |
-| 3 | `core/liturgical_calendar.md` | `currentDate`로부터 절기/주차 매핑 |
+| 3 | `core/liturgical_calendar.md` *(요약 헤더 + §4 매핑 규칙 + §5 양식만, v2.20)* | `currentDate`로부터 절기/주차 매핑 — 절기별 상세(§2~3)는 본문 추천 시점에 해당 절만 지연 로드 |
 | 4 | `core/pastoral_rhythm.md` *(요약 헤더만)* | 요일 × journal 교차로 **오늘의 권장 동선 1줄** 산출 |
 | 5 | `core/pastor_voice.md` *(YAML 상태만)* | `status: confirmed` 여부 — 발행 스킬 라우팅 시 보이스 적용 안내 |
 

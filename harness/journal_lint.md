@@ -43,6 +43,7 @@ triggers:
 | **C5. 설교 만료** | `active_sermons[stage=preached]` 중 `preached_on`으로부터 4주(28일) 경과 항목 | 📋 info |
 | **C6. 심방 만료** | `active_visitations[].followup_due`가 `currentDate - 14일` 이전인 항목 | 📋 info |
 | **C7. 토픽 관리** | `recent_topics` 내 12개 한도 초과 또는 중복 항목 | ⚠️ warn |
+| **C8. Foundation 위생** *(v2.20)* | `core/foundation.md` 점검(SSOT 트리오 확장): ① `OOO`류 플레이스홀더 잔존(교회명·목회자명 미설정 — sermon_audit L3가 "평가 불가"로 도는 원인) ② `column_venues[]` 형식 — `name`/`length`/`audience` 존재, `cadence`(존재 시) ∈ {weekly, monthly, adhoc} ③ `qt_source_path`(설정 시) 경로 실재 여부(AGENT 모드 한정, 콤마 구분 다중 경로 각각) — 위반은 **경고만**, 자동 수정 금지 | ⚠️ warn |
 
 ---
 
@@ -94,7 +95,7 @@ Drift는 critical이 아닙니다. 사용자가 이전에 시작했다가 중단
 
 1. `core/pastor_journal.md` 로드.
 2. `outputs/sermons/` 폴더 목록 확인 (C4 Drift용).
-3. C1→C2→C3→C4→C5→C6→C7 순서로 각 카테고리 점검.
+3. C1→C2→C3→C4→C5→C6→C7→C8 순서로 각 카테고리 점검 (C8은 `core/foundation.md` 로드 필요 — 읽기 전용).
 4. 위반 목록 취합 및 심각도 분류.
 5. 리포트 출력 (§8 포맷).
 6. 사용자 응답 대기. 동의 시 수정 실행 (§9).
