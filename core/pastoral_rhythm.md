@@ -14,7 +14,7 @@ enabled: true
 |---|---|---|
 | **매일** | 묵상 (요일 무관) | 아침 `qt-companion` — 큐티 동행·기록. 매일의 누적이 발아의 토양 (v2.11) |
 | 월 | 회고·조망 | `sermon-retro`(어제 선포 설교) → `weekly-briefing` (🌱 큐티·발아 스냅샷 포함) |
-| 화 | 발아 확인·발상 | 본문 미정: `qt-germinate-scan` 모드 1(익은 후보 확인) → 후보 있으면 `qt-germinate-seed` → `sermon-brainstorming` / 본문이 이미 정해졌으면: `qt-germinate-scan` **모드 2(본문 정박 수확, v2.15)**로 과거 묵상부터 거두기 → 씨앗 → `sermon-brainstorming` / 둘 다 아니면 절기·시리즈 기반 본문 확보 → `sermon-brainstorming` |
+| 화 | 발아 확인·발상 | **본문(또는 시리즈 다음 본문)이 정해졌으면 1순위: `qt-germinate-scan` 모드 2(본문 정박 수확, v2.15)**로 과거 묵상부터 거두기 → 씨앗 → `sermon-brainstorming` / 본문 미정: 모드 1(익은 후보 확인, 기본 창 2주 — 비면 4주 확장 1회 제안, v2.20) → 후보 있으면 `qt-germinate-seed` → `sermon-brainstorming` / 둘 다 비면 절기·시리즈 기반 본문 확보 → `sermon-brainstorming` |
 | 수 | 연구 | `sermon-research` → (선택) `qt-companion` 재묵상 모드 — 주해가 처음 묵상을 어디서 확증·전복했나 되짚기 (stage 불변) |
 | 목 | 난제·초안 | `biblical-dilemma-solver` → **초안 집필은 목회자의 자리** (AI는 침묵) |
 | 금 | 검증 | `sermon-red-team` → `harness/sermon_audit` |
@@ -32,6 +32,8 @@ enabled: true
 2. **월요일 특례**: `preached_on`이 어제(또는 직전 주일)로 채워졌고 `retro_done`이 아니면 → retro를 1순위로 제안.
 3. **임박 심방**: `followup_due ≤ 오늘+2일`인 심방이 있으면 동선에 1건 병기.
 4. **진행 중 작업이 없으면**: 요일 국면의 기본 동선 + 절기 컨텍스트로 본문 후보 제안.
+5. **큐티 공백 넛지 (v2.20)**: journal `last_qt_date`(§3.8)가 오늘로부터 3일 이상 경과면 Concierge가 헤더 아래 **침묵의 초대 1줄**을 표시한다 — 초대의 어조만, 강요·죄책 금지, `null`(미기록)이면 침묵, 세션당 1회(§3 잔소리 방지 적용).
+6. **지면 마감 (v2.20)**: `foundation.md` `column_venues[].cadence/deadline_rule`이 설정된 지면의 마감이 임박하면 `weekly-briefing`이 리마인드한다(우선순위 알고리즘 5) — 리듬표의 요일 동선과 별개의 축이며, 미설정이면 침묵.
 
 ## 3. 잔소리 방지 (Anti-Nagging)
 

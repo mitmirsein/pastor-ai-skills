@@ -1,12 +1,13 @@
 ---
 last_updated: 2026-07-05
-schema_version: 2
+schema_version: 3
 active_sermons: []
 active_series: []
 active_visitations: []
 recent_topics: ["대표사상", "영적민감함"]
 open_prayer_requests: []
 lessons: []
+last_qt_date: null
 ---
 
 # 🪔 Pastor Journal (목회 메모리 레이어)
@@ -135,14 +136,15 @@ open_prayer_requests:
     raised_on: 2026-05-03
 ```
 
-### 3.6 `lessons` *(schema v2 — sermon-retro가 기록)*
-설교 후 회고에서 나온 "다음에 다르게 할 것". 최근 5건 FIFO 회전. `sermon-red-team`과 `weekly-briefing`이 반복 패턴 신호로 참조한다.
+### 3.6 `lessons` *(schema v2 — sermon-retro가 기록 · v2.20 — publication-retro도 기록)*
+설교 후 회고(그리고 v2.20부터 발행물 회고)에서 나온 "다음에 다르게 할 것". 최근 5건 FIFO 회전(설교·발행 공유). `sermon-red-team`·`weekly-briefing`·*(v2.18)* `sermon-brainstorming`·`sermon-outline-codraft`가 반복 패턴/상기 신호로 참조한다.
 
 ```yaml
 lessons:
   - passage_id: mark-5-25-34
     date: 2026-05-12
     lesson: "적용이 추상적이었다 — 다음엔 구체적 한 장면으로"
+    source: retro               # (v2.20, 선택) retro | publication — 필드 부재 시 retro로 간주 (하위호환)
 ```
 
 ### 3.7 `open_tensions` *(v2.15 — sermon-retro가 기록)*
@@ -157,6 +159,16 @@ open_tensions:
 ```
 
 > 🔄 **에코 루프 차단 (불변식):** `open_tensions`는 `qt-germinate-scan` 축 3의 반복 횟수 집계에 **들어가지 않는다** — 재소환을 거쳐 큐티 노트에 자발적으로 다시 등장한 것만 집계된다. journal 항목 자체는 맥락 병기용이다.
+
+### 3.8 `last_qt_date` *(schema v3 — qt-companion만 기록)*
+목회자의 마지막 큐티 기록일. `qt-companion`의 `qt-log` 저장 시에만 갱신되며(`core/_hooks.md` §3), 다른 어떤 스킬도 이 필드를 만지지 않는다. **날짜만 기록한다** — 묵상 내용·본문·횟수는 journal에 남기지 않는다(큐티의 실질은 발아 코퍼스의 몫, 프라이버시 최소 기록).
+
+```yaml
+last_qt_date: 2026-07-09       # YYYY-MM-DD | null (한 번도 기록 없음)
+```
+
+- **소비처**: Concierge 부트 — 오늘로부터 **3일 이상** 경과 시 헤더 아래 침묵의 초대 1줄(강요·죄책 금지, `null`이면 침묵 — `core/pastoral_rhythm.md` §2.5). `weekly-briefing` 큐티 스냅샷의 보조 신호.
+- **v2 → v3 마이그레이션**: 필드가 없는 journal은 정상이다 — 첫 `qt-log` 저장 시 필드가 생기며, `journal_lint` C1이 `schema_version: 2` + 필드 부재를 감지하면 마이그레이션(버전 승격)을 제안만 한다(자동 수정 금지).
 
 ---
 

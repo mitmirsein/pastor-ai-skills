@@ -81,8 +81,17 @@ description: 지정 기간(기본: 최근 7일) 동안의 outputs/ 작업물과 
 2. `active_visitations`의 `followup_due` ≤ until + 7일인 항목 (PII: 직분+이니셜만)
 3. `active_sermons`에서 `stage != preached`이고 `next_step != null`인 미완료 항목
 4. (선택) 다음 주 절기 특별 작업 — 대림절 첫 주, 추수감사절, 송구영신 등 주요 절기에만 적용
+5. *(v2.20)* **지면 마감 리마인드**: `foundation.md`의 `column_venues[]`에 `cadence`·`deadline_rule`이 설정된 지면이 있고 마감이 이번 주 창 안에 들면 `📰 {지면} 마감 임박 ({deadline_rule})` 1줄을 우선순위 아래 병기한다 — 미설정 지면은 침묵(정직 폴백).
 
 동점 시: 1→2→3→4 순서 유지. 같은 레벨이면 due date가 빠른 것 우선.
+
+### Step 3.4: 월간 형성 스냅샷 (v2.20 — 요청 시에만)
+
+사용자가 "이번 달 묵상 돌아보자", "월간으로", "형성 스냅샷"을 명시하면(기본 주간 브리핑에는 포함하지 않음) 다음 3줄을 추가한다 — 각 줄은 데이터가 없으면 정직하게 생략한다:
+
+1. **질문 각도 분포**: 기간 내 큐티 노트 YAML `q_angles` 집계 (예: "formation 9 · tension 4 · observation 2 — formation에 기울어 있었습니다"). 구 노트 무필드는 집계 제외. 판정·처방 금지 — 분포만.
+2. **긴장 궤적**: journal `open_tensions` 신규 {n}건 · 큐티 `## 남은 긴장`에 자발 재등장 {m}건 (재소환 유래 분리 — 에코 루프 차단 규약 준수).
+3. **커버리지 요약**: `qt-germinate-scan` 모드 3과 같은 규약으로 몰린 책 Top 2 · 오래 안 편 책 1줄.
 
 ### Step 3.5: 품질 추이 집계 (v2.10 P3-12)
 

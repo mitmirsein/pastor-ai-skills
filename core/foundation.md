@@ -28,13 +28,15 @@ column_venues: [] # (선택, v2.16) 칼럼 지면 프로파일 — 상세: 아�
 2. 각 스킬 실행 시 이 설정을 기반으로 '우리 교회 맞춤형' 톤앤매너가 적용됩니다.
 3. 신학 용어의 표준 표기는 `data/terms/`에 용어 대조표를 넣으면 발행 전 감사(`sermon_audit` L2)가 자동 대조합니다 (`data/_README.md` 참고).
 4. `qt_source_path`(선택): 기존 큐티/묵상 노트 폴더의 경로. **콤마로 여러 폴더를 지정할 수 있습니다** (예: `"~/Obsidian/묵상일지"` 또는 `"묵상일지/, 성경연구/"`). 비우면 `outputs/devotionals/`​만 발아 스캔 대상이 됩니다. 지정된 폴더의 큐티 원문은 **읽기 전용으로만** 스캔하며 수정·이동하지 않습니다.
-5. `column_venues`(선택, v2.16): 칼럼을 싣는 **지면 프로파일** 목록. 설정하면 칼럼 스킬(`qt-to-column`·`sermon-to-column`)이 지면을 먼저 묻고 분량·독자·톤을 맞추며, `sermon_audit` 칼럼 프로파일(§4.4)이 지면 분량을 대조합니다. 비우면 현행 기본(약 1,000~1,500자)이 유지됩니다. 예:
+5. `column_venues`(선택, v2.16 · v2.20): 칼럼을 싣는 **지면 프로파일** 목록. 설정하면 칼럼 스킬(`qt-to-column`·`sermon-to-column`)이 지면을 먼저 묻고 분량·독자·톤을 맞추며, `sermon_audit` 칼럼 프로파일(§4.4)이 지면 분량을 대조합니다. 비우면 현행 기본(약 1,000~1,500자)이 유지됩니다. *(v2.20)* 선택 필드 `cadence`(발행 주기: `weekly`/`monthly`/`adhoc`)·`deadline_rule`(마감 규칙, 자유 문자열)을 채우면 `weekly-briefing`이 임박 마감을 1줄 리마인드합니다 — 미설정이면 어떤 스킬도 묻지 않습니다(정직 폴백). 예:
    ```yaml
    column_venues:
      - name: "주보"
        length: "600자 내외"
        audience: "전 세대 성도"
        tone: "따뜻하고 간결"
+       cadence: weekly            # (선택, v2.20) weekly | monthly | adhoc
+       deadline_rule: "매주 금요일 정오"   # (선택, v2.20) 자유 문자열
      - name: "지역신문 기고"
        length: "2,000자 내외"
        audience: "비신자 포함 일반 독자"
