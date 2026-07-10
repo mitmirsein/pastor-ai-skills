@@ -89,3 +89,5 @@
 | 81 | "지난주 신문에 나간 칼럼, 반응이 좀 있었는데 기록해두고 싶어" | publication-retro | v2.20 — 발행물 회고(지면·독자 축) |
 | 82 | (경계) "어제 설교 돌아보고 싶어" | sermon-retro | v2.20 경계 — 선포·회중 축 ≠ publication-retro |
 | 83 | "요즘 내 묵상이 어느 책에 몰려 있는지, 안 편 책은 뭔지 보여줘" | qt-germinate-scan (모드 3 커버리지 조망) | v2.20 — 분포 조망(≠모드 1 반복 발아) |
+| 84 | journal: `active_series[ephesians-2026].progress: 3/6` + "시리즈 절반 왔는데 지금 궤도 맞는지 점검해줘" | sermon-series-planner (중간 점검 모드) | v2.21 — 아크 점검(회고 신호 대조) |
+| 85 | (경계) "가을에 새로 로마서 시리즈 기획하자" | sermon-series-planner (기획 모드) | v2.21 경계 — 신규 기획 ≠ 중간 점검 |

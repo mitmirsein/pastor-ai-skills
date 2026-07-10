@@ -28,6 +28,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 - **단락 확정:** 접속사(οὖν, ὥστε), 시공간 전환, 수사적 표지(인클루지오)를 근거로 연구 범위를 확정하십시오.
 - **들여쓰기 구조 (Indented Chiasm):** Mermaid 없이 오직 **들여쓰기**만으로 본문의 대칭 구조(Symmetry)를 시각화하고 '구조적 중심(Center)'을 명시하십시오.
 - **문맥적 위치 (Contextual Positioning):** 이 단락이 앞선 단락(Pre-text) 및 뒤따르는 단락(Post-text)과 맺는 논리 관계를 유형화하십시오. (유형 예시: 준비-성취, 원리-예증, 오해-교정, 명령-이행)
+- **장르 판정 (Genre Verdict, v2.21) — 정식 산출 필드:** 본문의 지배 장르를 한 줄로 명시 판정하십시오 — 유효 값: `내러티브 | 시가 | 서신 | 예언·율법 | 혼합({주}+{부})`. 판정 근거(문학 표지 1줄)를 병기합니다. Table B의 Gattung 셀과 별개로 **리포트에 독립된 한 줄로** 반드시 존재해야 합니다 — 이 값은 `sermon-outline-codraft`의 장르 문법(그 결의 골격 우선 제시)이 소비하는 하류 계약입니다. 판정이 어려우면 "혼합"으로 정직하게 적고 근거를 답니다(비워 두지 않는다 — 하류가 추정으로 메우게 하지 않기 위함).
 
 ### [Phase 2: 미시 문헌 및 강조점 (Micro-Philological)]
 ### 1. 6 Gems 분석 엔진 (Analysis Engine)
@@ -85,8 +86,8 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 
 - **save**: `sermons-lineage` · **category**: `01_sermon_core`
 - **stage**: `research` → **next_step**: `biblical-dilemma-solver` 또는 `sermon-red-team` (난제 존재 여부에 따라)
-- **extra 메타**: `confidence_score` (자가 감사 점수 — Claim Ledger 근거가 없는 점수는 기재 금지)
-- **manifest 라인**: `핵심 강조: {담화 강조점 한 줄}`
+- **extra 메타**: `confidence_score` (자가 감사 점수 — Claim Ledger 근거가 없는 점수는 기재 금지) · `genre` (Phase 1 장르 판정 값 — v2.21, `sermon-outline-codraft`가 §9 자동 참조로 소비)
+- **manifest 라인**: `핵심 강조: {담화 강조점 한 줄} · 장르: {판정}` (v2.21)
 - **journal**: `active_sermons` stage/next_step 갱신 — `notes`에 핵심 신학 명제 한 줄; `recent_topics`에 신학 주제 1~2개
 
 ---

@@ -1,12 +1,17 @@
 ---
 name: 설교-시리즈-기획 (sermon-series-planner)
-description: 특정 성경 책이나 신학적 주제를 바탕으로 4~8주 분량의 체계적인 설교 시리즈(절기 포함)를 기획하고 주차별 개요를 작성합니다.
+description: 특정 성경 책이나 신학적 주제를 바탕으로 4~8주 분량의 체계적인 설교 시리즈(절기 포함)를 기획하고 주차별 개요를 작성합니다. v2.21 — 진행 중 시리즈의 아크 정합을 회차 회고와 대조해 되짚는 '중간 점검 모드' 포함(조정은 제안만, 확정은 목회자).
 requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core/_hooks.md §5 CHAT 폴백"
 ---
 
 # 📅 설교-시리즈-기획 (Sermon Series Planner)
 
 이 스킬은 한 주짜리 단편 설교가 아니라, 성도들의 영적 성장을 장기적으로 도모하기 위한 **연속 설교(Sermon Series) 기획안**을 도출하는 데 특화되어 있습니다.
+
+## 🎛️ 두 모드 (v2.21)
+
+- **모드 1 — 기획 (기본):** 새 시리즈의 아크와 주차별 개요를 도출한다 (아래 §1~3).
+- **모드 2 — 중간 점검 (Mid-Course Review):** **진행 중** 시리즈의 현재 위치와 아크 정합을 되짚는다 (§4). 기획은 첫날 한 번이지만 아크는 매주 흔들린다 — 회차 회고가 남긴 신호를 남은 회차에 되먹이는 것이 이 모드의 일이다.
 
 ## ⚙️ 시스템 프롬프트 (System Instructions & Constraints)
 
@@ -31,6 +36,23 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 ### 3. 출력 후 후속 제안
 > 💡 "기획안이 마음에 드신다면, **'1주차 본문으로 `설교-연구`를 진행해 줘'**라고 말씀해 주세요."
 
+### 4. 중간 점검 모드 (Mid-Course Review, v2.21)
+
+**트리거:** "시리즈 점검해줘", "시리즈 지금 궤도 맞나", "남은 회차 조정할까" — 진행 중(`active_series`) 시리즈가 대상이다. 진행 중 시리즈가 없으면 정직하게 보고하고 기획 모드를 안내한다.
+
+**소스 취합 (AGENT 모드 · 읽기 — `_hooks.md` §9 정신):**
+1. `outputs/series/{series_id}/`의 기획안 + `_manifest.md` (아크의 원안)
+2. `core/pastor_journal.md`의 `active_series`(progress·next_passage)와 `lessons`(해당 시리즈 회차의 것 우선)
+3. 각 회차 `outputs/sermons/{passage_id}/`의 **stage와 회고 카드(sermon-retro 산출물)만** — 설교 원고 전문은 열지 않는다(점검에 불필요).
+- CHAT 모드: 기획안과 회고 카드 붙여넣기를 요청한다.
+
+**산출 (3부 — 관찰과 제안만):**
+1. **아크 위치:** 진행 {n}/{total} · 회차별 stage 표 · 다음 본문 · 절기 충돌 여부.
+2. **회고 반복 신호:** lessons·회고 카드에서 2회 이상 반복된 지적을 **원문 인용과 함께** 표시 (근거 없는 신호는 싣지 않는다 — red-team 근거 인용 의무와 같은 원칙). 회고 카드가 아직 없으면 "회고가 쌓일수록 이 점검이 정확해집니다"로 정직 보고.
+3. **남은 회차 조정 제안:** 반복 신호·아크 이탈(회차 Big Idea가 시리즈 Big Idea에서 벗어남)을 근거로 남은 회차의 핵심 요약·순서 조정을 **제안**한다. 예: "3주차 회고의 '적용이 추상적' 신호가 2회째입니다 — 4주차 핵심 요약의 적용 축을 구체 장면형으로 바꾸는 것을 검토하시겠어요?"
+
+🚫 **점검 모드의 금지:** 기획안을 임의로 수정하지 않는다 — 조정은 목회자가 확정한 항목만 기획안에 읽고-병합-쓰기로 반영하고, `_manifest.md`에 `- 중간 점검 ({date}) — {조정 요지 또는 "조정 없음"}` 1줄을 남긴다. 회차 설교의 내용(대지·적용 문안)을 지어 제안하지 않는다 — 조정 대상은 아크(순서·핵심 요약·본문 배치)까지다(대필 거절 불변).
+
 ---
 
 [시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑. 본문 기반 스킬은 시작 시 §6 본문 팩 우선을 먼저 적용한다. 아래는 본 스킬의 파라미터다.]
@@ -41,6 +63,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 - **extra 메타**: `total`(편수), `theme`, `start_target`(예정 시작 주일), `weekly_passages`(편당 본문 목록)
 - **manifest 구조**: 시리즈 개요 + 주차별 본문 + 진행 상태 표 — 각 주차 본문은 별도 `passage_id`로 관리, `outputs/sermons/{passage_id}/`와 양방향 링크
 - **journal**: `active_series` 신규 등록 (`id`/`title`/`total`/`progress: 0`/`next_passage`/`next_passage_id`/`started_on`/`last_updated`/`notes` 1-2줄) — **동일 id 존재 시 갱신 거부·충돌 보고**; `active_sermons`에 1주차 본문 사전 등록 (`stage: pending`, `series_id` 연결)
+- **중간 점검 모드 (v2.21)**: save — `outputs/series/{series_id}/review_{date}.md`; journal — 해당 `active_series.notes`에 `[중간 점검] ({date})` + `last_updated` 갱신(정체 감지 리셋). `progress`는 점검이 아니라 실제 회차 완료(`preached`)로만 전진하며, 회차 본문의 stage는 건드리지 않는다(`pastor_journal.md` §3.1.1 원리)
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**
