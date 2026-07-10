@@ -1,10 +1,10 @@
 ---
-last_updated: 2026-05-10
+last_updated: 2026-07-05
 schema_version: 2
 active_sermons: []
 active_series: []
 active_visitations: []
-recent_topics: []
+recent_topics: ["대표사상", "영적민감함"]
 open_prayer_requests: []
 lessons: []
 ---
