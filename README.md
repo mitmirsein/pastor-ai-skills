@@ -10,7 +10,7 @@
 
 > **처음 쓰시나요?** AI 도구가 익숙하지 않은 목회자를 위한 단계별 안내는 [USER_GUIDE.md](USER_GUIDE.md)에 있습니다. 아래 "1분 가동"이 어렵게 느껴지시면 그쪽을 먼저 보십시오.
 
-![Pastor-KR Hero Image](assets/hero-image.jpg)
+![큐티에서 설교와 칼럼으로 이어지는 Pastor-KR 파이프라인](assets/qt-sermon-column-pipeline.jpg)
 
 **Pastor-KR**은 목회 현장의 고유한 맥락을 깊이 이해하고, 실제적인 사역 결과물을 만들어내는 **고성능 한국어 목회 지원 AI 스킬셋**입니다. 
 
