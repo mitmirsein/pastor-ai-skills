@@ -12,6 +12,13 @@ temp/
 *.bin
 **/.DS_Store
 docs/
+ideation/
+
+# Virtual Environments & Environment Files (Banned for multi-machine portability)
+.venv/
+venv/
+.env
+.env.*
 
 # Data Shelf slots (사용자 로컬 자산 — 저작권·로컬 데이터는 커밋 금지, v2.8 P0-1)
 data/scripture/*
