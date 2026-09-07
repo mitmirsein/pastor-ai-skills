@@ -11,7 +11,9 @@ temp/
 *.db
 *.bin
 **/.DS_Store
+docs
 docs/
+ideation
 ideation/
 
 # Virtual Environments & Environment Files (Banned for multi-machine portability)
