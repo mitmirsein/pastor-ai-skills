@@ -263,7 +263,32 @@ Pastor-KR의 스킬은 목회자의 실제 워크플로우를 기준으로 나�
 
 - `data/`: 성경 본문, 신학 용어표, 2차 문헌 서재 팩을 넣는 자리입니다.
 - `lenses/`: 특정 신학 주제의 점검 렌즈를 넣는 자리입니다.
-- `tools/`: PDF 주석을 마크다운으로 변환하는 선택 도구 등이 들어갑니다.
+- `tools/`: PDF 주석 변환 도구와 선택적 Exegete 본문·원어 증거 어댑터가 들어갑니다.
+
+#### 선택적 Exegete 증거 어댑터
+
+`tools/exegete/pastor_adapter.py`는 `core/foundation.md`의
+`preferred_bible`을 기준으로 로컬 본문을 조회하고, 요청한 역본이 없을 때
+다른 역본으로 바꾸지 않습니다. 조회 결과에는 본문·원어의 상태, 실제 역본과
+데이터셋, revision, 파일 SHA-256, 요청 레코드 키가 JSON으로 남습니다.
+
+사용하려면 사용자에게 사용권이 있는 본문을
+`data/scripture/_exegete/catalog.json`에 등록하고, 원어 자료는
+`data/scripture/source/_exegete/catalog.json`에 공급자·revision·라이선스와 함께
+등록합니다. 이 데이터 슬롯은 저장소에 커밋하지 않습니다. 카탈로그가 없거나
+요청 역본이 없으면 기존 책별 슬롯을 확인한 뒤 본문 전문 붙여넣기로 강등합니다.
+
+```bash
+python3 tools/exegete/pastor_adapter.py "요3:16" --kind all --edition "개역개정"
+python3 tools/exegete/setup_data.py /secure/path/manifest.json \
+  --destination data/scripture/source
+python3 -m unittest discover -s tools/exegete/tests -p 'test_*.py' -v
+```
+
+`setup_data.py`는 파일별 URL과 SHA-256이 적힌 명시적 manifest만 처리하며,
+조회 중 자동 다운로드하지 않고 기존 해시가 다른 파일도 덮어쓰지 않습니다.
+현재 P0 범위는 한국어 본문과 헬라어·히브리어 증거입니다. OpenGNT·LXX와
+감사에 연결된 Word/한컴 발행은 별도 후속 범위입니다.
 
 ## 주요 파일
 

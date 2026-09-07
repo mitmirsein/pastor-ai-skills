@@ -70,10 +70,20 @@
 
 성경 본문을 다루는 스킬(`save: sermons-lineage` 또는 본문 기반 묵상)은 **분석 시작 전에 본문 전문을 확보**합니다.
 
-1. AGENT 모드: `data/scripture/`에서 해당 본문 조회 (슬롯 규약: `data/_README.md`).
-2. 없으면(또는 CHAT 모드): 사용자에게 **본문 전문 붙여넣기를 요청**하고 기다립니다. 세션 내 동일 본문 재요청은 하지 않습니다.
-3. 🚨 **기억으로부터의 성경 인용 금지**: 확보된 본문 팩이 유일한 인용 원천입니다. 이후 모든 직접 인용·절 번호는 본문 팩과 대조하고, 대조 불가 인용은 "(검증 불가)"를 명시합니다.
-4. 확보된 본문은 결과물 머리에 게재하여 독자(목회자)도 같은 정본을 보게 합니다.
+1. AGENT 모드: `tools/exegete/pastor_adapter.py`가 있으면 먼저 호출하여 `data/scripture/`의 요청 역본을 조회합니다. 호출 예시는 `python3 tools/exegete/pastor_adapter.py "요3:16" --kind passage --edition "개역개정"`입니다. `--edition`은 `core/foundation.md`의 `preferred_bible`과 일치시킵니다.
+2. 어댑터의 `status`와 `capabilities.passage`가 `ok`인 경우에만 그 결과를 본문 팩으로 사용합니다. `partial`, `unavailable`, `invalid_request`, `error`는 성공으로 취급하지 않으며, `warnings`, `missing_verses`, `sources`의 해시·역본·레코드 키를 연구 기록에 남깁니다.
+3. **역본 자동 대체 금지:** 요청한 역본이 없을 때 개역개정 → 개역한글 → WEB처럼 조용히 바꾸지 않습니다. 다른 역본은 사용자가 명시적으로 선택했을 때만 조회하고 결과에 실제 역본명과 `edition_id`를 표시합니다.
+4. 어댑터가 없거나 본문 팩을 확보하지 못하면 먼저 기존 `data/scripture/`의 책별 슬롯을 직접 확인합니다. 거기에도 요청 역본의 전문이 없으면(또는 CHAT 모드) 사용자에게 **본문 전문 붙여넣기를 요청**하고 기다립니다. 세션 내 동일 본문 재요청은 하지 않습니다. CHAT 모드에서 CLI를 실행했거나 저장했다고 보고하지 않습니다.
+5. 🚨 **기억으로부터의 성경 인용 금지:** 확보된 본문 팩이 유일한 인용 원천입니다. 이후 모든 직접 인용·절 번호는 본문 팩과 대조하고, 대조 불가 인용은 "(검증 불가)"를 명시합니다.
+6. 확보된 본문은 결과물 머리에 게재하여 독자(목회자)도 같은 정본을 보게 합니다. 어댑터 JSON은 증거 입력이며 `pastor_journal.md`, `_manifest.md`, `stage`를 직접 쓰지 않습니다.
+
+### §6.1 선택적 원어 증거 조회
+
+1. `sermon-research`와 `sermon_audit`은 본문 조회와 별도로 같은 어댑터를 `--kind original` 또는 `--kind all`로 호출할 수 있습니다. 구약 요청은 히브리어, 신약 요청은 헬라어 결과를 받으며 두 언어의 가용성을 섞지 않습니다.
+2. `capabilities.original_text`와 `capabilities.morphology`가 `available: true`일 때만 원문·원시 형태소 태그를 관찰 자료로 옮깁니다. `lexicon`, `louw_nida`, `discourse`, `lxx`는 각 capability가 따로 `available`일 때만 사용합니다.
+3. 원어 결과에는 데이터셋·판본·revision·license·로컬 상대 경로·SHA-256·레코드 키가 있어야 합니다. 원자료가 부분적이면 해당 절과 토큰을 누락시키지 말고 `partial`과 결손 경고를 표시합니다.
+4. 형태소 관찰은 어휘상·상·담화 기능·번역·신학적 해석과 동일하지 않습니다. 어댑터가 제공하지 않는 셀은 "자료 없음/확인 필요"로 두고 기억으로 보완하지 않습니다.
+5. 원어 데이터 설치·다운로드는 조회 중 자동 실행하지 않습니다. 설치가 필요하면 `tools/exegete/VENDOR.md`와 `data/_README.md`의 로컬 데이터 절차를 따르고, 사용자 원본과 파생 캐시를 분리합니다.
 
 ## §7. 목양 안전 게이트 (Care-Safety Gate) — 목양·서신 스킬 공통
 

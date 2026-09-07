@@ -7,9 +7,10 @@
 
 성경 본문을 다루는 모든 스킬은 분석 전에 본문 전문을 확보합니다 (`core/_hooks.md` §6):
 
-1. `data/scripture/`에 해당 책 파일이 있으면 거기서 본문을 가져옵니다.
-2. 없으면 사용자에게 **본문 전문 붙여넣기를 요청**합니다.
-3. **기억으로부터의 성경 인용은 금지**됩니다 — 확보된 본문 팩이 유일한 인용 원천이며, 대조 불가 인용은 "(검증 불가)"로 표기합니다.
+1. `tools/exegete/pastor_adapter.py`가 설치되어 있고 카탈로그가 있으면 `core/foundation.md`의 `preferred_bible`과 일치하는 역본을 먼저 조회합니다. 어댑터는 조회 중 다운로드하지 않습니다.
+2. 어댑터를 사용할 수 없거나 해당 역본이 없으면 `data/scripture/`에 있는 본문 팩을 직접 확인합니다.
+3. 그래도 없으면 사용자에게 **본문 전문 붙여넣기를 요청**합니다.
+4. **기억으로부터의 성경 인용은 금지**됩니다 — 확보된 본문 팩이 유일한 인용 원천이며, 대조 불가 인용은 "(검증 불가)"로 표기합니다.
 
 ## 슬롯 1: `data/scripture/` — 성경 본문
 
@@ -21,16 +22,69 @@
 - 다른 포맷(JSON 등)도 무방합니다 — 에이전트가 책/장/절을 식별할 수 있으면 됩니다.
 - 여러 역본을 쓰려면 하위 폴더로 구분: `data/scripture/KRV/`, `data/scripture/NKRV/` 등. 기본 역본은 `core/foundation.md`의 `preferred_bible`을 따릅니다.
 
+### 슬롯 1-c: Exegete 역본 카탈로그 (선택, P0)
+
+어댑터가 역본을 파일명만 보고 추정하지 않도록 `data/scripture/_exegete/catalog.json`에
+역본의 `edition_id`, 정식 `name`, `file`, `provider`, `revision`, `license`를 기록합니다.
+`aliases`는 사용자가 입력할 수 있는 별칭일 뿐 `edition_id`를 대신하지 않습니다.
+
+```json
+{
+  "editions": [
+    {
+      "edition_id": "krv-1998",
+      "name": "개역개정",
+      "aliases": ["개역개정"],
+      "file": "bible_krv.txt",
+      "provider": "대한성서공회",
+      "source_url": "원배포처 URL",
+      "revision": "user-supplied",
+      "license": "user-held copy"
+    }
+  ]
+}
+```
+
+카탈로그가 없는 경우 어댑터는 `bible_korean.txt`, `web.txt`처럼 공급자·판본을
+안전하게 식별할 수 있는 일부 파일명만 보수적으로 인식합니다. `bible_krv.txt`처럼
+저작권 역본은 카탈로그의 정확한 `edition_id`·공급자·revision 등록 없이는 사용하지
+않습니다. 요청 역본이 없으면 다른 역본으로 대체하지 않고 `unavailable`을 반환합니다.
+실제 조회 결과에는 파일 SHA-256과 요청 절의 레코드 키가 함께 남습니다.
+
 ### 슬롯 1-b: `data/scripture/source/` — 원어 정본 (선택, v2.12)
 
 원어 분석(파싱·Aspect·강조 표지)의 **대조 기준**입니다. 이 슬롯이 있으면 `sermon-research`의 원어 분석과 `sermon_audit` L1이 실제 텍스트 대조로 격상됩니다.
 
-- 저작권상 자유로운 정본을 직접 받아 넣으십시오:
-  - **신약**: SBLGNT (자유 라이선스)
-  - **구약**: WLC (Westminster Leningrad Codex — public domain)
-  - **칠십인역**: Rahlfs 구판 등 (라이선스 확인 후)
-- 포맷 자유 — 책/장/절 식별만 가능하면 됩니다.
+- 원어 데이터셋의 원배포처·revision·라이선스를 먼저 확인하고, 필요한 경우
+  `data/scripture/source/_exegete/catalog.json`에 기록하십시오. `VENDOR.md`에 고정한
+  upstream Exegete 형식(STEPBible TAGNT/TAHOT의 장절 토큰 행)을 읽을 수 있으며, 파일은
+  `source/original/greek/`와 `source/original/hebrew/`처럼 언어별로 분리합니다.
+- 포맷 자유가 아닙니다. 어댑터가 출처 레코드를 다시 찾을 수 있도록
+  `Jhn.3.16#01=...` 형식의 토큰 키와 탭 필드를 보존해야 합니다.
+- 원어 본문만 있고 형태소·사전이 없으면 `original_text`만 사용 가능하다고 기록합니다.
+  형태소 결과를 본문 정본이나 비평본 대조 완료로 과장하지 않습니다.
 - **이 슬롯이 비어 있으면**: 스킬은 원어 형태소 파싱 표를 **생략**하고 의미 범위 논의로 강등합니다. 사전 없는 파싱 단정은 금지 — "요구하되 검증 못 하는" 상태를 만들지 않기 위한 규약입니다.
+
+원어 카탈로그 예시는 다음과 같습니다.
+
+```json
+{
+  "datasets": [
+    {
+      "dataset_id": "stepbible-tagnt",
+      "language": "Greek",
+      "root": "original/greek",
+      "provider": "Tyndale House / STEPBible",
+      "source_url": "https://github.com/STEPBible/STEPBible-Data",
+      "revision": "고정 revision 기록",
+      "license": "CC BY 4.0"
+    }
+  ]
+}
+```
+
+OpenGNT·Louw-Nida·LXX는 P0 어댑터가 제공한다고 가정하지 않습니다. 각 capability가
+실제로 `available: true`일 때만 소비하며, 미연결 상태는 `unavailable`로 남깁니다.
 
 ## 슬롯 2: `data/terms/` — 신학 용어 대조표
 
