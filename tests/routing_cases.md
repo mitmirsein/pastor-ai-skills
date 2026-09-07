@@ -91,3 +91,6 @@
 | 83 | "요즘 내 묵상이 어느 책에 몰려 있는지, 안 편 책은 뭔지 보여줘" | qt-germinate-scan (모드 3 커버리지 조망) | v2.20 — 분포 조망(≠모드 1 반복 발아) |
 | 84 | journal: `active_series[ephesians-2026].progress: 3/6` + "시리즈 절반 왔는데 지금 궤도 맞는지 점검해줘" | sermon-series-planner (중간 점검 모드) | v2.21 — 아크 점검(회고 신호 대조) |
 | 85 | (경계) "가을에 새로 로마서 시리즈 기획하자" | sermon-series-planner (기획 모드) | v2.21 경계 — 신규 기획 ≠ 중간 점검 |
+| 86 | "요3:16 주해하자. 이번에는 WEB으로" (foundation은 개역개정) | sermon-research → 요청 역본 WEB 우선, 누락 시 같은 역본 전문 요청 | Exegete — 명시 역본 우선 |
+| 87 | "이 원어 본문과 파싱 자료로 주해해줘" (CHAT, 자료 전문 제공) | sermon-research → 제공 자료 직접 대조, 어댑터 없이도 근거별 Table A 작성 | Exegete — 수동 근거 경로 유지 |
+| 88 | "이 원어 주장을 검수해줘" (어댑터 토큰 중복/판본 불일치) | sermon_audit → 영향받는 주장 보류/판본 차이, 기존 L1 산술 유지 | Exegete — 부분 증거 자동 통과 금지 |

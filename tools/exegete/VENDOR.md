@@ -33,9 +33,11 @@ flow.
 ## Data policy
 
 No Bible, original-language, lexicon, LXX, or OpenGNT data is bundled here.
-The ignored slots under `data/scripture/` are user-local inputs. A data source
-is accepted only when its catalog records its provider, revision, license, and
-the local file hash is emitted by the adapter at query time.
+The ignored slots under `data/scripture/` are user-local inputs. Sources without
+complete metadata remain observations, not verified editions. Original provenance
+requires dataset_id, edition_id, provider, revision, license, source_url and tagset;
+otherwise `original_metadata_incomplete` is emitted. File hashes are emitted at
+query time. A hash alone does not establish provenance or token coverage.
 
 The adapter never downloads data during lookup. Installation and cache
 regeneration must be explicit, atomic, and directed at derived files only.

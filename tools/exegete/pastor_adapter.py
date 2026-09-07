@@ -263,7 +263,12 @@ def _catalog_path(root: Path) -> Optional[Path]:
 
 def _catalog(root: Path) -> Dict[str, Any]:
     path = _catalog_path(root)
-    return _read_json(path) if path else {}
+    if not path:
+        return {}
+    value = _read_json(path)
+    if value is None:
+        raise ValueError(f"invalid_catalog:{path}")
+    return value
 
 
 def _frontmatter_value(path: Path, key: str) -> Optional[str]:
@@ -276,9 +281,23 @@ def _frontmatter_value(path: Path, key: str) -> Optional[str]:
     for line in text.splitlines()[1:]:
         if line.strip() == "---":
             break
-        match = re.match(rf"^{re.escape(key)}\s*:\s*[\"']?([^#\"']+?)[\"']?\s*$", line)
+        match = re.match(rf"^{re.escape(key)}\s*:\s*(.*)$", line)
         if match:
-            return match.group(1).strip()
+            scalar = match.group(1).strip()
+            if scalar.startswith('"'):
+                value, end = json.JSONDecoder().raw_decode(scalar)
+                if not isinstance(value, str) or (scalar[end:].strip() and not scalar[end:].strip().startswith('#')):
+                    raise ValueError("invalid_preferred_bible")
+                return value
+            if scalar.startswith("'"):
+                quoted = re.fullmatch(r"'((?:[^']|'')*)'\s*(?:#.*)?", scalar)
+                if not quoted:
+                    raise ValueError("invalid_preferred_bible")
+                return quoted.group(1).replace("''", "'")
+            value = re.split(r"\s+#", scalar, maxsplit=1)[0].strip()
+            if not value or value.startswith(('#', '[', '{', '|', '>')):
+                raise ValueError("invalid_preferred_bible")
+            return value
     return None
 
 
@@ -353,6 +372,7 @@ def _select_passage_file(
     data_root: Path,
     requested_edition: str,
     explicit_file: Optional[Path],
+    requested_book: Optional[str] = None,
 ) -> Tuple[Optional[Path], Dict[str, Any], List[Dict[str, Any]]]:
     warnings: List[Dict[str, Any]] = []
     catalog = _catalog(data_root)
@@ -378,6 +398,8 @@ def _select_passage_file(
         return path, metadata, warnings
 
     matching = [entry for entry in editions if isinstance(entry, dict) and _edition_matches(entry, requested_edition)]
+    if requested_book:
+        matching = [entry for entry in matching if not entry.get("book") or _book(str(entry["book"])) == _book(requested_book)]
     if len(matching) > 1:
         return None, {"requested_edition": requested_edition}, [
             _warning("ambiguous_edition", f"역본 식별자가 여러 파일과 일치합니다: {requested_edition}")
@@ -469,7 +491,7 @@ def _passage_component(
     requested_edition: str,
     explicit_file: Optional[Path],
 ) -> Dict[str, Any]:
-    path, metadata, warnings = _select_passage_file(data_root, requested_edition, explicit_file)
+    path, metadata, warnings = _select_passage_file(data_root, requested_edition, explicit_file, requested[0]["step"])
     base: Dict[str, Any] = {
         "status": STATUS_UNAVAILABLE,
         "requested_edition": requested_edition,
@@ -719,10 +741,14 @@ def _original_component(requested: List[Dict[str, Any]], source_root: Path) -> D
     source_keys: Dict[Path, List[str]] = {}
     duplicate_tokens: List[str] = []
     lexicon_paths: Dict[Path, str] = {}
+    selected_dataset = None
+    conflicted = False
+    read_failed = False
     for path, metadata, language_hint in entries:
         try:
             lines = path.read_text(encoding="utf-8").splitlines()
         except (OSError, UnicodeDecodeError) as error:
+            read_failed = True
             base["warnings"].append(_warning("original_read_error", f"원어 파일을 읽지 못했습니다: {error}"))
             continue
         for line in lines:
@@ -734,6 +760,15 @@ def _original_component(requested: List[Dict[str, Any]], source_root: Path) -> D
             key = (step, int(chapter), int(verse))
             if key not in wanted:
                 continue
+            identity = tuple(metadata.get(field) for field in ("dataset_id", "edition_id", "revision"))
+            if selected_dataset is None:
+                selected_dataset = identity
+            elif identity != selected_dataset:
+                conflicted = True
+                continue
+            token["source_path"] = _relative_path(path)
+            token["dataset_id"] = metadata.get("dataset_id")
+            token["edition_id"] = metadata.get("edition_id")
             token_id = token["token_id"]
             if any(existing["token_id"] == token_id for existing in verse_tokens.get(key, [])):
                 duplicate_tokens.append(token_id)
@@ -759,6 +794,12 @@ def _original_component(requested: List[Dict[str, Any]], source_root: Path) -> D
     base["resolved_verses"] = resolved
     base["missing_verses"] = missing
     base["tokens"] = flat_tokens
+    gaps = [item["ref"] for item in resolved if
+            [t["token_index"] for t in item["tokens"]] != list(range(1, len(item["tokens"]) + 1))]
+    if gaps:
+        base["warnings"].append(_warning("token_sequence_gap", "토큰 번호에 결손이 있습니다.", refs=gaps))
+    if conflicted:
+        base["warnings"].append(_warning("dataset_conflict", "서로 다른 데이터셋·판본을 병합하지 않았습니다. 사용할 데이터셋을 명시하십시오."))
     if duplicate_tokens:
         base["warnings"].append(
             _warning("duplicate_original_tokens", "원어 데이터에 중복 토큰이 있어 첫 항목만 사용했습니다.", token_ids=duplicate_tokens)
@@ -783,6 +824,21 @@ def _original_component(requested: List[Dict[str, Any]], source_root: Path) -> D
                 metadata={"provider": "local lexicon", "revision": "user-supplied", "license": "user-supplied or unspecified"},
             )
         )
+    required_metadata = ("dataset_id", "edition_id", "provider", "revision", "license", "source_url", "tagset")
+    used_metadata = [metadata for path, metadata, _ in entries if source_keys.get(path)]
+    base["provenance_complete"] = bool(used_metadata) and all(
+        all(metadata.get(field) for field in required_metadata) for metadata in used_metadata
+    )
+    if not base["provenance_complete"]:
+        base["warnings"].append(_warning("original_metadata_incomplete", "판본·출처·태그 체계 메타가 불완전합니다. 원자료 관찰만 가능하며 판본 검증 완료로 사용하지 마십시오."))
+    # Token presence cannot establish that the final token of a verse exists.
+    # A separately checked catalog count can certify coverage for a fixed dataset.
+    base["coverage_complete"] = bool(resolved) and not missing and all(
+        any(metadata.get("verse_token_counts", {}).get(item["ref"]) == len(item["tokens"])
+            for metadata in used_metadata) for item in resolved
+    )
+    if not base["coverage_complete"]:
+        base["warnings"].append(_warning("token_coverage_unverified", "절별 토큰 총수 대조가 없어 원어 전문 완전성은 미검증입니다."))
     if missing:
         base["status"] = STATUS_PARTIAL if resolved else STATUS_UNAVAILABLE
         base["warnings"].append(
@@ -790,6 +846,8 @@ def _original_component(requested: List[Dict[str, Any]], source_root: Path) -> D
         )
     else:
         base["status"] = STATUS_OK
+    if duplicate_tokens or conflicted or gaps or read_failed:
+        base["status"] = STATUS_PARTIAL if resolved else STATUS_ERROR
     return base
 
 
@@ -918,21 +976,22 @@ def query(
         evidence["capabilities"]["original_text"] = _capability(
             bool(original.get("tokens")),
             None if original.get("tokens") else "원어 데이터가 없습니다.",
-            complete=original_ok,
+            complete=original_ok and original.get("coverage_complete", False),
+            provenance_complete=original.get("provenance_complete", False),
             language=original.get("language"),
         )
         has_morphology = any(token.get("raw_morphology") for token in original.get("tokens", []))
         evidence["capabilities"]["morphology"] = _capability(
             has_morphology,
             None if has_morphology else "형태소 데이터가 없습니다.",
-            complete=has_morphology and original_ok,
+            complete=has_morphology and original_ok and original.get("coverage_complete", False) and all(token.get("raw_morphology") for token in original.get("tokens", [])),
             language=original.get("language"),
         )
-        has_lexicon = any("lexicon" in token for token in original.get("tokens", []))
+        has_lexicon = any(entry.get("entry") for token in original.get("tokens", []) for entry in token.get("lexicon", []))
         evidence["capabilities"]["lexicon"] = _capability(
             has_lexicon,
             None if has_lexicon else "사전 데이터가 없거나 조회되지 않았습니다.",
-            complete=has_lexicon and original_ok,
+            complete=has_lexicon and original_ok and original.get("coverage_complete", False) and all(token.get("lexicon") and all(entry.get("entry") for entry in token["lexicon"]) for token in original.get("tokens", [])),
             language=original.get("language"),
         )
         evidence["sources"].extend(original.get("sources", []))

@@ -238,6 +238,67 @@ class AdapterFixture(unittest.TestCase):
         self.assertEqual(payload["status"], "unavailable")
         self.assertIn("capabilities", payload)
 
+    def test_foundation_comments_and_quotes(self):
+        for scalar in ('"WEB" # chosen', "'WEB' # chosen", 'WEB # chosen'):
+            self.foundation.write_text(f'---\npreferred_bible: {scalar}\n---\n', encoding='utf-8')
+            self.assertEqual(pastor_adapter._preferred_edition(self.foundation), 'WEB')
+
+    def test_two_books_in_one_edition(self):
+        (self.data_root / 'john.txt').write_text('3:16 fixture john\n', encoding='utf-8')
+        (self.data_root / 'gen.txt').write_text('1:1 fixture genesis\n', encoding='utf-8')
+        self.write_catalog({'editions': [
+            {'name': 'fixture', 'book': '요', 'file': 'john.txt'},
+            {'name': 'fixture', 'book': '창', 'file': 'gen.txt'}]}, self.data_root)
+        for ref, text in [('요3:16', 'fixture john'), ('창1:1', 'fixture genesis')]:
+            evidence = pastor_adapter.query(ref, kind='passage', data_root=self.data_root, edition='fixture')
+            self.assertEqual(evidence['status'], 'ok')
+            self.assertEqual(evidence['resolved_verses'][0]['text'], text)
+
+    def test_original_conflicts_and_empty_dictionary_never_complete(self):
+        root = self.source_root / 'greek'
+        root.mkdir()
+        path = root / 'tokens.tsv'
+        path.write_text('Jhn.3.16#01=NKO\tA\tfirst\tG0001=N\tA\n'
+                        'Jhn.3.16#02=NKO\tB\n'
+                        'Jhn.3.16#01=NKO\tCONFLICT\tother\tG0002=N\tC\n', encoding='utf-8')
+        lex = self.source_root / 'lexicon'
+        lex.mkdir()
+        (lex / 'greek_lexicon.json').write_text('{"entries": {}, "by_base": {}}', encoding='utf-8')
+        evidence = pastor_adapter.query('요3:16', kind='original', source_root=self.source_root)
+        self.assertEqual(evidence['status'], 'partial')
+        for name in ('original_text', 'morphology', 'lexicon'):
+            self.assertFalse(evidence['capabilities'][name]['complete'])
+        self.assertFalse(evidence['capabilities']['lexicon']['available'])
+        self.assertFalse(evidence['original_language']['provenance_complete'])
+
+    def test_coverage_requires_separate_counts(self):
+        root = self.source_root / 'greek'
+        root.mkdir()
+        (root / 'tokens.tsv').write_text('Jhn.3.16#01=NKO\tA\tfirst\tG0001=N\tA\n', encoding='utf-8')
+        metadata = dict(dataset_id='fixture', edition_id='fixture', provider='fixture', revision='1',
+                        license='fixture', source_url='https://example.invalid', tagset='fixture', language='Greek', root='greek')
+        self.write_catalog({'datasets': [metadata]}, self.source_root)
+        evidence = pastor_adapter.query('요3:16', kind='original', source_root=self.source_root)
+        self.assertFalse(evidence['capabilities']['original_text']['complete'])
+        metadata['verse_token_counts'] = {'Jhn 3:16': 1}
+        self.write_catalog({'datasets': [metadata]}, self.source_root)
+        evidence = pastor_adapter.query('요3:16', kind='original', source_root=self.source_root)
+        self.assertTrue(evidence['capabilities']['original_text']['complete'])
+        self.assertTrue(evidence['original_language']['provenance_complete'])
+
+    def test_different_datasets_are_not_merged(self):
+        datasets = []
+        for i in (1, 2):
+            root = self.source_root / f'greek{i}'
+            root.mkdir()
+            (root / 'tokens.tsv').write_text(f'Jhn.3.16#0{i}=NKO\tA\tfirst\tG0001=N\tA\n', encoding='utf-8')
+            datasets.append({'dataset_id': str(i), 'language': 'Greek', 'root': root.name})
+        self.write_catalog({'datasets': datasets}, self.source_root)
+        evidence = pastor_adapter.query('요3:16', kind='original', source_root=self.source_root)
+        self.assertEqual(evidence['status'], 'partial')
+        self.assertEqual(len(evidence['original_language']['tokens']), 1)
+        self.assertIn('dataset_conflict', {w['code'] for w in evidence['warnings']})
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

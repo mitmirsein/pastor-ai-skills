@@ -120,3 +120,27 @@ This JSON is evidence for `sermon-research` and `sermon_audit`; it does not
 write `pastor_journal.md`, `_manifest.md`, `stage`, or a Word document.
 Word/한컴 export is a separate follow-up feature and is not part of this P0
 adapter.
+
+## Completeness and book-specific files
+
+`available` means at least one usable observation exists. `complete` is separate:
+missing morphology, unresolved dictionary entries, duplicate tokens and dataset
+conflicts cannot certify completeness. Original text coverage additionally needs
+catalog `verse_token_counts`, for example `{"Jhn 3:16": 28}`, checked against an
+independent record of the pinned dataset. Do not derive these counts from the
+possibly truncated query output. Without counts, observations remain usable but
+coverage is explicitly unverified. Counts are dataset-specific, not universal
+verse lengths. The example is a schema illustration, not a certified count.
+
+Original catalog metadata must include `dataset_id`, `edition_id`, `provider`,
+`revision`, `license`, `source_url`, and `tagset` for `provenance_complete: true`.
+Unregistered sources produce a warning. Lexicon source metadata remains unverified
+unless independently supplied and checked; a successful entry lookup alone is not
+a bibliographic verification. Original datasets with different identities are
+never merged; select one dataset in the local catalog for a clean lookup.
+
+For book-specific editions, register multiple entries with the same edition name
+and separate `book`/`file` values. The requested book selects the matching entry.
+An integrated file and a book-specific file both matching the request remain
+ambiguous: remove the redundant registration. Foundation scalar values support
+quoted/unquoted strings and trailing YAML comments.
