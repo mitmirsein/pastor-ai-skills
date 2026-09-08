@@ -132,7 +132,7 @@ class AdapterFixture(unittest.TestCase):
             encoding="utf-8",
         )
         hebrew.write_text(
-            "Gen.1.1#01=HVqp3ms\tבְּרֵאשִׁית\tbərēʾšît\tin the beginning\tH7225\tN-fs\t{H7225=beginning}\n",
+            "Gen.1.1#01=HVqp3ms\tבְּרֵאשִׁית\tbərēʾšît\tin the beginning\tH7225\tN-fs\tH7225\t{H7225=רֵאשִׁית=beginning}\n",
             encoding="utf-8",
         )
         self.write_catalog(
@@ -171,7 +171,7 @@ class AdapterFixture(unittest.TestCase):
         hebrew_token = hebrew_evidence["original_language"]["tokens"][0]
         self.assertEqual(hebrew_token["language"], "Hebrew")
         self.assertEqual(hebrew_token["strong"], "H7225")
-        self.assertEqual(hebrew_token["lemma"], "H7225=beginning")
+        self.assertEqual(hebrew_token["lemma"], "רֵאשִׁית")
         self.assertEqual(greek_evidence["sources"][0]["record_keys"], ["Jhn.3.16#01=NKO"])
 
     def test_original_partial_result_and_exact_lexicon_key(self):
@@ -242,6 +242,17 @@ class AdapterFixture(unittest.TestCase):
         for scalar in ('"WEB" # chosen', "'WEB' # chosen", 'WEB # chosen'):
             self.foundation.write_text(f'---\npreferred_bible: {scalar}\n---\n', encoding='utf-8')
             self.assertEqual(pastor_adapter._preferred_edition(self.foundation), 'WEB')
+
+    def test_original_field_boundaries(self):
+        _, greek = pastor_adapter._original_line(
+            'Jhn.3.16#01=NKO\tοὕτως (houtōs)\tThus\tG3779=ADV\tοὕτω, οὕτως=thus', 'greek')
+        self.assertEqual(greek['surface'], 'οὕτως')
+        self.assertEqual(greek['transliteration'], 'houtōs')
+        self.assertEqual(greek['lemma'], 'οὕτω, οὕτως')
+        _, hebrew = pastor_adapter._original_line(
+            'Gen.1.1#02=L\tבָּרָא\tbara\tcreated\t{H1254A}\tHVqp3ms\tH1254A\t{H1254A=בָּרָא=to create}', 'hebrew')
+        self.assertEqual(hebrew['lemma'], 'בָּרָא')
+        self.assertEqual(hebrew['strong'], '{H1254A}')
 
     def test_two_books_in_one_edition(self):
         (self.data_root / 'john.txt').write_text('3:16 fixture john\n', encoding='utf-8')

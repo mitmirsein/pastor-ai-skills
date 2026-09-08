@@ -20,7 +20,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 ### [Phase 0: 본문 확보 (Passage-Pack First)] — v2.8 신설, 생략 불가
 - 📎 **상류 자동 참조 (v2.18):** `core/_hooks.md` §9를 적용한다 — AGENT 모드면 같은 lineage 폴더의 브레인스토밍·씨앗 산출물(최신 v{NN})을 자동 로드하고 1줄 브리핑. 없으면 정직하게 없다고 말한다.
 - `core/_hooks.md` §6을 적용한다: ① 선택적 어댑터로 요청 역본 조회 → ② 어댑터가 없거나 성공하지 않으면 기존 `data/scripture/` 책별 슬롯 확인 → ③ 그래도 없으면 **사용자에게 본문 전문(사용 역본) 붙여넣기를 요청하고 기다린다.**
-- **선택적 Exegete 증거 어댑터(P0):** AGENT 모드에서 `python3 tools/exegete/pastor_adapter.py "{구절}" --kind all --edition "{foundation.preferred_bible}"`를 호출할 수 있다. `passage.status: ok`인 경우에만 해당 절의 본문·역본·출처 해시를 본문 팩으로 채택한다. `partial/unavailable/error`는 기존 붙여넣기 폴백으로 강등하며, 다른 역본으로 자동 대체하지 않는다.
+- **선택적 Exegete 증거 어댑터(P0):** AGENT 모드에서 `python3 tools/exegete/pastor_adapter.py "{구절}" --kind all --edition "{이번 요청 역본 또는 foundation.preferred_bible}"`를 호출할 수 있다. 역본 우선순위와 본문 성공 조건은 §6을 따른다. `partial/unavailable/error`는 기존 슬롯·붙여넣기 폴백으로 강등하며, 다른 역본으로 자동 대체하지 않는다.
 - 🚨 본문 팩 확보 전에는 Phase 1로 진입하지 않으며, **기억으로 본문을 깔지 않는다.**
 - 확보된 본문 전문을 리포트 머리에 게재한다. 결과물에는 실제 `edition_id`, `revision`, 상대 경로, SHA-256, 요청 절의 레코드 키를 증거 메모로 남긴다. 이후 모든 직접 인용·절 번호는 이 블록과 대조하고, 대조 불가 인용은 "(검증 불가)"로 표기한다.
 

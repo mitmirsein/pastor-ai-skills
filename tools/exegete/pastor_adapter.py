@@ -629,13 +629,11 @@ def _original_line(line: str, language: str) -> Optional[Tuple[str, Dict[str, An
         surface = fields[0] if fields else ""
         transliteration = fields[1] if len(fields) > 1 else ""
         gloss = fields[2] if len(fields) > 2 else ""
-        strong = fields[3].strip("{}") if len(fields) > 3 else ""
+        strong = fields[3] if len(fields) > 3 else ""
         morphology = fields[4] if len(fields) > 4 else ""
-        lemma = ""
-        for field in fields[5:]:
-            if re.search(r"[GH]\d+", field):
-                lemma = field.strip("{}")
-                break
+        lemma_definition = next((field for field in fields[5:] if re.search(r"H\d+[A-Za-z]?=", field)), "")
+        lemma_entries = re.findall(r"(H\d+[A-Za-z]?)=([^={}]+)=", lemma_definition)
+        lemma = lemma_entries[-1][1] if lemma_entries else ""
         token = {
             "token_id": record_key,
             "record_key": line.strip().split("\t", 1)[0],
@@ -649,14 +647,19 @@ def _original_line(line: str, language: str) -> Optional[Tuple[str, Dict[str, An
             "morphology": morphology,
             "raw_morphology": morphology,
             "lemma": lemma,
+            "lemma_definition": lemma_definition,
+            "lemma_entries": [{"strong": key, "lemma": value} for key, value in lemma_entries],
             "raw_fields": fields,
         }
     else:
-        surface = fields[0] if fields else ""
+        raw_surface = fields[0] if fields else ""
+        surface_match = re.fullmatch(r"(.+?)\s+\(([^()]*)\)", raw_surface)
+        surface = surface_match.group(1) if surface_match else raw_surface
         gloss = fields[1] if len(fields) > 1 else ""
         strong_parse = fields[2] if len(fields) > 2 else ""
         strong, morphology = (strong_parse.split("=", 1) + [""])[:2] if "=" in strong_parse else (strong_parse, "")
-        lemma = fields[3] if len(fields) > 3 else ""
+        lemma_definition = fields[3] if len(fields) > 3 else ""
+        lemma = lemma_definition.split("=", 1)[0]
         token = {
             "token_id": record_key,
             "record_key": line.strip().split("\t", 1)[0],
@@ -664,11 +667,13 @@ def _original_line(line: str, language: str) -> Optional[Tuple[str, Dict[str, An
             "language": "Greek",
             "ref": _canonical_ref(book, chapter, verse),
             "surface": surface,
+            "transliteration": surface_match.group(2) if surface_match else "",
             "gloss": gloss,
             "strong": strong,
             "morphology": morphology,
             "raw_morphology": morphology,
             "lemma": lemma,
+            "lemma_definition": lemma_definition,
             "raw_fields": fields,
         }
     return f"{step}.{chapter}.{verse}", token
