@@ -48,7 +48,7 @@ description: pastor_journal.md의 현재 상태를 시각화된 대시보드로 
 | H3 | followup 임박 | `active_visitations[].followup_due` ≤ currentDate + 7d (`pastor_journal.md` §1.4 임박 기준) |
 | H4 | followup 만료 | `active_visitations[].followup_due` ≤ currentDate - 14d (§1.4 만료 기준) |
 | H5 | 시리즈 정체 | `active_series[].last_updated` ≥ 21일 경과 (§1.4 정체 기준) |
-| H6 | 본문 lineage 정체 | `active_sermons[stage != preached]` 중 `started_on` ≥ 21일 경과 |
+| H6 | 본문 lineage 정체 | `active_sermons[stage not in {preached, published}]` 중 해당 본문 manifest `last_updated` ≥ 21일 경과 (없으면 개별 파일의 최근 작업일, 그것도 없으면 정체 판단 보류) |
 | H7 | PII 의심 | journal 내 한글 풀네임 + 직분 패턴 (예: "김철수 집사") 또는 전화번호 패턴 발견 |
 
 H1·H7은 🚨 critical, H3·H6은 ⚠️ attention, H4·H5는 📋 info, H2는 정보성 (신규 사용자 안내 메시지로 변환).
@@ -140,7 +140,7 @@ H1·H7은 🚨 critical, H3·H6은 ⚠️ attention, H4·H5는 📋 info, H2는 
 - 본문 작업: {a}건
 - 시리즈 갱신: {b}건
 - 🌱 큐티: {q}건 (`outputs/devotionals/`)
-- 비-본문 (심방/행정/공지): {c}건
+- 비-본문 (심방·과거 행정 보관 자료): {c}건
 - 총 누적 파일: {d}개
 
 ---

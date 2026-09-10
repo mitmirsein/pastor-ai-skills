@@ -88,8 +88,8 @@ active_sermons:
   `devotional → seed → brainstorm → research → dilemma → outline → redteam → drafted → preached → published`
   (`dilemma`는 선택 단계로 건너뛸 수 있습니다. v2.11 발아 파이프라인의 `devotional`(큐티 누적)·`seed`(씨앗 합성)·`outline`(개요 동반작성)을 포함합니다. 단, 큐티 스킬(qt-companion·devotional-generator)은 journal에 **신규 항목을 만들지 않으므로** 발아 항목의 journal 진입은 `seed`부터입니다 — `devotional` 값은 수동·과거 항목 호환용입니다.)
 - **예약 단계**: `pending` — `sermon-series-planner`가 다음 주차 본문을 사전 등록할 때만 사용합니다.
-- **파생 작업 단계 (순서 없음)**: `study`(성경공부 교안) · `smallgroup`(나눔지) — 파생물 생성 기록이지 본체 진행 단계가 아니므로, 기존 stage가 이보다 늦으면(예: `preached`) **본체 stage를 후퇴시키지 않고 `notes`에만 기록**합니다.
-- **발행 세분값 매핑**: 파일 YAML의 `published_blog` / `published_column` / `published_tts` / `published_cardnews`는 lineage 파일 전용 표기이며, journal에는 **발행 전이 가드**(`core/_hooks.md` §3.6)를 거쳐 반영합니다 — `preached_on`이 채워진 항목만 `published`​로 전이하고, 선포 전이면 stage를 바꾸지 않고 `notes`에만 기록합니다. `column_draft`(qt-to-column)·`devotional_draft`(qt-to-devotional, v2.16)는 journal의 stage를 바꾸지 않습니다(`notes`만).
+- **파생 작업 단계 (순서 없음)**: `study`(성경공부 교안) · `smallgroup`(나눔지) — 파생물 생성 기록이지 본체 진행 단계가 아니므로, 본체의 현재 단계와 무관하게 **stage는 바꾸지 않고 `notes`에만 기록**합니다.
+- **발행 세분값 매핑**: 파일의 `published_blog` / `published_column` / `published_tts` / `published_cardnews`는 과거 작업 종류 표기이며 실제 게시 증거가 아닙니다. 초안 생성은 본체 불변입니다. 실제 선포·게시 사건, 개별 버전 상태, 재묵상·회고·리허설의 본체 불변 규칙은 `core/_hooks.md` §3.6이 정의합니다. 본체 `published`는 선포 확인과 적어도 한 산출물의 실제 게시 확인을 모두 갖춘 진행 요약입니다. 과거 기록은 확인 없이 재분류하지 않습니다.
 
 ### 3.2 `active_series`
 강해/주제 시리즈의 진행 현황.
@@ -177,10 +177,10 @@ last_qt_date: 2026-07-09       # YYYY-MM-DD | null (한 번도 기록 없음)
 `pastor-concierge`가 본 파일을 로드할 때 다음 우선순위로 컨텍스트를 추출합니다.
 
 1. `active_series.next_passage` — 다음 주일 설교 후보 (1순위)
-2. `active_sermons[stage != preached]` — 미완료 설교 작업
+2. `active_sermons[stage not in {preached, published}]` — 미완료 설교 작업
 3. `active_visitations[followup_due <= today + 7d]` — 임박한 심방
 4. `recent_topics` — 중복 주제 회피
-5. `open_prayer_requests` — 목회 서신/광고/심방 기도 시 활용
+5. `open_prayer_requests` — 심방·소그룹·성도 묵상 기도 시 활용
 
 ---
 

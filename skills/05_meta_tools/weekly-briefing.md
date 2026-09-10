@@ -54,18 +54,19 @@ description: 지정 기간(기본: 최근 7일) 동안의 outputs/ 작업물과 
 
 [비-본문 작업]
 - outputs/{since ≤ date ≤ until}/{category}/*.md  →  파일 목록 수집
-  - category 매핑: 02_pastoral_care(목양), 04_church_admin(행정), 03_omni_publisher(출판)
+  - category 매핑: 02_pastoral_care(목양), 04_church_admin(과거 자료 조회만), 03_omni_publisher(출판)
 
 [큐티 발아 코퍼스 — v2.12]
+- qt-germinate-scan의 경로·원문 해시 중복 제거와 목회자 발화 한정 집계를 따른다. 기존 폴더 안 인덱스 누락 노트도 보완한다.
 - outputs/devotionals/_index.md 가 있으면 그것을 1차 소스로 date ∈ [since, until] 큐티를 카운트
   (없으면 outputs/devotionals/*/ 의 qt_kind: dialogue 노트 YAML date로 집계)
 - 기간 내 반복 본문/주제 상위 1~2개를 관찰 (판정은 qt-germinate-scan의 몫 — 여기서는 스냅샷만)
 
 [발아 퍼널 — v2.18]
-- 씨앗 {s} = outputs/sermons/_index.md에서 skill이 qt-germinate-seed인 라인 수 (date ∈ [since, until])
-- 진입 {b} = 그 씨앗 passage_id 중 stage가 brainstorm 이상으로 진행된 본문 수 (journal active_sermons 또는 인덱스 최신 stage 기준)
-- 선포 {p} = 그중 stage가 preached/published에 도달한 본문 수
-- sermons/_index.md가 없으면 퍼널 줄을 "집계 불가(설교 인덱스 부재)"로 정직 보고 — 지어내기 금지
+- 씨앗 {s} = 기간 내 qt-germinate-seed가 있는 **고유 passage_id 수**. 같은 본문의 여러 씨앗 버전은 1건이다.
+- 진입 {b} = 위 씨앗 본문 집합 중 현재 journal/manifest에서 brainstorm 이상으로 확인된 고유 본문 수.
+- 선포 {p} = 그 집합 중 실제 preached_on이 확인된 고유 본문 수. 기간 내 씨앗 코호트의 현재 진행으로 표기하며 전환 소요시간이나 기간 내 선포 건수로 오해하지 않게 한다.
+- 인덱스는 위치 힌트이며 최신 파일 stage로 본체 상태를 판정하지 않는다. 모든 대상 폴더의 누락 파일 frontmatter를 보완하고 경로별 중복을 제거한다. 인덱스가 없으면 같은 원본 메타로 집계하고, 원본/상태를 읽지 못한 항목은 확인 범위와 미확인 수를 표시한다. 집계 불가면 숫자를 만들지 않는다.
 
 [칼럼 — v2.17]
 - outputs/columns/_index.md 가 있으면 date ∈ [since, until] 칼럼을 카운트 (지면별 병기; 없으면 생략 — 지어내기 금지)
@@ -139,10 +140,10 @@ description: 지정 기간(기본: 최근 7일) 동안의 outputs/ 작업물과 
 **🌱 큐티·발아 스냅샷** (v2.12)
 - 이번 주 큐티 {N}건 — 반복 관찰: {본문/주제: n회} {또는 "누적 중"}
 - {반복 2회 이상이 보이면} 💡 "요즘 큐티 모아서 설교감 있는지 봐줘"(qt-germinate-scan)를 권합니다
-- 🌱 발아 퍼널: 씨앗 {s}건 → 설교 진입 {b}건 → 선포 {p}건 (집계창: {since}~{until}) *(v2.18)*
+- 🌱 발아 퍼널: 씨앗 본문 {s}개 → 설교 진입 {b}개 → 선포 {p}개 (집계창: {since}~{until}) *(v2.18)*
 *(큐티 기록이 없으면 이 블록 생략 — 지어내기 금지)*
 
-**행정** ({N}건)
+**과거 행정 보관 자료** ({N}건; 신규 생성 안내 없음)
 - {category}: {파일명 또는 1줄 설명}
 *(이 기간 기록 없음)*
 

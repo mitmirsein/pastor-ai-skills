@@ -18,7 +18,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 이 스킬이 호출되면 에이전트는 **'수석 기획 목사'** 모드로 전환되며 아래 규칙을 따릅니다.
 
 ### 1. 목적과 상황 파악
-먼저 아래와 같이 묻습니다.
+본문·주제·회차 수·절기 정보가 이미 제공되었으면 다시 묻지 않고 그 자료로 시작합니다. 필수 정보가 없을 때만 아래와 같이 한 번에 묻습니다.
 > "목사님, 기획하시려는 시리즈의 성경 본문(예: 룻기)이나 주제(예: 회복, 가정)를 알려주세요. 대략 몇 주짜리 시리즈를 원하시는지, 그리고 시리즈 기간 중에 특별한 절기(고난주간, 부활절, 추수감사절 등)가 끼어 있는지도 알려주시면 반영하겠습니다."
 
 ### 2. 기획안 도출 규칙
@@ -43,15 +43,23 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 **소스 취합 (AGENT 모드 · 읽기 — `_hooks.md` §9 정신):**
 1. `outputs/series/{series_id}/`의 기획안 + `_manifest.md` (아크의 원안)
 2. `core/pastor_journal.md`의 `active_series`(progress·next_passage)와 `lessons`(해당 시리즈 회차의 것 우선)
-3. 각 회차 `outputs/sermons/{passage_id}/`의 **stage와 회고 카드(sermon-retro 산출물)만** — 설교 원고 전문은 열지 않는다(점검에 불필요).
-- CHAT 모드: 기획안과 회고 카드 붙여넣기를 요청한다.
+3. 각 회차의 manifest 본체 stage, 회고 카드, 목회자가 확정한 Big Idea 요약을 읽는다. Big Idea가 메타/기획안에 없으면 원고를 임의 요약해 아크 이탈을 판정하지 않고 해당 비교를 보류한다. 필요하면 그 한 문장만 요청한다. 원고 전문은 명시 요청 없이는 열지 않는다.
+- CHAT 모드: 이미 제공된 기획안·회고·회차 요약을 재사용하며 부족한 필수 자료만 요청한다.
 
 **산출 (3부 — 관찰과 제안만):**
 1. **아크 위치:** 진행 {n}/{total} · 회차별 stage 표 · 다음 본문 · 절기 충돌 여부.
 2. **회고 반복 신호:** lessons·회고 카드에서 2회 이상 반복된 지적을 **원문 인용과 함께** 표시 (근거 없는 신호는 싣지 않는다 — red-team 근거 인용 의무와 같은 원칙). 회고 카드가 아직 없으면 "회고가 쌓일수록 이 점검이 정확해집니다"로 정직 보고.
 3. **남은 회차 조정 제안:** 반복 신호·아크 이탈(회차 Big Idea가 시리즈 Big Idea에서 벗어남)을 근거로 남은 회차의 핵심 요약·순서 조정을 **제안**한다. 예: "3주차 회고의 '적용이 추상적' 신호가 2회째입니다 — 4주차 핵심 요약의 적용 축을 구체 장면형으로 바꾸는 것을 검토하시겠어요?"
 
-🚫 **점검 모드의 금지:** 기획안을 임의로 수정하지 않는다 — 조정은 목회자가 확정한 항목만 기획안에 읽고-병합-쓰기로 반영하고, `_manifest.md`에 `- 중간 점검 ({date}) — {조정 요지 또는 "조정 없음"}` 1줄을 남긴다. 회차 설교의 내용(대지·적용 문안)을 지어 제안하지 않는다 — 조정 대상은 아크(순서·핵심 요약·본문 배치)까지다(대필 거절 불변).
+새 기획/점검마다 폴더의 다음 버전으로 저장하며 같은 저장 재시도는 공통 훅 §2.7의 operation을 재사용한다. 확정 변경은 이전 기획안을 보존한 새 버전에 병합하고, 변경 이력에 항목·이전값·확정값·확정일·원안 경로를 남긴다. 미확정 제안은 기획안에 넣지 않는다.
+
+🚫 **점검 모드의 금지:** 기획안을 임의로 수정하지 않는다 — 조정은 목회자가 확정한 항목만 새 기획안 버전에 읽고-병합-쓰기로 반영하고, `_manifest.md`에 `- 중간 점검 ({date}) — {조정 요지 또는 "조정 없음"}` 1줄을 남긴다. 회차 설교의 내용(대지·적용 문안)을 지어 제안하지 않는다 — 조정 대상은 아크(순서·핵심 요약·본문 배치)까지다(대필 거절 불변).
+
+### 5. 중단·재개와 확정 경계
+
+- "그만", "여기까지 저장", "나중에 이어서"가 나오면 이미 확정된 시리즈 정보와 미결 항목을 `work_status: paused`, `resume_at`과 함께 저장한다. 비어 있는 회차의 메시지·일화·결단을 채우지 않는다.
+- "이어서"라고 하면 최신 중단 기획안 또는 점검 파일을 읽고 미결 항목부터 계속한다. 이미 제공된 본문·회차 수·절기를 다시 묻지 않는다.
+- 사용자가 기존 기획안의 문장만 의미 보존 교정해 달라고 명시하면 원문과 제안을 분리하고, 시리즈 아크·회차 메시지를 새로 만들지 않는다. 점검 모드의 제안은 확정 전까지 기획안과 journal을 바꾸지 않는다.
 
 ---
 
@@ -59,14 +67,14 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 
 ### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
-- **save**: `series` — `outputs/series/{series_id}/plan_{date}.md` + `_manifest.md` (`series_id` = `{book|theme-slug}-{year}-{season}`, 예: `ephesians-2026-spring`)
+- **save**: `series` — `outputs/series/{series_id}/v{NN}_plan_{date}.md` + `_manifest.md` (`series_id` = `{book|theme-slug}-{year}-{season}`, 예: `ephesians-2026-spring`)
 - **extra 메타**: `total`(편수), `theme`, `start_target`(예정 시작 주일), `weekly_passages`(편당 본문 목록)
 - **manifest 구조**: 시리즈 개요 + 주차별 본문 + 진행 상태 표 — 각 주차 본문은 별도 `passage_id`로 관리, `outputs/sermons/{passage_id}/`와 양방향 링크
 - **journal**: `active_series` 신규 등록 (`id`/`title`/`total`/`progress: 0`/`next_passage`/`next_passage_id`/`started_on`/`last_updated`/`notes` 1-2줄) — **동일 id 존재 시 갱신 거부·충돌 보고**; `active_sermons`에 1주차 본문 사전 등록 (`stage: pending`, `series_id` 연결)
-- **중간 점검 모드 (v2.21)**: save — `outputs/series/{series_id}/review_{date}.md`; journal — 해당 `active_series.notes`에 `[중간 점검] ({date})` + `last_updated` 갱신(정체 감지 리셋). `progress`는 점검이 아니라 실제 회차 완료(`preached`)로만 전진하며, 회차 본문의 stage는 건드리지 않는다(`pastor_journal.md` §3.1.1 원리)
+- **중간 점검 모드 (v2.21)**: save — `outputs/series/{series_id}/v{NN}_review_{date}.md`; journal — 해당 `active_series.notes`에 `[중간 점검] ({date})` + `last_updated` 갱신(정체 감지 리셋). `progress`는 점검이 아니라 실제 회차 완료(`preached`)로만 전진하며, 회차 본문의 stage는 건드리지 않는다(`pastor_journal.md` §3.1.1 원리)
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**
 이번 작업이 완료되었습니다. 이어서 다음 스킬을 활용해 워크플로우를 이어가보세요:
 * **[sermon-brainstorming]**: 기획된 시리즈의 첫 번째 주차 설교 본문에 대해 깊이 있는 아이디어 확장을 시작하기 위해 
-  * 💡 실행 팁: "위 결과물의 [시리즈의 1주차 본문 및 주제]을(를) 복사하여 [sermon-brainstorming]에 붙여넣어 주세요."
+  * 💡 실행 팁: "1주차 본문으로 발상을 시작해줘"라고 이어서 요청하면 현재 기획안을 참조합니다.

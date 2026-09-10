@@ -13,7 +13,7 @@
 outputs/series/
 ├── {series_id}/
 │   ├── _manifest.md              # 시리즈 개요 + 주차 진행 표
-│   └── plan_{date}.md            # 시리즈 기획안 (sermon-series-planner 결과물)
+│   └── v{NN}_plan_{date}.md            # 시리즈 기획안 (sermon-series-planner 결과물)
 └── ...
 ```
 
@@ -77,9 +77,11 @@ status: in_progress       # in_progress | paused | completed | archived
 
 ### 3.2 작성 정책
 
+기획·점검 산출물은 `v{NN}_plan_{date}.md` / `v{NN}_review_{date}.md`로 새 버전을 사용한다. 같은 저장 재시도는 `core/_hooks.md` §2.7을 따른다. 확정된 아크 변경만 새 기획 버전에 병합하고 변경 전후 값·확정일·이전 경로를 기록한다. 기존 `plan_{date}.md`·`review_{date}.md`는 이동 없이 읽기 호환한다.
+
 - 주차별 `상태` 값: `pending | scheduled | drafted | preached | published`
 - 주차별 본문이 작업되면 해당 주차 `상태`만 갱신, 다른 행 건드리지 않음.
-- `progress`는 `preached` 상태인 주차의 누적 수.
+- `progress`는 실제 선포일이 확인된 주차의 누적 수이며 `published`로 옮겨도 선포 수에서 빠지지 않는다. 단순 기획·중간 점검·파생 초안 저장은 progress를 바꾸지 않는다.
 - `status` 자동 전이: 모든 주차가 `preached` 이상이면 `completed`로 갱신.
 
 ---
@@ -92,7 +94,7 @@ status: in_progress       # in_progress | paused | completed | archived
 - `next_passage` 갱신: 가장 빠른 `pending|scheduled` 주차의 본문 표기
 - `progress` 동기화
 
-`status: completed` 또는 `archived` 전이 시 `pastor_journal`의 `active_series`에서 자동 제거 후 archive로 이동.
+`status: completed`면 정리 후보로만 표시한다. 사용자가 아카이브를 요청할 때만 `active_series`와 archive를 함께 갱신하며 자동 제거·이동하지 않는다.
 
 ---
 

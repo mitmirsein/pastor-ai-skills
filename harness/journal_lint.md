@@ -32,7 +32,7 @@ triggers:
 
 ---
 
-## 3. 점검 항목 (7개 카테고리)
+## 3. 점검 항목 (8개 카테고리)
 
 | 카테고리 | 검증 내용 | 심각도 |
 |---|---|---|
@@ -40,7 +40,7 @@ triggers:
 | **C2. 타입** | `active_sermons[].stage` ∈ enum 값, 날짜 필드가 ISO 8601 (`YYYY-MM-DD`) 형식. `open_tensions[]`(존재 시): `date` ISO 8601 · `tension` 문자열 · `source` ∈ {retro, manual} · 5건 이하(FIFO — §3.7). `lessons[].source`(존재 시) ∈ {retro, publication}(v2.20 — §3.6). `last_qt_date`(존재 시): ISO 8601 또는 null (v3 — §3.8) | ⚠️ warn |
 | **C3. PII 위반** | 실명 의심 패턴, 전화번호, 이메일, 병원명/약물명 상세, 주소 (`open_tensions[].tension` 등 자유 텍스트 필드 포함) | 🚨 critical |
 | **C4. 표류 (Drift)** | `active_sermons[].id`에 매칭되는 `outputs/sermons/{id}/` 폴더 존재 여부, 역방향 orphan 폴더 존재 여부 | 📋 info |
-| **C5. 설교 만료** | `active_sermons[stage=preached]` 중 `preached_on`으로부터 4주(28일) 경과 항목 | 📋 info |
+| **C5. 설교 만료** | `active_sermons[stage in {preached, published}]` 중 `preached_on`으로부터 4주(28일) 경과 항목 | 📋 info |
 | **C6. 심방 만료** | `active_visitations[].followup_due`가 `currentDate - 14일` 이전인 항목 | 📋 info |
 | **C7. 토픽 관리** | `recent_topics` 내 12개 한도 초과 또는 중복 항목 | ⚠️ warn |
 | **C8. Foundation 위생** *(v2.20)* | `core/foundation.md` 점검(SSOT 트리오 확장): ① `OOO`류 플레이스홀더 잔존(교회명·목회자명 미설정 — sermon_audit L3가 "평가 불가"로 도는 원인) ② `column_venues[]` 형식 — `name`/`length`/`audience` 존재, `cadence`(존재 시) ∈ {weekly, monthly, adhoc} ③ `qt_source_path`(설정 시) 경로 실재 여부(AGENT 모드 한정, 콤마 구분 다중 경로 각각) — 위반은 **경고만**, 자동 수정 금지 | ⚠️ warn |
@@ -77,7 +77,7 @@ LLM이 추론 기반으로 판단합니다. 다음 휴리스틱을 적용합니�
 ```
 devotional | seed | brainstorm | research | dilemma | outline | redteam | drafted | preached | published | pending | study | smallgroup
 ```
-- `published_blog`·`published_column`·`published_tts`·`published_cardnews`·`column_draft`·`devotional_draft`(v2.16)는 lineage 파일 YAML 전용 세분값입니다 — journal에 나타나면 §3.1.1 매핑 위반으로 ⚠️ warn 처리합니다.
+- `published_blog`·`published_column`·`published_tts`·`published_cardnews`·`column_draft`·`devotional_draft`·`blog_draft`·`tts_draft`·`cardnews_draft`는 lineage 파일 YAML 전용 세분값입니다 — journal에 나타나면 §3.1.1 매핑 위반으로 ⚠️ warn 처리합니다.
 
 ---
 
@@ -86,6 +86,10 @@ devotional | seed | brainstorm | research | dilemma | outline | redteam | drafte
 **양방향 검증:**
 1. **Journal → Outputs:** `active_sermons[].id` 값이 `outputs/sermons/{id}/` 폴더로 존재하지 않으면 info 보고.
 2. **Outputs → Journal:** `outputs/sermons/` 아래 있는 폴더 중 `pastor_journal.active_sermons`에 없는 것(orphan)도 info 보고.
+
+**상태·복구 대조:** journal stage와 manifest current_stage를 `_hooks.md` §3.6의 확인 사건에 대조한다. 최신 산출물 stage를 그대로 복사하지 않는다. `outputs/.operations/`의 미완료 저장 영수증이 있으면 성공 파일·실패 단계·실제 해시를 확인하고 §2.7에 맞는 재개안을 제시한다. 읽기 전용 점검 중 재시도 쓰기는 하지 않는다. `publication_events`가 있으면 대상 경로·버전·실제 게시일의 연결 및 중복을 검사한다. 과거 published의 사건 부재는 미확인으로 표시하며 초안으로 자동 강등하지 않는다.
+
+파싱·필드 타입·날짜 형식·경로 존재·해시 대조는 기계적으로 검사하고, 민감 정보 판단·메모 의미·상태 사건의 실제성은 별도 내용 검토로 구분한다. 수정 제안에는 대상 키/파일, 현재값과 제안값(민감정보 마스킹), 근거와 보존되는 원문을 미리 보여준다.
 
 Drift는 critical이 아닙니다. 사용자가 이전에 시작했다가 중단한 작업일 수 있습니다. 판단은 사용자가 합니다.
 

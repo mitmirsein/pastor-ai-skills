@@ -13,6 +13,12 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 1. **명시적 호출**: "지난주 칼럼 반응 기록해두고 싶어", "이번 묵상 세트 돌아보자".
 2. **연성 제안**: 칼럼/성도 묵상 발행 후 다음 발행물 작업에 진입할 때 Concierge가 1회 가볍게 제안할 수 있다 (강제 아님).
 
+### 입력·진행 계약
+
+- 대상 발행물과 세 문항의 답변이 이미 있으면 다시 묻지 않고 회고 카드를 바로 만든다. 답변이 비어 있을 때만 한 번에 하나씩 묻는다.
+- 가능하면 대상 파일의 경로, 버전, 실제 게시일을 함께 받는다. 확인된 값은 `core/_hooks.md` §3.6의 `publication_events[{artifact_path, version, published_on}]`로 기록하고, 값이 없으면 추정하지 않고 `게시 확인 미제공`으로 남긴다. 회고 생성만으로 외부 게시를 보고하지 않는다.
+- 실명·연락처·개별 사정은 회고 카드에 옮기지 않는다. 사용자가 제외한 민감한 대목은 재확인하거나 되살리지 않는다.
+
 ## ⚙️ 동작 프로세스 — 3분 문답 (3문항)
 
 대상 발행물(경로 또는 붙여넣기, AGENT 모드면 `outputs/columns/_index.md`·lineage에서 최근 발행물 확인)을 짧게 확인한 뒤, 한 번에 하나씩 묻고 기다린다. 답이 짧아도 캐묻지 않는다 — 회고는 부담이 되는 순간 죽는다.
@@ -25,6 +31,7 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 
 ```markdown
 # 🔁 발행물 회고 — {제목 또는 주제} ({발행 지면/형태} · {date})
+- 게시 이벤트: {artifact_path, version, published_on 또는 게시 확인 미제공}
 - 독자: {1 답변 요약 — 익명}
 - ✏️ Lesson: {2 답변 — 한 문장}
 - 🌱 재활용: {3 답변 — 한 줄 · "없음"이면 이 줄째 생략}
@@ -34,13 +41,15 @@ requires: "file_access (AGENT 모드) — 파일 접근이 없는 환경은 core
 
 [시스템 지침: 결과물 출력을 마친 후 `core/_hooks.md`의 표준 절차를 실행할 것 — §1 모드 판별 → §2 저장(AGENT) 또는 §5 CHAT 폴백 → §3 Journal 갱신 → §4 브리핑.]
 
+발행 전 최소 점검과 배포본 분리는 `core/_hooks.md` §11을 따른다.
+
 ### 🧷 표준 훅 파라미터 (절차: `core/_hooks.md`)
 
 - **save**: 대상이 lineage 소속이면 `sermons-lineage`(같은 폴더에 인접 저장), 아니면 `dated`(`outputs/{date}/03_omni_publisher/`) · **category**: `03_omni_publisher`
 - **stage**: 변경 없음 (회고는 파생 작업 — `pastor_journal.md` §3.1.1 원리, 발행 전이 가드 §3.6과 동일 정신)
 - **manifest 라인**: `발행물 회고 — Lesson: {한 문장}` (lineage 소속일 때)
-- **journal**: `lessons`에 `{passage_id 또는 topic, date, lesson, source: publication}` 추가 (설교 회고와 5건 FIFO 공유 — `pastor_journal.md` §3.6); 본체 stage·notes는 건드리지 않음
-- **소비처**: `weekly-briefing`(반복 패턴)·칼럼 스킬의 0단계 아카이브 조회와 결합해 다음 발행물에 반영
+- **journal**: `lessons`에 `{passage_id 또는 topic, date, lesson, source: publication, publication_event_ref}`를 추가 (설교 회고와 5건 FIFO 공유 — `pastor_journal.md` §3.6). 게시 이벤트가 확인되지 않으면 참조를 비워 두며, 본체 stage·notes는 건드리지 않는다.
+- **소비처**: 다음 칼럼·블로그·성도 묵상·카드뉴스·TTS 작업은 `source: publication` lesson 최근 5건을 먼저 읽고 제작 메모에 실제 반영 여부를 남긴다. lesson이 없으면 없는 것으로 보고하고 새 lesson을 추정하지 않는다.
 
 ---
 ⏭️ **다음 단계 추천 (Next Steps)**
